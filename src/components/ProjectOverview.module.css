@@ -1,0 +1,426 @@
+/* ==========================================================================
+   ProjectOverview Component Styles (CSS Module)
+   Project Astitva — Phase 3 Editorial Impact Rows
+   ========================================================================== */
+
+.section {
+  background-color: #141414;
+  padding: clamp(80px, 11vh, 130px) var(--page-pad, clamp(24px, 5vw, 64px));
+  position: relative;
+  width: 100%;
+}
+
+.container {
+  max-width: var(--max-width, 1200px);
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   SECTION HEADER
+   -------------------------------------------------------------------------- */
+.header {
+  text-align: left;
+  max-width: 720px;
+  margin-bottom: clamp(48px, 7vh, 72px);
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.eyebrowRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.eyebrowDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #facc15;
+  box-shadow: 0 0 8px rgba(250, 204, 21, 0.7);
+  flex-shrink: 0;
+}
+
+.eyebrow {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.72rem, 0.85vw, 0.78rem);
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #facc15;
+}
+
+.eyebrowLine {
+  width: 32px;
+  height: 1px;
+  background: linear-gradient(to right, rgba(250, 204, 21, 0.6), transparent);
+}
+
+.headline {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+.headlineItalic {
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* --------------------------------------------------------------------------
+   EDITORIAL ROWS
+   -------------------------------------------------------------------------- */
+.rowsList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.row {
+  position: relative;
+  width: 100%;
+  padding: clamp(32px, 4.5vh, 44px) 0;
+  cursor: pointer;
+  outline: none;
+  background: transparent;
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color 240ms ease;
+  will-change: opacity, transform;
+}
+
+.rowVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Top hairline that illuminates on hover */
+.rowBorderTop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.rowBorderGlow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(250, 204, 21, 0.9) 25%,
+    rgba(250, 204, 21, 0.9) 75%,
+    transparent
+  );
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 360ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.row:hover .rowBorderGlow {
+  transform: scaleX(1);
+}
+
+.rowInner {
+  display: grid;
+  grid-template-columns: 80px 220px 1fr auto;
+  align-items: center;
+  gap: clamp(20px, 3vw, 44px);
+  padding: 0 4px;
+}
+
+/* Column 1: Number */
+.numberCol {
+  flex-shrink: 0;
+}
+
+.number {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-style: italic;
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.28);
+  line-height: 1;
+  display: inline-block;
+  transition:
+    color 240ms ease,
+    transform 240ms ease;
+}
+
+/* Column 2: Title */
+.titleCol {
+  flex-shrink: 0;
+}
+
+.title {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(1.75rem, 2.5vw, 2.4rem);
+  font-weight: 400;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  transition:
+    color 240ms ease,
+    text-shadow 240ms ease;
+}
+
+/* Column 3: Description */
+.descCol {
+  max-width: 520px;
+}
+
+.description {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.88rem, 1.05vw, 0.96rem);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.52);
+  margin: 0;
+  transition: color 240ms ease;
+}
+
+/* Column 4: Interactive Action */
+.actionCol {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-left: auto;
+}
+
+.actionText {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  transition: color 240ms ease;
+  white-space: nowrap;
+}
+
+.arrowCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+  transition:
+    border-color 240ms ease,
+    background-color 240ms ease,
+    color 240ms ease,
+    transform 240ms ease;
+  flex-shrink: 0;
+}
+
+.arrowIcon {
+  transition: transform 240ms ease;
+}
+
+/* --------------------------------------------------------------------------
+   HOVER PHYSICS
+   -------------------------------------------------------------------------- */
+.row:hover {
+  transform: translateX(8px);
+}
+
+.row:hover .number {
+  color: #facc15;
+  transform: scale(1.06);
+}
+
+.row:hover .title {
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
+}
+
+.row:hover .description {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.row:hover .actionText {
+  color: #facc15;
+}
+
+.row:hover .arrowCircle {
+  border-color: rgba(250, 204, 21, 0.5);
+  background-color: rgba(250, 204, 21, 0.1);
+  color: #facc15;
+  transform: scale(1.06);
+}
+
+.row:hover .arrowIcon {
+  transform: translateX(4px);
+}
+
+.row:focus-visible {
+  outline: 1px solid #facc15;
+  outline-offset: 6px;
+  border-radius: 4px;
+}
+
+/* Closing bottom hairline */
+.bottomHairline {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.08);
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 800ms ease,
+    transform 800ms ease;
+}
+
+/* --------------------------------------------------------------------------
+   REVEAL TRIGGERED STATE
+   -------------------------------------------------------------------------- */
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE DESIGN (1440, 1280, 1024, 768, 480, 430, 390, 375)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .rowInner {
+    grid-template-columns: 60px 180px 1fr auto;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 860px) {
+  .rowInner {
+    grid-template-columns: 50px 160px 1fr auto;
+    gap: 20px;
+  }
+
+  .actionText {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: clamp(60px, 9vh, 90px) 20px;
+  }
+
+  .header {
+    margin-bottom: 36px;
+  }
+
+  .rowInner {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .numberCol {
+    margin-bottom: -4px;
+  }
+
+  .number {
+    font-size: 1.8rem;
+  }
+
+  .title {
+    font-size: 1.7rem;
+  }
+
+  .description {
+    font-size: 0.92rem;
+  }
+
+  .actionCol {
+    margin-left: 0;
+    margin-top: 8px;
+  }
+
+  .actionText {
+    display: inline-block;
+    color: #facc15;
+  }
+
+  .row {
+    padding: 26px 0;
+  }
+
+  .row:hover {
+    transform: translateX(4px);
+  }
+}
+
+@media (max-width: 480px) {
+  .headline {
+    font-size: 1.85rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .number {
+    font-size: 1.6rem;
+  }
+
+  .description {
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+
+  .arrowCircle {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 375px) {
+  .headline {
+    font-size: 1.7rem;
+  }
+
+  .title {
+    font-size: 1.4rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ACCESSIBILITY: PREFERS-REDUCED-MOTION
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .header,
+  .row,
+  .rowBorderGlow,
+  .number,
+  .title,
+  .description,
+  .actionText,
+  .arrowCircle,
+  .arrowIcon,
+  .bottomHairline {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

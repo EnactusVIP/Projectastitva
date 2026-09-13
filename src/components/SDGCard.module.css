@@ -1,0 +1,289 @@
+/* ==========================================================================
+   SDG Card Component Styles (CSS Module)
+   Interactive 3D Flippable Card with Preserved Official SDG Artwork
+   ========================================================================== */
+
+.cardWrapper {
+  perspective: 1200px;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cardInner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  min-height: 255px;
+  transform-style: preserve-3d;
+  transition: transform 750ms cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 300ms ease;
+  cursor: pointer;
+  border-radius: 10px;
+  outline: none;
+}
+
+.cardInner:focus-visible {
+  outline: 2px solid var(--card-accent, #facc15);
+  outline-offset: 4px;
+}
+
+/* Desktop hover: lifts 6px, DOES NOT flip */
+@media (hover: hover) and (pointer: fine) {
+  .cardInner:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+  }
+
+  .cardInner.flipped:hover {
+    transform: translateY(-6px) rotateY(180deg);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+  }
+
+  .cardInner:hover .cardImage {
+    transform: scale(1.015);
+  }
+
+  .cardInner:hover .exploreHint {
+    opacity: 1;
+    transform: translateY(0);
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+}
+
+/* Flipped state: 180 degree rotation around Y */
+.flipped {
+  transform: rotateY(180deg);
+}
+
+.cardFaceFront,
+.cardFaceBack {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* --------------------------------------------------------------------------
+   FRONT FACE: Official SDG Artwork (Exact 1:1 Aspect Ratio, Zero Cropping)
+   -------------------------------------------------------------------------- */
+.cardFaceFront {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  user-select: none;
+  transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.frontOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 12px 10px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.exploreHint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: rgba(18, 18, 18, 0.84);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  color: #ffffff;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.9;
+  transform: translateY(2px);
+  transition: opacity 250ms ease, transform 250ms ease, border-color 250ms ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.exploreIcon {
+  color: #facc15;
+}
+
+/* --------------------------------------------------------------------------
+   BACK FACE: Editorial Information & Subtle Accent
+   -------------------------------------------------------------------------- */
+.cardFaceBack {
+  background-color: #171717;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(14px, 1.5vw, 18px);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 1;
+  overflow: hidden;
+}
+
+.backAccentBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3.5px;
+  background-color: var(--card-accent, #facc15);
+}
+
+.backTopRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  flex-shrink: 0;
+}
+
+.backNumber {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-style: italic;
+  font-size: clamp(1.8rem, 2.3vw, 2.4rem);
+  line-height: 0.9;
+  color: rgba(255, 255, 255, 0.22);
+  user-select: none;
+}
+
+.backBadge {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.backContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  margin: 4px 0;
+  min-height: 0;
+}
+
+.backTitle {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(0.82rem, 0.98vw, 0.96rem);
+  font-weight: 600;
+  line-height: 1.22;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin: 0 0 6px;
+}
+
+.backDescription {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.72rem, 0.82vw, 0.78rem);
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 350;
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+.backFooter {
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+
+.flipBackHint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.45);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 200ms ease;
+}
+
+.cardInner:hover .flipBackHint {
+  color: var(--card-accent, #facc15);
+}
+
+/* --------------------------------------------------------------------------
+   ACCESSIBILITY: PREFERS-REDUCED-MOTION
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .cardWrapper {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .cardInner {
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .cardInner:hover {
+    transform: none !important;
+  }
+
+  .cardFaceFront {
+    opacity: 1;
+    transition: opacity 300ms ease;
+  }
+
+  .cardFaceBack {
+    opacity: 0;
+    pointer-events: none;
+    transform: none !important;
+    transition: opacity 300ms ease;
+  }
+
+  .flipped .cardFaceFront {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .flipped .cardFaceBack {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}

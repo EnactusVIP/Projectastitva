@@ -1,0 +1,95 @@
+/* ==========================================================================
+   CommunityStrip Component Styles
+   Project Astitva — Absolute Last Visual Element (Below Footer)
+   ========================================================================== */
+
+.communityStrip {
+  /* Full viewport width — breaks free of any parent max-width */
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: block;
+  overflow: hidden;
+  line-height: 0; /* Remove inline-block gap under image */
+  background-color: var(--bg-primary, #1a1a1a);
+
+  /* Entrance Animation — initial state */
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.communityStrip.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Image container: full width, no padding/margin */
+.imageContainer {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+}
+
+/* The illustration itself */
+.stripImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  object-fit: cover;
+  object-position: center bottom;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+/* Tablets (768px – 1024px) */
+@media (max-width: 1024px) {
+  .stripImage {
+    object-position: center bottom;
+  }
+}
+
+/* Mobile (< 768px) — give a fixed height so people don't shrink to specks */
+@media (max-width: 767px) {
+  .imageContainer {
+    height: 160px;
+    overflow: hidden;
+  }
+
+  .stripImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+  }
+}
+
+/* Tiny mobile (< 480px) */
+@media (max-width: 480px) {
+  .imageContainer {
+    height: 130px;
+  }
+}
+
+/* ==========================================================================
+   Accessibility
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .communityStrip {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

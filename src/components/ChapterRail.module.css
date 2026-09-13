@@ -1,0 +1,431 @@
+/* ==========================================================================
+   ChapterRail Styles (CSS Module)
+   Project Astitva — Refined Editorial Chapter Navigation Rail
+   ========================================================================== */
+
+.chapterRailPortalWrapper {
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   DESKTOP RAIL (Fixed to right edge of viewport)
+   -------------------------------------------------------------------------- */
+.desktopRail {
+  position: fixed;
+  right: clamp(12px, 1.5vw, 22px);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 99999;
+  pointer-events: auto;
+  user-select: none;
+}
+
+.railInner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 12px 8px 12px 12px;
+  border-radius: 24px;
+  background: rgba(18, 18, 18, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* Subtle "TOP" jump button */
+.topButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  padding: 4px 0;
+  margin-bottom: 12px;
+  cursor: pointer;
+  outline: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 250ms ease, transform 250ms ease;
+  pointer-events: none;
+}
+
+.topButtonVisible {
+  opacity: 0.35;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.topButtonVisible:hover {
+  opacity: 0.9;
+}
+
+.topLabel {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+}
+
+.topArrowWrapper {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: #facc15;
+}
+
+/* Subtle continuous vertical track line */
+.trackBackground {
+  position: absolute;
+  right: 7.5px;
+  top: 10px;
+  bottom: 10px;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.12);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Yellow active portion growing downward */
+.trackProgress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1.5px;
+  background: #facc15;
+  box-shadow: 0 0 8px rgba(250, 204, 21, 0.5);
+  transition: height 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: height;
+}
+
+/* List of chapters */
+.chapterList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-end;
+  margin: 0;
+  padding: 0;
+}
+
+/* Chapter Interactive Button */
+.railItem {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  background: none;
+  border: none;
+  padding: 3px 0;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  text-decoration: none;
+}
+
+/* Inactive chapter: subtle dot, hidden label */
+.labelWrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.63rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(8px);
+  transition:
+    opacity 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 220ms ease;
+  pointer-events: none;
+}
+
+.labelNumber {
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+}
+
+.labelSlash {
+  font-size: 0.58rem;
+  opacity: 0.35;
+  margin: 0 1px;
+}
+
+.labelText {
+  letter-spacing: 0.16em;
+}
+
+/* Hover: Reveal label subtly */
+.railItem:hover .labelWrapper {
+  opacity: 0.85;
+  transform: translateX(0);
+  color: #ffffff;
+}
+
+/* Active State: Label visible in yellow */
+.railItemActive .labelWrapper {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+  color: #facc15 !important;
+}
+
+.railItemActive .labelNumber {
+  opacity: 1;
+  font-weight: 700;
+}
+
+/* Dot column on right */
+.dotWrapper {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.24);
+  transition:
+    width 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    height 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-radius 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 220ms ease,
+    transform 220ms ease,
+    box-shadow 220ms ease;
+  will-change: width, height, transform, background-color;
+}
+
+/* Hover dot */
+.railItem:hover .dot {
+  background-color: rgba(255, 255, 255, 0.85);
+  transform: scale(1.3);
+}
+
+/* Passed dots: subtle gold tint */
+.railItemPassed .dot {
+  background-color: rgba(250, 204, 21, 0.45);
+}
+
+/* Active chapter: yellow vertical indicator bar */
+.railItemActive .dot {
+  width: 2.5px;
+  height: 18px;
+  border-radius: 2px;
+  background-color: #facc15;
+  box-shadow: 0 0 10px rgba(250, 204, 21, 0.65);
+  transform: scale(1);
+}
+
+/* Keyboard accessibility */
+.railItem:focus-visible .dotWrapper,
+.topButton:focus-visible {
+  outline: 1px solid #facc15;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.railItem:focus-visible .labelWrapper {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* --------------------------------------------------------------------------
+   MOBILE RAIL (max-width: 768px)
+   -------------------------------------------------------------------------- */
+.mobileRail {
+  display: none;
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .desktopRail {
+    right: clamp(14px, 2vw, 24px);
+  }
+}
+
+@media (max-width: 768px) {
+  .desktopRail {
+    display: none;
+  }
+
+  .mobileRail {
+    display: block;
+    position: fixed;
+    bottom: clamp(16px, 3vh, 24px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99999;
+    pointer-events: auto;
+    width: max-content;
+    max-width: calc(100vw - 32px);
+  }
+
+  .mobilePill {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(18, 18, 18, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 30px;
+    padding: 7px 14px 9px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.65);
+    overflow: hidden;
+  }
+
+  .mobileBadge {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-family: var(--font-body, 'Inter', sans-serif);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #facc15;
+    flex-shrink: 0;
+  }
+
+  .mobileBadgeNumber {
+    font-weight: 800;
+  }
+
+  .mobileBadgeSlash {
+    opacity: 0.4;
+    font-size: 0.62rem;
+  }
+
+  .mobileBadgeLabel {
+    letter-spacing: 0.2em;
+  }
+
+  .mobileDivider {
+    width: 1px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.14);
+    flex-shrink: 0;
+  }
+
+  .mobileSteps {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  .mobileConnector {
+    width: 6px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.12);
+    transition: background-color 250ms ease;
+    flex-shrink: 0;
+  }
+
+  .mobileConnectorActive {
+    background: rgba(250, 204, 21, 0.5);
+  }
+
+  .mobileStepButton {
+    background: none;
+    border: none;
+    font-family: var(--font-body, 'Inter', sans-serif);
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.45);
+    padding: 3px 4px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: color 200ms ease, transform 200ms ease;
+    outline: none;
+  }
+
+  .mobileStepButtonActive {
+    color: #facc15 !important;
+    font-weight: 700 !important;
+    transform: scale(1.1);
+  }
+
+  .mobileStepButtonPassed {
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .mobileStepButton:focus-visible {
+    outline: 1px solid #facc15;
+  }
+
+  /* Micro progress bar along bottom edge of pill */
+  .mobileProgressBar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .mobileProgressFill {
+    height: 100%;
+    background: #facc15;
+    box-shadow: 0 0 6px rgba(250, 204, 21, 0.5);
+    transition: width 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+@media (max-width: 400px) {
+  .mobilePill {
+    padding: 6px 10px 8px;
+    gap: 6px;
+  }
+
+  .mobileBadgeLabel {
+    display: none;
+  }
+
+  .mobileConnector {
+    width: 4px;
+  }
+
+  .mobileStepButton {
+    font-size: 0.68rem;
+    padding: 2px 3px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ACCESSIBILITY: REDUCED MOTION
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .trackProgress,
+  .mobileProgressFill,
+  .labelWrapper,
+  .dot,
+  .mobileConnector,
+  .mobileStepButton,
+  .topButton {
+    transition: none !important;
+  }
+
+  .railItem:hover .dot,
+  .railItemActive .dot,
+  .mobileStepButtonActive {
+    transform: none !important;
+  }
+}

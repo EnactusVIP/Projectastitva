@@ -1,0 +1,267 @@
+/* ==========================================================================
+   HomeCTA Component Styles (CSS Module)
+   Project Astitva — Phase 5 Final Editorial CTA
+   ========================================================================== */
+
+.section {
+  background-color: #141414;
+  padding: clamp(80px, 11vh, 120px) var(--page-pad, clamp(24px, 5vw, 64px)) clamp(72px, 10vh, 110px);
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.ambientGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(600px, 85vw);
+  height: min(300px, 50vw);
+  background: radial-gradient(
+    circle,
+    rgba(250, 204, 21, 0.035) 0%,
+    transparent 70%
+  );
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 850ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 850ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   EYEBROW
+   -------------------------------------------------------------------------- */
+.eyebrowRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.eyebrowDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #facc15;
+  box-shadow: 0 0 8px rgba(250, 204, 21, 0.7);
+  flex-shrink: 0;
+}
+
+.eyebrow {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.72rem, 0.85vw, 0.78rem);
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #facc15;
+}
+
+.eyebrowLine {
+  width: 32px;
+  height: 1px;
+  background: linear-gradient(to right, rgba(250, 204, 21, 0.6), transparent);
+}
+
+/* --------------------------------------------------------------------------
+   EDITORIAL HEADLINE & STATEMENT
+   -------------------------------------------------------------------------- */
+.headline {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(2.4rem, 4.4vw, 3.6rem);
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1.16;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+}
+
+.headlineItalic {
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.subtext {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.58);
+  max-width: 600px;
+  margin: 0 0 clamp(36px, 5vh, 48px);
+}
+
+/* --------------------------------------------------------------------------
+   ACTIONS
+   -------------------------------------------------------------------------- */
+.actionGroup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(14px, 2.5vw, 24px);
+  flex-wrap: wrap;
+}
+
+.primaryAction {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 30px;
+  border-radius: 40px;
+  background-color: rgba(250, 204, 21, 0.08);
+  border: 1px solid rgba(250, 204, 21, 0.38);
+  color: #facc15;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background-color 260ms ease,
+    border-color 260ms ease,
+    color 260ms ease,
+    transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 260ms ease;
+  outline: none;
+}
+
+.primaryAction:hover {
+  background-color: #facc15;
+  color: #141414;
+  border-color: #facc15;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(250, 204, 21, 0.24);
+}
+
+.actionArrow {
+  transition: transform 260ms ease;
+}
+
+.primaryAction:hover .actionArrow {
+  transform: translateX(4px);
+}
+
+.primaryAction:focus-visible {
+  outline: 2px solid #facc15;
+  outline-offset: 4px;
+}
+
+.secondaryAction {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 18px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.65);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.86rem;
+  cursor: pointer;
+  transition:
+    color 240ms ease,
+    transform 240ms ease;
+  outline: none;
+}
+
+.secondaryArrow {
+  transition: transform 240ms ease;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.secondaryAction:hover {
+  color: #ffffff;
+  transform: translateX(3px);
+}
+
+.secondaryAction:hover .secondaryArrow {
+  color: #facc15;
+  transform: translateX(3px);
+}
+
+.secondaryAction:focus-visible {
+  outline: 1px solid rgba(255, 255, 255, 0.4);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE DESIGN (1440, 1280, 1024, 768, 480, 430, 390, 375)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .section {
+    padding: clamp(60px, 9vh, 90px) 20px;
+  }
+
+  .headline {
+    font-size: clamp(1.9rem, 6.4vw, 2.6rem);
+  }
+
+  .subtext {
+    font-size: 0.95rem;
+    margin-bottom: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .headline {
+    font-size: 1.85rem;
+  }
+
+  .actionGroup {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .primaryAction {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .secondaryAction {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 375px) {
+  .headline {
+    font-size: 1.7rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ACCESSIBILITY: PREFERS-REDUCED-MOTION
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .container,
+  .primaryAction,
+  .secondaryAction,
+  .actionArrow,
+  .secondaryArrow {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

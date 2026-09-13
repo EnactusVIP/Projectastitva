@@ -1,0 +1,438 @@
+/* ==========================================================================
+   Footer Component Styles (CSS Module)
+   Project Astitva — Minimal Editorial Global Footer
+   ========================================================================== */
+
+.footer {
+  position: relative;
+  background-color: #121212;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  width: 100%;
+  color: var(--text-primary, #ffffff);
+}
+
+.container {
+  max-width: var(--max-width, 1200px);
+  margin: 0 auto;
+  padding: clamp(48px, 6.5vh, 72px) var(--page-pad, clamp(24px, 5vw, 64px)) clamp(28px, 3.5vh, 36px);
+}
+
+/* --------------------------------------------------------------------------
+   3-COLUMN MAIN GRID
+   -------------------------------------------------------------------------- */
+.mainGrid {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr 1.3fr;
+  gap: clamp(36px, 5vw, 68px);
+  align-items: start;
+  margin-bottom: clamp(40px, 5vh, 56px);
+}
+
+/* --------------------------------------------------------------------------
+   COLUMN 1: PROJECT ASTITVA & ENACTUS IDENTITY
+   -------------------------------------------------------------------------- */
+.brandColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.identityBlock {
+  margin-bottom: 24px;
+}
+
+.brandTitle {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(1.55rem, 2.1vw, 1.95rem);
+  font-weight: 400;
+  color: #ffffff;
+  letter-spacing: -0.015em;
+  margin: 0 0 6px;
+  line-height: 1.2;
+}
+
+.brandTagline {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: 0.94rem;
+  font-style: italic;
+  color: rgba(250, 204, 21, 0.92);
+  letter-spacing: 0.08em;
+  margin: 0 0 14px;
+  line-height: 1.3;
+}
+
+.brandDescription {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.86rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.52);
+  max-width: 360px;
+  margin: 0;
+}
+
+/* Subtle Enactus Connection */
+.enactusSubtle {
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.enactusLabel {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.enactusBrandRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.enactusLogo {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.82;
+  filter: brightness(0.92) contrast(1.05);
+  transition: opacity 200ms ease;
+  flex-shrink: 0;
+}
+
+.enactusBrandRow:hover .enactusLogo {
+  opacity: 1;
+}
+
+.enactusTextCol {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.enactusOrg {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.enactusInstitution {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.42);
+  font-weight: 400;
+}
+
+/* --------------------------------------------------------------------------
+   COLUMN HEADINGS
+   -------------------------------------------------------------------------- */
+.columnHeading {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: #facc15;
+  margin: 0 0 20px;
+}
+
+/* --------------------------------------------------------------------------
+   COLUMN 2: EXPLORE / NAVIGATION
+   -------------------------------------------------------------------------- */
+.navColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.navList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.navItem {
+  margin: 0;
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.62);
+  padding: 3px 0;
+  transition:
+    color 200ms ease,
+    transform 200ms ease;
+  position: relative;
+}
+
+.navLinkLine {
+  display: inline-block;
+  width: 0;
+  height: 1px;
+  background-color: #facc15;
+  transition: width 220ms ease;
+}
+
+.navLinkLabel {
+  color: inherit;
+}
+
+.navLinkArrow {
+  opacity: 0;
+  transform: translateX(-4px);
+  transition:
+    opacity 200ms ease,
+    transform 200ms ease;
+  color: #facc15;
+}
+
+.navLink:hover {
+  color: #facc15;
+  transform: translateX(4px);
+}
+
+.navLink:hover .navLinkLine {
+  width: 10px;
+}
+
+.navLink:hover .navLinkArrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.navLink:focus-visible {
+  outline: 1px solid #facc15;
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   COLUMN 3: CONNECT
+   -------------------------------------------------------------------------- */
+.connectColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.connectList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.connectItem {
+  margin: 0;
+}
+
+.connectLink,
+.connectPlaceholder {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  padding: 5px 8px;
+  margin-left: -8px;
+  border-radius: 6px;
+  transition:
+    background-color 200ms ease,
+    transform 200ms ease;
+  color: inherit;
+}
+
+.connectLink {
+  cursor: pointer;
+}
+
+.connectLink:hover {
+  background-color: rgba(255, 255, 255, 0.035);
+  transform: translateX(3px);
+}
+
+.connectIconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition:
+    border-color 200ms ease,
+    color 200ms ease,
+    background-color 200ms ease,
+    transform 200ms ease;
+  flex-shrink: 0;
+}
+
+.connectIcon {
+  color: rgba(255, 255, 255, 0.55);
+  transition:
+    color 200ms ease,
+    transform 200ms ease;
+}
+
+.connectDetails {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.connectTitle {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.82);
+  transition: color 200ms ease;
+}
+
+.connectValue,
+.connectMeta {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.74rem;
+  color: rgba(255, 255, 255, 0.44);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 200ms ease;
+}
+
+.placeholderBadge {
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 1px 6px;
+  border-radius: 10px;
+  background-color: rgba(250, 204, 21, 0.08);
+  border: 1px solid rgba(250, 204, 21, 0.24);
+  color: #facc15;
+}
+
+/* Hover state for functional connect links */
+.connectLink:hover .connectIconWrapper {
+  border-color: rgba(250, 204, 21, 0.38);
+  background-color: rgba(250, 204, 21, 0.08);
+  transform: translateY(-1px);
+}
+
+.connectLink:hover .connectIcon {
+  color: #facc15;
+}
+
+.connectLink:hover .connectTitle {
+  color: #ffffff;
+}
+
+.connectLink:hover .connectValue {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.connectLink:focus-visible {
+  outline: 1px solid #facc15;
+  outline-offset: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   DIVIDER & BOTTOM ROW
+   -------------------------------------------------------------------------- */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.08) 12%,
+    rgba(255, 255, 255, 0.08) 88%,
+    transparent
+  );
+  margin-bottom: 24px;
+}
+
+.bottomRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.42);
+  flex-wrap: wrap;
+}
+
+.copyright {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.madeWithPurpose {
+  margin: 0;
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.48);
+  letter-spacing: 0.04em;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE DESIGN
+   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .mainGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  .brandColumn {
+    grid-column: 1 / -1;
+    max-width: 520px;
+  }
+}
+
+@media (max-width: 600px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .brandColumn {
+    max-width: 100%;
+  }
+
+  .bottomRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ACCESSIBILITY: PREFERS-REDUCED-MOTION
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .navLink,
+  .navLinkLine,
+  .navLinkArrow,
+  .connectLink,
+  .connectIconWrapper,
+  .connectIcon {
+    transition: none !important;
+    transform: none !important;
+  }
+}

@@ -1,0 +1,366 @@
+/* ==========================================================================
+   Art Therapy / Coming Soon Page Styles (CSS Module)
+   Project Astitva — Minimal Atmospheric Editorial Layout
+   ========================================================================== */
+
+.pageContainer {
+  --page-max: 960px;
+  --page-pad: clamp(24px, 5vw, 64px);
+
+  /* Color aliases */
+  --accent: #facc15;
+  --accent-glow: rgba(250, 204, 21, 0.25);
+  --text-hi: #ffffff;
+  --text-mid: rgba(255, 255, 255, 0.78);
+  --text-muted: rgba(255, 255, 255, 0.44);
+
+  background-color: #141414;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(250, 204, 21, 0.035), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 85% 50%, rgba(255, 140, 0, 0.02), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 15% 75%, rgba(117, 7, 135, 0.025), transparent 70%);
+  color: var(--text-primary, #ffffff);
+  min-height: calc(100vh - var(--navbar-height, 80px));
+  position: relative;
+  overflow-x: hidden;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 800ms ease;
+}
+
+.stageBgReady {
+  /* Soft transition as stage 1 resolves */
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   MAIN STAGE (~90-100vh viewport centering with natural breathing room)
+   -------------------------------------------------------------------------- */
+.mainStage {
+  position: relative;
+  width: 100%;
+  min-height: calc(88vh - var(--navbar-height, 80px));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--navbar-height, 80px) + 24px) var(--page-pad) clamp(48px, 8vh, 88px);
+}
+
+.ambientGlow {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(560px, 85vw);
+  height: min(340px, 55vw);
+  background: radial-gradient(
+    circle at center,
+    rgba(250, 204, 21, 0.045) 0%,
+    rgba(255, 255, 255, 0.015) 45%,
+    transparent 75%
+  );
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.contentCard {
+  position: relative;
+  z-index: 2;
+  max-width: var(--page-max);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0;
+}
+
+/* --------------------------------------------------------------------------
+   EYEBROW
+   -------------------------------------------------------------------------- */
+.eyebrowWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: clamp(20px, 3vh, 32px);
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.eyebrow {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.74rem, 0.9vw, 0.82rem);
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* --------------------------------------------------------------------------
+   HEADING BLOCK & ORGANIC ART MOTIF
+   -------------------------------------------------------------------------- */
+.headingBlock {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: clamp(20px, 3.5vh, 32px);
+}
+
+.artMotif {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(840px, 94vw);
+  height: auto;
+  pointer-events: none;
+  z-index: 1;
+  overflow: visible;
+}
+
+.drawnStroke {
+  stroke: url(#artStrokeGrad);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 2400ms cubic-bezier(0.25, 1, 0.5, 1);
+  opacity: 0.85;
+}
+
+.echoStroke {
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 0.9;
+  stroke-linecap: round;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 2200ms cubic-bezier(0.25, 1, 0.5, 1) 250ms;
+}
+
+.drawMotif .drawnStroke,
+.drawMotif .echoStroke {
+  stroke-dashoffset: 0;
+}
+
+.title {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(3.4rem, 8vw, 6.8rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--text-hi);
+  margin: 0;
+  user-select: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 900ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --------------------------------------------------------------------------
+   SUPPORTING STATEMENT
+   -------------------------------------------------------------------------- */
+.statement {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+  font-weight: 400;
+  color: var(--text-mid);
+  line-height: 1.45;
+  margin: 0;
+  max-width: 620px;
+  letter-spacing: -0.01em;
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 900ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --------------------------------------------------------------------------
+   SECONDARY / HOVER DETAIL
+   -------------------------------------------------------------------------- */
+.bottomDetail {
+  margin-top: clamp(48px, 8vh, 72px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.detailText {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.82rem, 1vw, 0.88rem);
+  color: var(--text-muted);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.inProgressAction {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: rgba(250, 204, 21, 0.85);
+  cursor: pointer;
+  padding: 6px 10px;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: color 240ms ease;
+}
+
+.inProgressLine {
+  display: inline-block;
+  width: 14px;
+  height: 1px;
+  background-color: rgba(250, 204, 21, 0.4);
+  transition:
+    width 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 240ms ease;
+}
+
+.inProgressText {
+  color: inherit;
+}
+
+.arrow {
+  display: inline-block;
+  color: var(--accent);
+  transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  font-size: 0.86rem;
+  line-height: 1;
+}
+
+.inProgressAction:hover {
+  color: #ffffff;
+}
+
+.inProgressAction:hover .inProgressLine {
+  width: 26px;
+  background-color: var(--accent);
+}
+
+.inProgressAction:hover .arrow {
+  transform: translateX(4px);
+}
+
+.inProgressAction:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   STAGES / VISIBILITY
+   -------------------------------------------------------------------------- */
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE DESIGN
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .title {
+    font-size: clamp(2.6rem, 10vw, 4rem);
+    letter-spacing: -0.02em;
+  }
+
+  .statement {
+    font-size: 1.15rem;
+    padding: 0 16px;
+  }
+
+  .artMotif {
+    width: 110vw;
+  }
+
+  .bottomDetail {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 42px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pageContainer {
+    --page-pad: 20px;
+  }
+
+  .title {
+    font-size: clamp(2.2rem, 9.5vw, 3rem);
+  }
+
+  .statement {
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+
+  .bottomDetail {
+    margin-top: 36px;
+  }
+
+  .detailText {
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .title {
+    font-size: 2rem;
+  }
+  
+  .statement {
+    font-size: 0.98rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ACCESSIBILITY: PREFERS-REDUCED-MOTION
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .pageContainer,
+  .eyebrowWrapper,
+  .title,
+  .statement,
+  .bottomDetail {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .drawnStroke,
+  .echoStroke {
+    transition: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+
+  .inProgressLine,
+  .arrow {
+    transition: none !important;
+  }
+}

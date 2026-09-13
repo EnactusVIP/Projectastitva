@@ -1,0 +1,280 @@
+/* ==========================================================================
+   LanguageTransition Component Styles
+   Project Astitva — Unique Multilingual Transition
+   ========================================================================== */
+
+.container {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #121214;
+  overflow: hidden;
+  user-select: none;
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 650ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 650ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 650ms ease;
+  will-change: opacity, transform;
+}
+
+/* Revealing / Outro State: Word lifts and dark backdrop dissolves */
+.revealing {
+  opacity: 0 !important;
+  transform: translateY(-24px) scale(1.02) !important;
+  filter: blur(4px);
+  pointer-events: none;
+}
+
+/* Subtle Ambient Undertone */
+.ambientGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(600px, 90vw);
+  height: min(400px, 70vh);
+  background: radial-gradient(
+    ellipse 60% 50% at 50% 50%,
+    rgba(250, 204, 21, 0.055) 0%,
+    rgba(212, 175, 55, 0.025) 45%,
+    transparent 75%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+
+/* Center Stage */
+.centerStage {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  max-width: 900px;
+  padding: 0 24px;
+}
+
+/* Word Container */
+.wordWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 110px;
+  width: 100%;
+  transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* Final Resolving Word Expansion */
+.wordWrapper.resolving {
+  transform: scale(1.08);
+}
+
+/* Double-buffered Typography Layers */
+.word {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(2.6rem, 6.2vw, 4.4rem);
+  color: #fbfbfb;
+  line-height: 1.15;
+  text-align: center;
+  white-space: nowrap;
+  will-change: transform, opacity, filter, letter-spacing;
+  transform-origin: center center;
+  pointer-events: none;
+}
+
+/* Active Layer: Crisp, focused, settled */
+.wordActive {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  filter: blur(0);
+  transition:
+    opacity 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 320ms ease-out,
+    letter-spacing 340ms ease-out;
+}
+
+/* Inactive Layer: Stretched and softly dissolved into light */
+.wordInactive {
+  opacity: 0;
+  transform: translate(-50%, -50%) scaleX(1.08) scaleY(0.94) translateY(-2px);
+  filter: blur(10px);
+  transition:
+    opacity 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    filter 300ms ease-in,
+    letter-spacing 300ms ease-in;
+}
+
+/* ==========================================================================
+   The Connection Line & Community Ring of Belonging
+   ========================================================================== */
+
+.connectionStage {
+  position: relative;
+  width: 280px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.connectionSvg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* The Animated Baseline */
+.animatedLine {
+  transition:
+    x1 380ms cubic-bezier(0.16, 1, 0.3, 1),
+    x2 380ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 400ms ease;
+  will-change: x1, x2;
+}
+
+/* Gliding Ember */
+.lineEmber {
+  animation: emberOscillate 2.4s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes emberOscillate {
+  0% {
+    transform: translateX(-42px);
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.95;
+  }
+  100% {
+    transform: translateX(42px);
+    opacity: 0.3;
+  }
+}
+
+/* Minimal Community Ring: forms at final resolve */
+.communityRing {
+  stroke-dasharray: 240;
+  stroke-dashoffset: 240;
+  opacity: 0;
+  transform-origin: 140px 24px;
+  transition:
+    stroke-dashoffset 750ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 450ms ease,
+    transform 750ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: stroke-dashoffset, opacity, transform;
+}
+
+.ringActive .communityRing {
+  stroke-dashoffset: 0;
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+.ringActive .animatedLine {
+  opacity: 0.35;
+}
+
+.ringActive .lineEmber {
+  opacity: 0;
+  animation: none;
+}
+
+/* ==========================================================================
+   Subtext / Language Indicator
+   ========================================================================== */
+
+.subtextWrapper {
+  margin-top: 10px;
+  min-height: 24px;
+}
+
+.languageLabel {
+  display: inline-block;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(250, 204, 21, 0.75);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .word {
+    font-size: clamp(2.2rem, 8vw, 3.2rem);
+  }
+
+  .connectionStage {
+    width: 220px;
+    height: 44px;
+  }
+}
+
+@media (max-width: 480px) {
+  .word {
+    font-size: clamp(1.9rem, 7.5vw, 2.6rem);
+  }
+
+  .languageLabel {
+    font-size: 0.66rem;
+    letter-spacing: 0.16em;
+  }
+}
+
+/* ==========================================================================
+   Accessibility: Reduced Motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .container {
+    transition: opacity 300ms ease !important;
+  }
+
+  .word {
+    transform: translate(-50%, -50%) !important;
+    filter: none !important;
+    transition: opacity 200ms ease !important;
+  }
+
+  .wordInactive {
+    transform: translate(-50%, -50%) !important;
+    filter: none !important;
+    opacity: 0 !important;
+  }
+
+  .wordActive {
+    transform: translate(-50%, -50%) !important;
+    filter: none !important;
+    opacity: 1 !important;
+  }
+
+  .lineEmber {
+    animation: none !important;
+  }
+
+  .communityRing {
+    transition: none !important;
+  }
+}

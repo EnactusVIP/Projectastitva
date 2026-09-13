@@ -1,0 +1,991 @@
+/* ==========================================================================
+   Support Page Styles (CSS Module)
+   Project Astitva — Immersive Editorial Digital Storytelling
+   ========================================================================== */
+
+.pageContainer {
+  /* Layout */
+  --page-max:    1200px;
+  --page-pad:    clamp(24px, 5vw, 72px);
+  --section-v:   clamp(80px, 10vh, 120px);
+  --chapter-gap: clamp(28px, 4vh, 48px);
+  --content-gap: clamp(14px, 2vw, 24px);
+
+  /* Motion */
+  --motion-fast: 200ms;
+  --motion-std:  700ms;
+  --motion-slow: 1000ms;
+  --ease-ed:     cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out:    cubic-bezier(0.0, 0, 0.2, 1);
+
+  /* Color aliases */
+  --accent:      #facc15;
+  --accent-glow: rgba(250, 204, 21, 0.35);
+  --text-hi:     #ffffff;
+  --text-mid:    rgba(255, 255, 255, 0.82);
+  --text-lo:     rgba(255, 255, 255, 0.55);
+  --border-sub:  rgba(255, 255, 255, 0.07);
+
+  background-color: #141414;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(250, 204, 21, 0.035), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 90% 40%, rgba(255, 140, 0, 0.02), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 10% 80%, rgba(117, 7, 135, 0.025), transparent 70%);
+  color: var(--text-primary, #ffffff);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   SCROLL REVEAL BASE SYSTEM
+   -------------------------------------------------------------------------- */
+.revealElement {
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(3px);
+  transition:
+    opacity   var(--motion-std) var(--ease-ed),
+    transform var(--motion-std) var(--ease-ed),
+    filter    var(--motion-std) var(--ease-ed);
+  will-change: opacity, transform, filter;
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+.delay100 { transition-delay: 120ms; }
+.delay200 { transition-delay: 260ms; }
+.delay300 { transition-delay: 420ms; }
+.delay400 { transition-delay: 580ms; }
+
+/* --------------------------------------------------------------------------
+   1. HERO SECTION
+   -------------------------------------------------------------------------- */
+.heroSection {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background-color: #141414;
+  padding-top: var(--navbar-height, 80px);
+  padding-bottom: clamp(60px, 8vh, 100px);
+}
+
+.heroBgWrapper {
+  position: absolute;
+  top: -24px;
+  left: -12px;
+  right: -12px;
+  bottom: -24px;
+  width: calc(100% + 24px);
+  height: calc(100% + 48px);
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.heroBgImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  opacity: 0;
+  transform: scale(1.04);
+  filter: brightness(0.72) contrast(1.06) saturate(1.1);
+  transition:
+    opacity 1100ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1400ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1100ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.heroBgLoaded {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to right,
+      rgba(10, 10, 10, 0.82) 0%,
+      rgba(10, 10, 10, 0.62) 38%,
+      rgba(10, 10, 10, 0.38) 68%,
+      rgba(10, 10, 10, 0.52) 100%
+    ),
+    rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  transition: opacity 1000ms cubic-bezier(0.16, 1, 0.3, 1) 120ms;
+  pointer-events: none;
+}
+
+.heroOverlayLoaded {
+  opacity: 1;
+}
+
+.heroBottomFade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: clamp(100px, 18vh, 180px);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(20, 20, 20, 0.5) 40%,
+    rgba(20, 20, 20, 0.88) 80%,
+    #141414 100%
+  );
+  pointer-events: none;
+}
+
+.heroContentContainer {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: var(--page-max, 1200px);
+  margin: 0 auto;
+  padding: 0 var(--page-pad);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.heroTextColumn {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 580px;
+}
+
+.heroEyebrowWrapper {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.heroEyebrow {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+}
+
+.eyebrowLine {
+  display: inline-block;
+  width: 36px;
+  height: 1.5px;
+  background-color: var(--accent);
+  opacity: 0.85;
+  box-shadow: 0 0 10px rgba(250, 204, 21, 0.4);
+}
+
+.heroTitle {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(4.8rem, 10vw, 8.5rem);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  color: var(--text-hi);
+  margin: 0 0 clamp(24px, 4vh, 40px);
+  user-select: none;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.9);
+}
+
+.titleLine {
+  display: block;
+}
+
+.titleLineItalic {
+  display: block;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.92);
+  padding-left: 0.04em;
+}
+
+.heroStatement {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 540px;
+  margin-bottom: clamp(28px, 4vh, 44px);
+  border-left: 2px solid rgba(250, 204, 21, 0.45);
+  padding-left: 20px;
+}
+
+.statementLine {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-style: italic;
+  font-size: clamp(1.1rem, 1.7vw, 1.45rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.5;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85);
+}
+
+.scrollCue {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  color: rgba(255, 255, 255, 0.65);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.68rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  user-select: none;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.scrollCueLine {
+  width: 28px;
+  height: 1.5px;
+  background-color: rgba(255, 255, 255, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.scrollCueLine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--accent);
+  animation: pulseLine 2.4s var(--ease-out) infinite;
+}
+
+@keyframes pulseLine {
+  0%   { left: -100%; }
+  50%  { left: 100%;  }
+  100% { left: 100%;  }
+}
+
+/* --------------------------------------------------------------------------
+   SHARED SECTION TYPOGRAPHY
+   -------------------------------------------------------------------------- */
+.sectionEyebrow {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.accentItalic {
+  font-style: italic;
+  color: var(--accent);
+}
+
+/* --------------------------------------------------------------------------
+   2. PILLARS SECTION
+   -------------------------------------------------------------------------- */
+.pillarsSection {
+  position: relative;
+  max-width: var(--page-max, 1200px);
+  margin: 0 auto;
+  padding: var(--section-v) var(--page-pad);
+}
+
+.pillarsSection::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: var(--page-pad);
+  right: var(--page-pad);
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--border-sub) 20%,
+    var(--border-sub) 80%,
+    transparent
+  );
+}
+
+.pillarsInner {
+  width: 100%;
+}
+
+.sectionHeader {
+  margin-bottom: clamp(36px, 5vh, 60px);
+  max-width: 720px;
+}
+
+.sectionHeadline {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(2.2rem, 3.8vw, 3.4rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-hi);
+  margin: 0 0 16px;
+  letter-spacing: -0.02em;
+}
+
+.sectionSubtext {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  color: var(--text-lo);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.pillarsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 2.5vw, 32px);
+}
+
+.pillarCard {
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  padding: clamp(28px, 3.5vw, 40px);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--motion-std) var(--ease-ed),
+    transform var(--motion-std) var(--ease-ed),
+    border-color var(--motion-fast) ease,
+    background-color var(--motion-fast) ease;
+}
+
+.pillarCard:hover {
+  border-color: rgba(250, 204, 21, 0.25);
+  background-color: rgba(255, 255, 255, 0.035);
+}
+
+.pillarVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.pillarTopRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.pillarNumber {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-style: italic;
+  font-size: 2rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.pillarIcon {
+  color: var(--accent);
+}
+
+.pillarTitle {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(1.35rem, 1.8vw, 1.6rem);
+  font-weight: 400;
+  color: var(--text-hi);
+  margin: 0 0 14px;
+  line-height: 1.3;
+}
+
+.pillarBody {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--text-lo);
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   3. HOW WE HELP SECTION
+   -------------------------------------------------------------------------- */
+.howSection {
+  position: relative;
+  max-width: var(--page-max, 1200px);
+  margin: 0 auto;
+  padding: var(--section-v) var(--page-pad);
+}
+
+.howSection::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: var(--page-pad);
+  right: var(--page-pad);
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--border-sub) 20%,
+    var(--border-sub) 80%,
+    transparent
+  );
+}
+
+.howInner {
+  width: 100%;
+}
+
+.howEyebrowRow {
+  margin-bottom: clamp(32px, 4vh, 48px);
+}
+
+.howRows {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.howRow {
+  display: grid;
+  grid-template-columns: 1.1fr 1px 1.2fr;
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+  padding: clamp(32px, 4.5vh, 48px) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity var(--motion-std) var(--ease-ed),
+    transform var(--motion-std) var(--ease-ed);
+}
+
+.howRow:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.howRowVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.howLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.howTag {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.howHeadline {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+  font-weight: 400;
+  color: var(--text-hi);
+  line-height: 1.25;
+  margin: 0;
+}
+
+.howDivider {
+  width: 1px;
+  height: 70%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(250, 204, 21, 0.4) 30%,
+    rgba(255, 255, 255, 0.15) 70%,
+    transparent
+  );
+}
+
+.howRight {
+  display: flex;
+  align-items: center;
+}
+
+.howCopy {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.96rem, 1.1vw, 1.05rem);
+  line-height: 1.85;
+  color: var(--text-lo);
+  margin: 0;
+}
+
+/* Art Therapy Teaser */
+.artTherapyTeaser {
+  margin-top: clamp(40px, 6vh, 64px);
+  padding: clamp(24px, 3.5vw, 36px);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed rgba(250, 204, 21, 0.25);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  transition:
+    border-color var(--motion-fast) ease,
+    background-color var(--motion-fast) ease;
+}
+
+.artTherapyTeaser:hover {
+  border-color: rgba(250, 204, 21, 0.45);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.teaserLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 620px;
+}
+
+.teaserBadge {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.teaserTitle {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(1.3rem, 1.8vw, 1.6rem);
+  font-weight: 400;
+  color: var(--text-hi);
+  margin: 0;
+}
+
+.teaserDesc {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.92rem;
+  color: var(--text-lo);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.teaserButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid rgba(250, 204, 21, 0.4);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition:
+    background-color var(--motion-fast) ease,
+    color var(--motion-fast) ease,
+    transform var(--motion-fast) ease;
+}
+
+.teaserButton:hover {
+  background-color: var(--accent);
+  color: #141414;
+  transform: translateX(3px);
+}
+
+/* --------------------------------------------------------------------------
+   4. COMMITMENT SECTION
+   -------------------------------------------------------------------------- */
+.commitmentSection {
+  position: relative;
+  max-width: var(--page-max, 1200px);
+  margin: 0 auto;
+  padding: var(--section-v) var(--page-pad);
+  text-align: center;
+}
+
+.commitmentSection::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: var(--page-pad);
+  right: var(--page-pad);
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--border-sub) 20%,
+    var(--border-sub) 80%,
+    transparent
+  );
+}
+
+.commitmentInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 840px;
+  margin: 0 auto;
+}
+
+.rainbowFilament {
+  width: min(220px, 55%);
+  height: 2px;
+  background: var(--accent-rainbow, linear-gradient(90deg, #facc15, #f97316, #ec4899, #8b5cf6, #3b82f6));
+  border-radius: 2px;
+  margin-bottom: 32px;
+  box-shadow: 0 0 12px rgba(255, 237, 0, 0.2);
+}
+
+.commitmentEyebrow {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+}
+
+.commitmentQuote {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-style: italic;
+  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+  font-weight: 400;
+  color: var(--text-hi);
+  line-height: 1.45;
+  margin: 0 0 28px;
+  padding: 0;
+  border: none;
+}
+
+.commitmentBody {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.98rem, 1.15vw, 1.1rem);
+  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   5. REACH STATS SECTION
+   -------------------------------------------------------------------------- */
+.reachSection {
+  position: relative;
+  max-width: var(--page-max, 1200px);
+  margin: 0 auto;
+  padding: var(--section-v) var(--page-pad);
+}
+
+.reachSection::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: var(--page-pad);
+  right: var(--page-pad);
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--border-sub) 20%,
+    var(--border-sub) 80%,
+    transparent
+  );
+}
+
+.reachInner {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+
+.reachHeader {
+  display: flex;
+  flex-direction: column;
+}
+
+.reachHeadline {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(2.2rem, 3.5vw, 3rem);
+  font-weight: 400;
+  color: var(--text-hi);
+  line-height: 1.18;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.statRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 2.5vw, 28px);
+}
+
+.statBlock {
+  display: flex;
+  flex-direction: column;
+  padding-left: clamp(16px, 2vw, 24px);
+  border-left: 1px solid rgba(250, 204, 21, 0.35);
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity var(--motion-std) var(--ease-ed),
+    transform var(--motion-std) var(--ease-ed);
+}
+
+.statVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.statValue {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--text-hi);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.statLabel {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  color: var(--text-lo);
+  line-height: 1.4;
+}
+
+/* --------------------------------------------------------------------------
+   6. CLOSING CTA SECTION
+   -------------------------------------------------------------------------- */
+.closingSection {
+  position: relative;
+  max-width: var(--page-max, 1200px);
+  margin: 0 auto;
+  padding: clamp(48px, 7vh, 80px) var(--page-pad) var(--section-v);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.closingSection::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: var(--page-pad);
+  right: var(--page-pad);
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--border-sub) 20%,
+    var(--border-sub) 80%,
+    transparent
+  );
+}
+
+.closingInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 620px;
+}
+
+.closingTagline {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.closingHeadline {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.35;
+  margin: 0 0 16px;
+}
+
+.closingSubtext {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1rem;
+  color: var(--text-lo);
+  line-height: 1.7;
+  margin: 0 0 36px;
+}
+
+.closingButtonRow {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.primaryPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  background-color: var(--accent);
+  color: #121212;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: 40px;
+  text-decoration: none;
+  transition:
+    transform var(--motion-fast) ease,
+    background-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease;
+  box-shadow: 0 4px 20px rgba(250, 204, 21, 0.22);
+  cursor: pointer;
+  border: none;
+}
+
+.primaryPill:hover {
+  background-color: #fde047;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 28px rgba(250, 204, 21, 0.36);
+}
+
+.secondaryPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 20px;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.9rem;
+  font-weight: 400;
+  text-decoration: none;
+  transition: color var(--motion-fast) ease, transform var(--motion-fast) ease;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.secondaryPill:hover {
+  color: var(--text-hi);
+  transform: translateX(4px);
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE DESIGN
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .pillarsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .reachInner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    padding-top: calc(var(--navbar-height, 80px) + 24px);
+  }
+
+  .heroTitle {
+    font-size: clamp(3rem, 11vw, 4.8rem);
+  }
+
+  .pillarsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .howRow {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .howDivider {
+    display: none;
+  }
+
+  .artTherapyTeaser {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .teaserButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .statRow {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .closingButtonRow {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .primaryPill,
+  .secondaryPill {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .pageContainer {
+    --page-pad: 20px;
+  }
+
+  .heroTitle {
+    font-size: clamp(2.4rem, 10.5vw, 3.4rem);
+  }
+
+  .sectionHeadline {
+    font-size: clamp(1.8rem, 8vw, 2.4rem);
+  }
+
+  .statementLine {
+    font-size: 1.05rem;
+  }
+
+  .commitmentQuote {
+    font-size: clamp(1.25rem, 6vw, 1.6rem);
+  }
+
+  .pillarCard {
+    padding: 24px 20px;
+  }
+}

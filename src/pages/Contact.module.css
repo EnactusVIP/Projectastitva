@@ -1,0 +1,921 @@
+/* ==========================================================================
+   Contact Us Page Styles (CSS Module)
+   Project Astitva — Immersive Editorial Digital Storytelling
+   ========================================================================== */
+
+.pageContainer {
+  --page-max:    1200px;
+  --page-pad:    clamp(24px, 5vw, 72px);
+  --section-v:   clamp(80px, 10vh, 120px);
+  --chapter-gap: clamp(28px, 4vh, 48px);
+  --content-gap: clamp(14px, 2vw, 24px);
+
+  /* Motion */
+  --motion-fast: 200ms;
+  --motion-std:  700ms;
+  --motion-slow: 1000ms;
+  --ease-ed:     cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out:    cubic-bezier(0.0, 0, 0.2, 1);
+
+  /* Color aliases */
+  --accent:      #facc15;
+  --accent-glow: rgba(250, 204, 21, 0.35);
+  --text-hi:     #ffffff;
+  --text-mid:    rgba(255, 255, 255, 0.82);
+  --text-lo:     rgba(255, 255, 255, 0.55);
+  --border-sub:  rgba(255, 255, 255, 0.07);
+
+  background-color: #141414;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(250, 204, 21, 0.035), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 90% 40%, rgba(255, 140, 0, 0.02), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 10% 80%, rgba(117, 7, 135, 0.025), transparent 70%);
+  color: var(--text-primary, #ffffff);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   SCROLL REVEAL BASE SYSTEM
+   -------------------------------------------------------------------------- */
+.revealElement {
+  opacity: 0;
+  transform: translateY(24px);
+  filter: blur(2px);
+  transition:
+    opacity   var(--motion-std) var(--ease-ed),
+    transform var(--motion-std) var(--ease-ed),
+    filter    var(--motion-std) var(--ease-ed);
+  will-change: opacity, transform, filter;
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+.delay100 { transition-delay: 120ms; }
+.delay200 { transition-delay: 260ms; }
+.delay300 { transition-delay: 420ms; }
+
+/* --------------------------------------------------------------------------
+   1. HERO SECTION
+   -------------------------------------------------------------------------- */
+.heroSection {
+  position: relative;
+  max-width: var(--page-max, 1200px);
+  margin: 0 auto;
+  padding: calc(var(--navbar-height, 80px) + clamp(48px, 8vh, 80px)) var(--page-pad) clamp(48px, 6vh, 80px);
+}
+
+.heroInner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 860px;
+}
+
+.heroEyebrowRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.heroEyebrow {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.heroEyebrowLine {
+  display: inline-block;
+  width: 32px;
+  height: 1.5px;
+  background-color: var(--accent);
+  opacity: 0.85;
+}
+
+.heroTitle {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(3.2rem, 6.5vw, 5.8rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--text-hi);
+  margin: 0 0 clamp(20px, 3vh, 32px);
+}
+
+.titleLine {
+  display: block;
+}
+
+.titleLineItalic {
+  display: block;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.heroSubtitle {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(1.05rem, 1.3vw, 1.22rem);
+  line-height: 1.75;
+  color: var(--text-lo);
+  max-width: 620px;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   2. EDITORIAL SPLIT: STATEMENT + CONTACT INFO
+   -------------------------------------------------------------------------- */
+.splitSection {
+  position: relative;
+  max-width: var(--page-max, 1200px);
+  margin: 0 auto;
+  padding: var(--section-v) var(--page-pad);
+}
+
+.splitSection::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: var(--page-pad);
+  right: var(--page-pad);
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--border-sub) 20%,
+    var(--border-sub) 80%,
+    transparent
+  );
+}
+
+.splitInner {
+  display: grid;
+  grid-template-columns: 1.15fr 1px 1.1fr;
+  gap: clamp(32px, 5vw, 68px);
+  align-items: center;
+}
+
+.splitLeft {
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionEyebrow {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: inline-block;
+  margin-bottom: 14px;
+}
+
+.statementHeading {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-hi);
+  margin: 0 0 20px;
+  letter-spacing: -0.02em;
+}
+
+.accentItalic {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.statementText {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(1rem, 1.15vw, 1.1rem);
+  color: var(--text-lo);
+  line-height: 1.8;
+  margin: 0;
+}
+
+.splitDivider {
+  width: 1px;
+  height: 80%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(250, 204, 21, 0.4) 25%,
+    rgba(255, 255, 255, 0.15) 75%,
+    transparent
+  );
+}
+
+.splitRight {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 3vh, 32px);
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 20px;
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  transition:
+    background-color var(--motion-fast) ease,
+    border-color var(--motion-fast) ease;
+}
+
+.contactItem:hover {
+  background-color: rgba(255, 255, 255, 0.04);
+  border-color: rgba(250, 204, 21, 0.3);
+}
+
+.iconCircle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: rgba(250, 204, 21, 0.08);
+  border: 1px solid rgba(250, 204, 21, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon {
+  color: var(--accent);
+}
+
+.contactText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.contactLabel {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.contactLink {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  font-weight: 500;
+  color: var(--text-hi);
+  text-decoration: none;
+  transition: color var(--motion-fast) ease;
+}
+
+.contactLink:hover {
+  color: var(--accent);
+}
+
+.contactStatic {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  font-weight: 500;
+  color: var(--text-hi);
+}
+
+/* --------------------------------------------------------------------------
+   3. AI CHAT CTA (SAATHI)
+   -------------------------------------------------------------------------- */
+.saathiSection {
+  position: relative;
+  max-width: var(--page-max, 1200px);
+  margin: 0 auto;
+  padding: 0 var(--page-pad) var(--section-v);
+}
+
+.saathiCard {
+  position: relative;
+  border: 1px solid rgba(250, 204, 21, 0.25);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.02);
+  padding: clamp(36px, 5vw, 56px);
+  overflow: hidden;
+  transition:
+    border-color var(--motion-fast) ease,
+    background-color var(--motion-fast) ease;
+}
+
+.saathiCard:hover {
+  border-color: rgba(250, 204, 21, 0.45);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.saathiGlow {
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(250, 204, 21, 0.12) 0%, transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+.saathiContent {
+  position: relative;
+  z-index: 2;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.saathiBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.saathiBadgeIcon {
+  color: var(--accent);
+}
+
+.saathiHeading {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--text-hi);
+  margin: 0 0 14px;
+}
+
+.accentText {
+  color: var(--accent);
+  font-style: italic;
+}
+
+.saathiDescription {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text-lo);
+  margin: 0 0 28px;
+}
+
+.saathiButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 0;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.saathiArrow {
+  transition: transform var(--motion-fast) ease;
+}
+
+.buttonUnderline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40%;
+  height: 2px;
+  background-color: var(--accent);
+  transition: width 300ms var(--ease-ed);
+}
+
+.saathiButton:hover .buttonUnderline {
+  width: 100%;
+}
+
+.saathiButton:hover .saathiArrow {
+  transform: translateX(5px);
+}
+
+/* --------------------------------------------------------------------------
+   4. CONTACT FORM
+   -------------------------------------------------------------------------- */
+.formSection {
+  position: relative;
+  max-width: var(--page-max, 1200px);
+  margin: 0 auto;
+  padding: var(--section-v) var(--page-pad);
+}
+
+.formSection::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: var(--page-pad);
+  right: var(--page-pad);
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--border-sub) 20%,
+    var(--border-sub) 80%,
+    transparent
+  );
+}
+
+.formInner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.formHeader {
+  text-align: center;
+  margin-bottom: clamp(36px, 5vh, 52px);
+}
+
+.formTitle {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(2rem, 3.6vw, 3rem);
+  font-weight: 400;
+  color: var(--text-hi);
+  margin: 0 0 14px;
+}
+
+.formSubtitle {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1rem;
+  color: var(--text-lo);
+  line-height: 1.7;
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formLabel {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.formInput,
+.formTextarea {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 14px 18px;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.95rem;
+  color: var(--text-hi);
+  outline: none;
+  transition:
+    border-color var(--motion-fast) ease,
+    background-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease;
+}
+
+.formInput::placeholder,
+.formTextarea::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.formInput:focus,
+.formTextarea:focus {
+  border-color: var(--accent);
+  background-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 14px rgba(250, 204, 21, 0.2);
+}
+
+.formTextarea {
+  resize: vertical;
+  min-height: 130px;
+}
+
+.formActionRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.submitButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 34px;
+  background-color: var(--accent);
+  color: #121212;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  border-radius: 40px;
+  border: none;
+  cursor: pointer;
+  transition:
+    transform var(--motion-fast) ease,
+    background-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease;
+  box-shadow: 0 4px 20px rgba(250, 204, 21, 0.22);
+}
+
+.submitButton:hover {
+  background-color: #fde047;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(250, 204, 21, 0.36);
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.privacyNote {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.successBanner {
+  display: flex;
+  gap: 16px;
+  padding: 28px;
+  border: 1px solid rgba(250, 204, 21, 0.4);
+  background: rgba(250, 204, 21, 0.05);
+  border-radius: 6px;
+  align-items: flex-start;
+}
+
+.successIcon {
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.successContent {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.successTitle {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--text-hi);
+  margin: 0;
+}
+
+.successText {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.95rem;
+  color: var(--text-mid);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.sendAnotherButton {
+  align-self: flex-start;
+  margin-top: 10px;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   5. COMMUNITY VISUAL INTEGRATION
+   -------------------------------------------------------------------------- */
+.visualSection {
+  position: relative;
+  width: 100%;
+  max-width: var(--page-max, 1200px);
+  margin: 0 auto;
+  padding: clamp(40px, 6vh, 80px) var(--page-pad) clamp(60px, 10vh, 100px);
+}
+
+.visualWrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.visualTopFade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  background: linear-gradient(to bottom, #141414 0%, transparent 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.visualBottomFade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  background: linear-gradient(to top, #141414 0%, transparent 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.visualImage {
+  width: 100%;
+  height: auto;
+  max-height: 480px;
+  object-fit: cover;
+  opacity: 0;
+  filter: brightness(0.9) contrast(1.02);
+  transform: scale(1.02);
+  transition:
+    opacity 1000ms var(--ease-ed),
+    transform 1200ms var(--ease-ed);
+}
+
+.visualLoaded {
+  opacity: 0.88;
+  transform: scale(1);
+}
+
+/* --------------------------------------------------------------------------
+   6. SAATHI PREVIEW MODAL
+   -------------------------------------------------------------------------- */
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modalCard {
+  background-color: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 560px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 28px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.modalTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.saathiAvatarCircle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(250, 204, 21, 0.12);
+  border: 1px solid rgba(250, 204, 21, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.accentIcon {
+  color: var(--accent);
+}
+
+.modalTitle {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--text-hi);
+  margin: 0;
+}
+
+.modalBadge {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.modalCloseBtn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  padding: 4px;
+  transition: color var(--motion-fast) ease;
+}
+
+.modalCloseBtn:hover {
+  color: var(--text-hi);
+}
+
+.modalBody {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modalWelcome {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--text-mid);
+  margin: 0;
+  border-left: 2px solid var(--accent);
+  padding-left: 16px;
+}
+
+.starterPromptList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.promptHeader {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.promptItem {
+  text-align: left;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  padding: 12px 16px;
+  color: var(--text-hi);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition:
+    background-color var(--motion-fast) ease,
+    border-color var(--motion-fast) ease;
+}
+
+.promptItem:hover {
+  background: rgba(250, 204, 21, 0.06);
+  border-color: rgba(250, 204, 21, 0.3);
+  color: var(--accent);
+}
+
+.modalFooter {
+  padding: 16px 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.modalDisclaimer {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.4;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE DESIGN
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .splitInner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .splitDivider {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    padding-top: calc(var(--navbar-height, 80px) + 24px);
+  }
+
+  .heroTitle {
+    font-size: clamp(2.4rem, 8vw, 3.8rem);
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .formActionRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .submitButton {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .pageContainer {
+    --page-pad: 20px;
+  }
+
+  .heroTitle {
+    font-size: clamp(2rem, 8.5vw, 2.7rem);
+  }
+
+  .statementHeading {
+    font-size: clamp(1.65rem, 6.8vw, 2.2rem);
+  }
+
+  .formTitle {
+    font-size: clamp(1.6rem, 6vw, 2rem);
+  }
+
+  .saathiHeading {
+    font-size: 1.6rem;
+  }
+
+  .saathiCard {
+    padding: 28px 20px;
+  }
+
+  .contactItem {
+    padding: 14px 16px;
+    gap: 14px;
+  }
+
+  .contactLink {
+    word-break: break-all;
+  }
+
+  .modalCard {
+    margin: 12px;
+  }
+
+  .modalHeader,
+  .modalBody {
+    padding: 20px;
+  }
+}

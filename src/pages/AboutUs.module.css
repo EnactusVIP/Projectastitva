@@ -1,0 +1,1169 @@
+/* ==========================================================================
+   About Us Page Styles (CSS Module)
+   Project Astitva — Immersive Editorial Digital Storytelling
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   GLOBAL DESIGN TOKENS — All sections align to the same invisible grid
+   -------------------------------------------------------------------------- */
+.pageContainer {
+  /* Layout */
+  --page-max:    1200px;
+  --page-pad:    clamp(24px, 5vw, 72px);
+  --section-v:   clamp(80px, 10vh, 120px);
+  --chapter-gap: clamp(28px, 4vh, 48px);
+  --content-gap: clamp(14px, 2vw, 24px);
+
+  /* Motion */
+  --motion-fast: 200ms;
+  --motion-std:  700ms;
+  --motion-slow: 1000ms;
+  --ease-ed:     cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out:    cubic-bezier(0.0, 0, 0.2, 1);
+
+  /* Color aliases */
+  --accent:      #facc15;
+  --accent-glow: rgba(250, 204, 21, 0.35);
+  --text-hi:     #ffffff;
+  --text-mid:    rgba(255, 255, 255, 0.82);
+  --text-lo:     rgba(255, 255, 255, 0.55);
+  --border-sub:  rgba(255, 255, 255, 0.07);
+
+  background-color: #141414;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(250, 204, 21, 0.035), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 90% 40%, rgba(255, 140, 0, 0.02), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 10% 80%, rgba(117, 7, 135, 0.025), transparent 70%);
+  color: var(--text-primary, #ffffff);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+
+/* --------------------------------------------------------------------------
+   SCROLL REVEAL BASE SYSTEM
+   -------------------------------------------------------------------------- */
+.revealElement {
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(3px);
+  transition:
+    opacity   var(--motion-std) var(--ease-ed),
+    transform var(--motion-std) var(--ease-ed),
+    filter    var(--motion-std) var(--ease-ed);
+  will-change: opacity, transform, filter;
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Perceptibly distinct stagger delays */
+.delay100 { transition-delay: 120ms; }
+.delay200 { transition-delay: 260ms; }
+.delay300 { transition-delay: 420ms; }
+.delay400 { transition-delay: 580ms; }
+
+/* --------------------------------------------------------------------------
+   CHAPTER WRAPPERS — Unified grid, consistent padding
+   -------------------------------------------------------------------------- */
+.chapterScene {
+  max-width: var(--page-max, 1200px);
+  margin: 0 auto;
+  padding: var(--section-v) var(--page-pad);
+  position: relative;
+}
+
+/* Subtle hairline separator between adjacent chapter scenes */
+.chapterScene + .chapterScene::before,
+.impactSection + .chapterScene::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: var(--page-pad);
+  right: var(--page-pad);
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--border-sub) 20%,
+    var(--border-sub) 80%,
+    transparent
+  );
+}
+
+.chapterContent {
+  width: 100%;
+}
+
+.chapterHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: var(--chapter-gap);
+}
+
+.chapterNumber {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-style: italic;
+  font-size: clamp(3rem, 5vw, 5rem);
+  line-height: 0.82;
+  color: rgba(255, 255, 255, 0.1);
+  user-select: none;
+  letter-spacing: -0.04em;
+}
+
+.chapterTag {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* --------------------------------------------------------------------------
+   1. HERO SCENE: Full-Screen Community Illustration Background + Editorial Content
+   -------------------------------------------------------------------------- */
+.heroSection {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background-color: #141414;
+  padding-top: var(--navbar-height, 80px);
+  padding-bottom: clamp(60px, 8vh, 100px);
+}
+
+/* Full-bleed background illustration wrapper */
+.heroBgWrapper {
+  position: absolute;
+  top: -24px;
+  left: -12px;
+  right: -12px;
+  bottom: -24px;
+  width: calc(100% + 24px);
+  height: calc(100% + 48px);
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.heroBgImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 38%;
+  opacity: 0;
+  transform: scale(1.04);
+  filter: brightness(0.92) contrast(1.04);
+  transition:
+    opacity 1100ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1400ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1100ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.heroBgLoaded {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Dark translucent & subtle gradient overlay for editorial readability */
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to right,
+      rgba(15, 15, 15, 0.74) 0%,
+      rgba(15, 15, 15, 0.62) 36%,
+      rgba(15, 15, 15, 0.44) 70%,
+      rgba(15, 15, 15, 0.54) 100%
+    ),
+    rgba(0, 0, 0, 0.24);
+  opacity: 0;
+  transition: opacity 1000ms cubic-bezier(0.16, 1, 0.3, 1) 120ms;
+  pointer-events: none;
+}
+
+.heroOverlayLoaded {
+  opacity: 1;
+}
+
+/* Seamless bottom transition into Chapter 01 */
+.heroBottomFade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: clamp(100px, 18vh, 180px);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(20, 20, 20, 0.5) 40%,
+    rgba(20, 20, 20, 0.88) 80%,
+    #141414 100%
+  );
+  pointer-events: none;
+}
+
+/* Foreground Container (Aligns with 1200px page grid) */
+.heroContentContainer {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: var(--page-max, 1200px);
+  margin: 0 auto;
+  padding: 0 var(--page-pad);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.heroTextColumn {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 580px;
+}
+
+.heroEyebrowWrapper {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.heroEyebrow {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+}
+
+.eyebrowLine {
+  display: inline-block;
+  width: 36px;
+  height: 1.5px;
+  background-color: var(--accent);
+  opacity: 0.85;
+  box-shadow: 0 0 10px rgba(250, 204, 21, 0.4);
+}
+
+.heroTitle {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(4.8rem, 10vw, 9rem);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  color: var(--text-hi);
+  margin: 0 0 clamp(24px, 4vh, 40px);
+  user-select: none;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.9);
+}
+
+.titleLine {
+  display: block;
+}
+
+.titleLineItalic {
+  display: block;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.92);
+  padding-left: 0.04em;
+}
+
+.heroStatement {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 540px;
+  margin-bottom: clamp(28px, 4vh, 44px);
+  border-left: 2px solid rgba(250, 204, 21, 0.45);
+  padding-left: 20px;
+}
+
+.statementLine {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-style: italic;
+  font-size: clamp(1.1rem, 1.7vw, 1.45rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.5;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85);
+}
+
+.scrollCue {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  color: rgba(255, 255, 255, 0.65);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.68rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  user-select: none;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.scrollCueLine {
+  width: 28px;
+  height: 1.5px;
+  background-color: rgba(255, 255, 255, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.scrollCueLine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--accent);
+  animation: pulseLine 2.4s var(--ease-out) infinite;
+}
+
+@keyframes pulseLine {
+  0%   { left: -100%; }
+  50%  { left: 100%;  }
+  100% { left: 100%;  }
+}
+
+/* --------------------------------------------------------------------------
+   CHAPTER 01: THE IDEA
+   -------------------------------------------------------------------------- */
+.ideaStage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--chapter-gap);
+}
+
+.grandHeadline {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-weight: 400;
+  line-height: 1.28;
+  color: var(--text-hi);
+  letter-spacing: -0.015em;
+  max-width: 960px;
+  margin: 0;
+}
+
+.grandHeadlineHighlight {
+  font-style: italic;
+  color: var(--accent);
+  display: inline;
+}
+
+.editorialNarrativeRow {
+  display: grid;
+  grid-template-columns: 1fr clamp(280px, 40%, 460px);
+  gap: clamp(24px, 5vw, 64px);
+  align-items: flex-start;
+}
+
+.narrativeLead {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-style: italic;
+  font-size: clamp(1.2rem, 1.8vw, 1.55rem);
+  line-height: 1.55;
+  color: var(--text-mid);
+  margin: 0;
+}
+
+.narrativeBody {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(1rem, 1.15vw, 1.1rem);
+  font-weight: 350;
+  line-height: 1.85;
+  color: var(--text-lo);
+  letter-spacing: 0.01em;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   CHAPTER 02: WHY ASTITVA
+   -------------------------------------------------------------------------- */
+.whyStage {
+  display: grid;
+  grid-template-columns: 1.1fr 1px 1fr;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+
+.whyPoemCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.whyPoemText {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-style: italic;
+  font-size: clamp(2.4rem, 4.2vw, 4rem);
+  line-height: 1.16;
+  color: var(--text-hi);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+/* Animated golden vertical divider — shared across sections 02, 03, 04 */
+.whyVerticalDivider {
+  width: 1px;
+  height: 100%;
+  min-height: 200px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(250, 204, 21, 0.55) 25%,
+    rgba(255, 255, 255, 0.18) 75%,
+    transparent
+  );
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform var(--motion-slow) var(--ease-ed);
+  will-change: transform;
+}
+
+.dividerDrawn {
+  transform: scaleY(1);
+}
+
+.whyDetailCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--content-gap);
+}
+
+.challengePillGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.challengePill {
+  display: inline-flex;
+  padding: 5px 13px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 20px;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.73rem;
+  letter-spacing: 0.04em;
+  color: var(--text-lo);
+}
+
+.whyNarrative {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(1rem, 1.15vw, 1.1rem);
+  font-weight: 350;
+  line-height: 1.85;
+  color: var(--text-lo);
+  letter-spacing: 0.01em;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   CHAPTERS 03 & 04: EDITORIAL STORYTELLING
+   Identical design system to 01 & 02
+   -------------------------------------------------------------------------- */
+
+/* Section 03: large-col | divider | text-col */
+.editorialSplitStage {
+  display: grid;
+  grid-template-columns: 1.1fr 1px 1fr;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+
+/* Section 04: text-col | divider | large-col */
+.splitReversed {
+  grid-template-columns: 1fr 1px 1.1fr;
+}
+
+.splitLeft {
+  display: flex;
+  flex-direction: column;
+  gap: var(--content-gap);
+  justify-content: center;
+}
+
+.splitRight {
+  display: flex;
+  flex-direction: column;
+  gap: var(--content-gap);
+  justify-content: center;
+}
+
+/* Section 04 title: lives in wider right column */
+.splitReversed .splitRight {
+  align-items: flex-start;
+}
+
+/* LEVEL 1 display type — the large visual statement in 03 & 04 */
+.editorialSectionTitle {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(2.8rem, 5.2vw, 5.2rem);
+  font-weight: 400;
+  color: var(--text-hi);
+  letter-spacing: -0.028em;
+  line-height: 1.04;
+  margin: 0;
+}
+
+/* Italic leading statement */
+.editorialLargeStatement {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-style: italic;
+  font-size: clamp(1.3rem, 2vw, 1.75rem);
+  line-height: 1.45;
+  color: var(--text-mid);
+  margin: 0;
+}
+
+/* Yellow badge row */
+.editorialBadgeGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.editorialBadgeIcon {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.editorialBadgeText {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Body copy */
+.editorialBodyText {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(1rem, 1.15vw, 1.1rem);
+  font-weight: 350;
+  line-height: 1.85;
+  color: var(--text-lo);
+  letter-spacing: 0.01em;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   BRAND SOUL & CULTURAL MANIFESTO
+   -------------------------------------------------------------------------- */
+.soulScene {
+  max-width: var(--page-max, 1200px);
+  margin: 0 auto;
+  padding: var(--section-v) var(--page-pad);
+  text-align: center;
+  position: relative;
+}
+
+.soulScene::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: var(--page-pad);
+  right: var(--page-pad);
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--border-sub) 20%,
+    var(--border-sub) 80%,
+    transparent
+  );
+}
+
+.soulContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.rainbowFilament {
+  width: min(220px, 55%);
+  height: 2px;
+  background: var(--accent-rainbow, linear-gradient(90deg, #facc15, #f97316, #ec4899, #8b5cf6, #3b82f6));
+  border-radius: 2px;
+  margin-bottom: 32px;
+  box-shadow: 0 0 12px rgba(255, 237, 0, 0.2);
+}
+
+.soulBrandTitle {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(1rem, 1.6vw, 1.3rem);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.88);
+  margin-bottom: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.hindiIdentity {
+  font-family: var(--font-hindi, sans-serif);
+  letter-spacing: normal;
+  font-weight: 500;
+}
+
+.soulSeparator {
+  color: rgba(255, 255, 255, 0.28);
+  font-weight: 300;
+}
+
+.soulEnglish {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-style: italic;
+  font-size: clamp(1.1rem, 1.7vw, 1.48rem);
+  font-weight: 400;
+  color: #ddd;
+  line-height: 1.7;
+  max-width: 700px;
+  margin: 0 0 18px;
+}
+
+.soulHindi {
+  font-family: var(--font-hindi, sans-serif);
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  font-weight: 400;
+  color: #aaa;
+  line-height: 1.85;
+  max-width: 700px;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   THE BELIEF — Emotional Climax (Peak of the Story)
+   -------------------------------------------------------------------------- */
+.beliefScene {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: var(--section-v) var(--page-pad);
+  text-align: center;
+  position: relative;
+}
+
+.beliefScene::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: var(--page-pad);
+  right: var(--page-pad);
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--border-sub) 20%,
+    var(--border-sub) 80%,
+    transparent
+  );
+}
+
+.beliefWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.beliefWatermark {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-style: italic;
+  font-size: clamp(5rem, 9vw, 10rem);
+  line-height: 0.8;
+  color: rgba(255, 255, 255, 0.05);
+  user-select: none;
+  margin-bottom: 8px;
+  letter-spacing: -0.05em;
+}
+
+/* The emotional climax — largest narrative statement */
+.beliefClimaxHeading {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(2.6rem, 5.5vw, 5rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.18;
+  color: var(--text-hi);
+  margin: 16px auto 32px;
+  max-width: 860px;
+  letter-spacing: -0.025em;
+}
+
+.beliefSupportingCopy {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  font-weight: 350;
+  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 660px;
+  margin: 0 auto;
+}
+
+/* --------------------------------------------------------------------------
+   OUR IMPACT — SDG Section
+   -------------------------------------------------------------------------- */
+.impactSection {
+  max-width: var(--page-max, 1200px);
+  margin: 0 auto;
+  padding: var(--section-v) var(--page-pad);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+@media (min-width: 1025px) {
+  .impactSection {
+    padding-right: clamp(68px, 7.5vw, 115px);
+  }
+}
+
+.impactSection::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: var(--page-pad);
+  right: var(--page-pad);
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--border-sub) 20%,
+    var(--border-sub) 80%,
+    transparent
+  );
+}
+
+.impactHeader {
+  margin-bottom: clamp(36px, 5vh, 56px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.impactEyebrow {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.impactTitle {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(2rem, 3.8vw, 3.2rem);
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--text-hi);
+  margin: 0 0 14px;
+  letter-spacing: -0.015em;
+}
+
+.impactSubtitleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.impactDescription {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(1rem, 1.15vw, 1.1rem);
+  color: var(--text-lo);
+  max-width: 580px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.sdgGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(14px, 1.8vw, 24px);
+  width: 100%;
+  margin-top: clamp(28px, 3.5vh, 40px);
+}
+
+/* --------------------------------------------------------------------------
+   CLOSING CTA
+   -------------------------------------------------------------------------- */
+.closingScene {
+  max-width: var(--page-max, 1200px);
+  margin: 0 auto;
+  padding: clamp(48px, 7vh, 80px) var(--page-pad) var(--section-v);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.closingScene::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: var(--page-pad);
+  right: var(--page-pad);
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--border-sub) 20%,
+    var(--border-sub) 80%,
+    transparent
+  );
+}
+
+.closingTagline {
+  display: block;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.closingHeadline {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 620px;
+  line-height: 1.48;
+  margin: 0 0 36px;
+}
+
+.closingButtonRow {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.primaryPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  background-color: var(--accent);
+  color: #121212;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: 40px;
+  text-decoration: none;
+  transition:
+    transform          var(--motion-fast) ease,
+    background-color   var(--motion-fast) ease,
+    box-shadow         var(--motion-fast) ease;
+  box-shadow: 0 4px 20px rgba(250, 204, 21, 0.22);
+  cursor: pointer;
+  border: none;
+}
+
+.primaryPill:hover {
+  background-color: #fde047;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 28px rgba(250, 204, 21, 0.36);
+}
+
+.secondaryPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 20px;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.9rem;
+  font-weight: 400;
+  text-decoration: none;
+  transition: color var(--motion-fast) ease, transform var(--motion-fast) ease;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.secondaryPill:hover {
+  color: var(--text-hi);
+  transform: translateX(4px);
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+@media (max-width: 1180px) {
+  .sdgGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 1024px) {
+  .heroBgImage {
+    object-position: center 38%;
+  }
+
+  .heroTitle {
+    font-size: clamp(4.2rem, 9.5vw, 7.5rem);
+  }
+
+  .editorialNarrativeRow {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+
+  .whyStage,
+  .editorialSplitStage,
+  .splitReversed {
+    gap: 40px;
+  }
+
+  .sdgGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 860px) {
+  .heroTextColumn {
+    max-width: 100%;
+  }
+
+  .editorialNarrativeRow {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    min-height: 100vh;
+    min-height: 100svh;
+    min-height: 100dvh;
+    padding-top: calc(var(--navbar-height, 80px) + 24px);
+    padding-bottom: clamp(56px, 8vh, 80px);
+  }
+
+  .heroBgImage {
+    object-position: 68% center;
+  }
+
+  .heroOverlay {
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(15, 15, 15, 0.7) 0%,
+        rgba(15, 15, 15, 0.54) 40%,
+        rgba(15, 15, 15, 0.72) 75%,
+        #141414 100%
+      ),
+      rgba(0, 0, 0, 0.28);
+  }
+
+  .heroTitle {
+    font-size: clamp(3.8rem, 14vw, 5.5rem);
+    margin-bottom: 24px;
+  }
+
+  .chapterScene {
+    padding: clamp(56px, 8vh, 80px) clamp(20px, 5vw, 40px);
+  }
+
+  .chapterScene + .chapterScene::before,
+  .impactSection + .chapterScene::before,
+  .soulScene::before,
+  .beliefScene::before,
+  .impactSection::before,
+  .closingScene::before {
+    left: clamp(20px, 5vw, 40px);
+    right: clamp(20px, 5vw, 40px);
+  }
+
+  .whyStage,
+  .editorialSplitStage,
+  .splitReversed {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  /* Reversed section: title first on mobile */
+  .splitReversed .splitRight {
+    order: -1;
+  }
+
+  /* Horizontal divider on mobile */
+  .whyVerticalDivider {
+    width: 100%;
+    height: 1px;
+    min-height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(250, 204, 21, 0.42) 20%,
+      rgba(255, 255, 255, 0.15) 80%,
+      transparent
+    );
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--motion-slow) var(--ease-ed);
+  }
+
+  .dividerDrawn {
+    transform: scaleX(1);
+  }
+
+  .soulScene {
+    padding: clamp(56px, 8vh, 80px) clamp(20px, 5vw, 40px);
+  }
+
+  .beliefScene {
+    padding: clamp(56px, 8vh, 80px) clamp(20px, 5vw, 40px);
+  }
+
+  .impactSection {
+    padding: clamp(56px, 8vh, 80px) clamp(20px, 5vw, 40px);
+  }
+
+  .impactSubtitleRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .closingScene {
+    padding: clamp(48px, 7vh, 64px) clamp(20px, 5vw, 40px) clamp(56px, 8vh, 80px);
+  }
+
+  .editorialSectionTitle {
+    font-size: clamp(2.4rem, 10vw, 3.6rem);
+  }
+
+  .beliefClimaxHeading {
+    font-size: clamp(2rem, 7vw, 3rem);
+  }
+}
+
+@media (max-width: 640px) {
+  .sdgGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroBgImage {
+    object-position: 72% center;
+  }
+
+  .heroTitle {
+    font-size: 3.4rem;
+  }
+
+  .statementLine {
+    font-size: 1.05rem;
+  }
+
+  .sdgGrid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 12px;
+  }
+
+  .closingButtonRow {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .primaryPill,
+  .secondaryPill {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ACCESSIBILITY: REDUCED MOTION
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .revealElement {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+
+  .heroBgImage {
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .heroBgWrapper {
+    transform: none !important;
+  }
+
+  .heroOverlay {
+    transition: none !important;
+    opacity: 1 !important;
+  }
+
+  .whyVerticalDivider {
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .scrollCueLine::after {
+    animation: none !important;
+  }
+
+  .indexItem,
+  .indexDot,
+  .indexLabel,
+  .primaryPill,
+  .secondaryPill {
+    transition: none !important;
+  }
+}
