@@ -117,13 +117,11 @@ export default function Newsletter({ onNavigate }) {
   const heroRef = useRef(null);
   const signupRef = useRef(null);
   const contentRef = useRef(null);
-  const ctaRef = useRef(null);
 
   const [reveals, setReveals] = useState({
     hero: false,
     signup: false,
     content: false,
-    cta: false,
   });
 
   useEffect(() => {
@@ -132,7 +130,7 @@ export default function Newsletter({ onNavigate }) {
 
   useEffect(() => {
     if (!('IntersectionObserver' in window)) {
-      setReveals({ hero: true, signup: true, content: true, cta: true });
+      setReveals({ hero: true, signup: true, content: true });
       return;
     }
 
@@ -154,7 +152,6 @@ export default function Newsletter({ onNavigate }) {
     observe(heroRef, 'hero');
     observe(signupRef, 'signup');
     observe(contentRef, 'content');
-    observe(ctaRef, 'cta');
 
     return () => {
       observers.forEach(({ obs, target }) => {
@@ -197,15 +194,6 @@ export default function Newsletter({ onNavigate }) {
     // Clean frontend state structure ready for backend connection
     setIsSubscribed(true);
     setEmail('');
-  };
-
-  const handleScrollToSubscribe = () => {
-    if (emailInputRef.current) {
-      emailInputRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      setTimeout(() => {
-        emailInputRef.current?.focus();
-      }, 400);
-    }
   };
 
   return (
@@ -415,30 +403,6 @@ export default function Newsletter({ onNavigate }) {
               )}
             </div>
 
-          </div>
-        </section>
-
-        {/* ----------------------------------------------------------------
-            4. FINAL CTA
-            ---------------------------------------------------------------- */}
-        <section ref={ctaRef} className={styles.finalCtaSection} aria-label="Closing invitation">
-          <div className={`${styles.revealElement} ${reveals.cta ? styles.revealed : ''} ${styles.finalCtaInner}`}>
-            <h4 className={styles.ctaHeading}>
-              Stay curious. <br />
-              <em className={styles.accentItalic}>Stay connected.</em>
-            </h4>
-            <p className={styles.ctaSubtitle}>
-              Be the first to receive new personal stories, reflection toolkits, and event dispatches.
-            </p>
-            <button
-              type="button"
-              className={styles.ctaButton}
-              onClick={handleScrollToSubscribe}
-              aria-label="Scroll to subscribe form"
-            >
-              <span>SUBSCRIBE TO ASTITVA</span>
-              <ArrowRight size={16} aria-hidden="true" />
-            </button>
           </div>
         </section>
       </main>
