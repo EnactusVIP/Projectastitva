@@ -431,8 +431,8 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 36px;
-    padding-top: calc(var(--navbar-height, 80px) + 20px);
+    gap: 28px;
+    padding-top: calc(var(--navbar-height, 80px) + var(--safe-area-top, 0px) + 16px);
   }
 
   .editorialCard {
@@ -455,77 +455,105 @@
     min-height: 100dvh;
   }
 
+  .bgImage {
+    object-position: center 26%;
+    filter: brightness(0.82) contrast(1.05);
+  }
+
+  .overlayBase {
+    background: rgba(14, 14, 14, 0.44);
+  }
+
+  .overlayRadial {
+    background: radial-gradient(
+      ellipse 95% 75% at 50% 46%,
+      rgba(14, 14, 14, 0.88) 0%,
+      rgba(14, 14, 14, 0.65) 55%,
+      rgba(14, 14, 14, 0.28) 85%,
+      transparent 100%
+    );
+  }
+
   .title {
-    font-size: clamp(2.8rem, 8vw, 3.8rem);
+    font-size: clamp(2.6rem, 9.5vw, 3.4rem);
+    line-height: 1.08;
   }
 
   .tagline {
-    font-size: clamp(1.1rem, 3.2vw, 1.4rem);
-    letter-spacing: 0.18em;
+    font-size: clamp(0.95rem, 3.2vw, 1.25rem);
+    letter-spacing: 0.16em;
+    margin-top: 10px;
   }
 
   .badgeCircle {
-    width: 96px;
-    height: 96px;
+    width: 90px;
+    height: 90px;
+  }
+
+  .scrollCueWrapper {
+    bottom: calc(16px + var(--safe-area-bottom, 0px));
   }
 }
 
 @media (max-width: 480px) {
   .heroStage {
-    padding-bottom: 72px;
+    padding-bottom: calc(64px + var(--safe-area-bottom, 0px));
+    gap: 22px;
   }
 
   .title {
-    font-size: clamp(2.4rem, 9.5vw, 3rem);
-  }
-
-  .tagline {
-    font-size: 1.05rem;
-    letter-spacing: 0.15em;
-  }
-
-  .badgeCircle {
-    width: 88px;
-    height: 88px;
-  }
-
-  .scrollCueWrapper {
-    bottom: 20px;
-  }
-
-  .scrollCueIndicator {
-    height: 20px;
-  }
-}
-
-@media (max-width: 390px) {
-  .title {
-    font-size: 2.35rem;
+    font-size: clamp(2.3rem, 9.4vw, 2.85rem);
   }
 
   .tagline {
     font-size: 0.98rem;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
+    margin-top: 8px;
   }
 
   .badgeCircle {
     width: 82px;
     height: 82px;
   }
+
+  .scrollCueWrapper {
+    bottom: calc(14px + var(--safe-area-bottom, 0px));
+  }
+
+  .scrollCueIndicator {
+    height: 18px;
+  }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 390px) {
   .title {
-    font-size: 2.2rem;
+    font-size: 2.25rem;
   }
 
   .tagline {
-    font-size: 0.94rem;
+    font-size: 0.92rem;
+    letter-spacing: 0.12em;
   }
 
   .badgeCircle {
     width: 78px;
     height: 78px;
+  }
+}
+
+@media (max-width: 375px) {
+  .title {
+    font-size: 2.15rem;
+  }
+
+  .tagline {
+    font-size: 0.88rem;
+    letter-spacing: 0.1em;
+  }
+
+  .badgeCircle {
+    width: 74px;
+    height: 74px;
   }
 }
 

@@ -15,12 +15,12 @@ import sdg10Image from '../assets/E_WEB_10.png';
 import sdg16Image from '../assets/E_PRINT_16.jpg';
 
 const STORY_CHAPTERS = [
-  { id: 'impact', number: 'SDG', label: 'IMPACT' },
   { id: 'idea', number: '01', label: 'IDEA' },
   { id: 'why', number: '02', label: 'WHY' },
   { id: 'human', number: '03', label: 'SUPPORT' },
   { id: 'ai', number: '04', label: 'AI' },
   { id: 'belief', number: '05', label: 'BELIEF' },
+  { id: 'impact', number: '06', label: 'IMPACT' },
 ];
 
 const SDG_DATA = [
@@ -65,7 +65,6 @@ export default function AboutUs({ onNavigate, showFooter = false }) {
   const dividerRef = useRef(null);
   const humanRef = useRef(null);
   const aiRef = useRef(null);
-  const soulRef = useRef(null);
   const beliefRef = useRef(null);
   const impactRef = useRef(null);
   const closingRef = useRef(null);
@@ -78,7 +77,6 @@ export default function AboutUs({ onNavigate, showFooter = false }) {
     divider: false,
     human: false,
     ai: false,
-    soul: false,
     belief: false,
     impact: false,
     closing: false,
@@ -156,7 +154,6 @@ export default function AboutUs({ onNavigate, showFooter = false }) {
     observeSection(beliefRef, 'belief');
     observeSection(impactRef, 'impact');
     observeSection(closingRef, 'closing');
-    observeSection(soulRef, 'soul');
 
     return () => {
       observers.forEach(({ obs, target }) => {
@@ -172,12 +169,12 @@ export default function AboutUs({ onNavigate, showFooter = false }) {
 
       // Scan chapters from bottom to top to identify the current reading zone
       const chaptersToCheck = [
+        { id: 'impact', ref: impactRef },
         { id: 'belief', ref: beliefRef },
         { id: 'ai', ref: aiRef },
         { id: 'human', ref: humanRef },
         { id: 'why', ref: whyRef },
         { id: 'idea', ref: ideaRef },
-        { id: 'impact', ref: impactRef },
       ];
 
       for (const item of chaptersToCheck) {
@@ -194,7 +191,7 @@ export default function AboutUs({ onNavigate, showFooter = false }) {
       if (heroRef.current) {
         const heroRect = heroRef.current.getBoundingClientRect();
         if (heroRect.bottom > midPoint) {
-          setActiveChapter('impact');
+          setActiveChapter('idea');
         }
       }
     };
@@ -208,7 +205,7 @@ export default function AboutUs({ onNavigate, showFooter = false }) {
   const scrollToChapter = (chapterId) => {
     if (chapterId === 'hero') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      setActiveChapter('impact');
+      setActiveChapter('idea');
       return;
     }
     const map = {
@@ -219,7 +216,6 @@ export default function AboutUs({ onNavigate, showFooter = false }) {
       ai: aiRef,
       belief: beliefRef,
       impact: impactRef,
-      soul: soulRef,
     };
     const targetRef = map[chapterId];
     if (targetRef && targetRef.current) {
@@ -342,62 +338,7 @@ export default function AboutUs({ onNavigate, showFooter = false }) {
         </section>
 
         {/* ------------------------------------------------------------------
-            2. SUSTAINABLE DEVELOPMENT GOALS: OUR IMPACT
-            ------------------------------------------------------------------ */}
-        <section
-          id="chapter-impact"
-          ref={impactRef}
-          className={styles.impactSection}
-          aria-labelledby="sdg-impact-heading"
-        >
-          <div className={styles.impactHeader}>
-            <span
-              className={`${styles.revealElement} ${
-                reveals.impact ? styles.revealed : ''
-              } ${styles.impactEyebrow}`}
-            >
-              OUR IMPACT
-            </span>
-            <h2
-              id="sdg-impact-heading"
-              className={`${styles.revealElement} ${
-                reveals.impact ? styles.revealed : ''
-              } ${styles.delay100} ${styles.impactTitle}`}
-            >
-              Aligned with the Sustainable Development Goals
-            </h2>
-            <div
-              className={`${styles.revealElement} ${
-                reveals.impact ? styles.revealed : ''
-              } ${styles.delay200} ${styles.impactSubtitleRow}`}
-            >
-              <p className={styles.impactDescription}>
-                Project Astitva directly champions global targets for health,
-                inclusive learning, reduced inequality, and institutional justice.
-              </p>
-            </div>
-          </div>
-
-          <div className={styles.sdgGrid}>
-            {SDG_DATA.map((sdg, index) => (
-              <SDGCard
-                key={sdg.number}
-                number={sdg.number}
-                title={sdg.title}
-                description={sdg.description}
-                image={sdg.image}
-                accentColor={sdg.accentColor}
-                isFlipped={!!flippedCards[sdg.number]}
-                onFlip={() => handleCardFlip(sdg.number)}
-                isVisible={reveals.impact}
-                delay={index * 100}
-              />
-            ))}
-          </div>
-        </section>
-
-        {/* ------------------------------------------------------------------
-            3. CHAPTER 01: THE IDEA (Grand Statement + Focused Narrative)
+            2. CHAPTER 01: THE IDEA (Grand Statement + Focused Narrative)
             ------------------------------------------------------------------ */}
         <section
           id="chapter-idea"
@@ -692,6 +633,64 @@ export default function AboutUs({ onNavigate, showFooter = false }) {
         </section>
 
         {/* ------------------------------------------------------------------
+            6. CHAPTER 06: OUR IMPACT (Aligned with Sustainable Development Goals)
+            ------------------------------------------------------------------ */}
+        <section
+          id="chapter-impact"
+          ref={impactRef}
+          className={styles.impactSection}
+          aria-labelledby="sdg-impact-heading"
+        >
+          <div className={styles.impactHeader}>
+            <div
+              className={`${styles.revealElement} ${
+                reveals.impact ? styles.revealed : ''
+              } ${styles.chapterHeader}`}
+            >
+              <span className={styles.chapterNumber} aria-hidden="true">
+                06
+              </span>
+              <span className={styles.chapterTag}>Our Impact</span>
+            </div>
+            <h2
+              id="sdg-impact-heading"
+              className={`${styles.revealElement} ${
+                reveals.impact ? styles.revealed : ''
+              } ${styles.delay100} ${styles.impactTitle}`}
+            >
+              Aligned with the Sustainable Development Goals
+            </h2>
+            <div
+              className={`${styles.revealElement} ${
+                reveals.impact ? styles.revealed : ''
+              } ${styles.delay200} ${styles.impactSubtitleRow}`}
+            >
+              <p className={styles.impactDescription}>
+                Project Astitva directly champions global targets for health,
+                inclusive learning, reduced inequality, and institutional justice.
+              </p>
+            </div>
+          </div>
+
+          <div className={styles.sdgGrid}>
+            {SDG_DATA.map((sdg, index) => (
+              <SDGCard
+                key={sdg.number}
+                number={sdg.number}
+                title={sdg.title}
+                description={sdg.description}
+                image={sdg.image}
+                accentColor={sdg.accentColor}
+                isFlipped={!!flippedCards[sdg.number]}
+                onFlip={() => handleCardFlip(sdg.number)}
+                isVisible={reveals.impact}
+                delay={index * 100}
+              />
+            ))}
+          </div>
+        </section>
+
+        {/* ------------------------------------------------------------------
             7. CLOSING ACTION & TRANSITION PORTAL
             ------------------------------------------------------------------ */}
         <section
@@ -728,55 +727,6 @@ export default function AboutUs({ onNavigate, showFooter = false }) {
                 <span>Return to Home</span>
               </button>
             </div>
-          </div>
-        </section>
-
-        {/* ------------------------------------------------------------------
-            BRAND SOUL & CULTURAL MANIFESTO — Final Signature
-            ------------------------------------------------------------------ */}
-        <section
-          ref={soulRef}
-          className={styles.soulScene}
-          aria-label="Astitva Soul and Identity"
-        >
-          <div className={styles.soulContainer}>
-            <div
-              className={`${styles.revealElement} ${
-                reveals.soul ? styles.revealed : ''
-              } ${styles.rainbowFilament}`}
-              aria-hidden="true"
-            />
-
-            <h2
-              className={`${styles.revealElement} ${
-                reveals.soul ? styles.revealed : ''
-              } ${styles.delay100} ${styles.soulBrandTitle}`}
-            >
-              <span>ASTITVA</span>
-              <span className={styles.soulSeparator}>|</span>
-              <span className={styles.hindiIdentity} lang="hi">
-                अस्तित्व
-              </span>
-            </h2>
-
-            <p
-              className={`${styles.revealElement} ${
-                reveals.soul ? styles.revealed : ''
-              } ${styles.delay200} ${styles.soulEnglish}`}
-            >
-              &ldquo;I am the path that has not been paved yet but I will be the
-              identity that can never be erased&rdquo;
-            </p>
-
-            <p
-              className={`${styles.revealElement} ${
-                reveals.soul ? styles.revealed : ''
-              } ${styles.delay300} ${styles.soulHindi}`}
-              lang="hi"
-            >
-              मैं वो राह हूँ जो अभी बनी नहीं, मैं वो अस्तित्व हूँ जो कभी मिटेगा
-              नहीं।
-            </p>
           </div>
         </section>
       </main>

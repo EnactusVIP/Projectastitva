@@ -127,6 +127,113 @@
 }
 
 /* --------------------------------------------------------------------------
+   STATS DIVIDER
+   -------------------------------------------------------------------------- */
+.statsDivider {
+  width: min(420px, 80%);
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(250, 204, 21, 0.45) 30%,
+    rgba(250, 204, 21, 0.45) 70%,
+    transparent
+  );
+  margin: clamp(40px, 6vh, 60px) auto clamp(40px, 6vh, 60px);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1) 250ms;
+}
+
+.dividerDrawn {
+  transform: scaleX(1);
+}
+
+/* --------------------------------------------------------------------------
+   STATS GRID
+   -------------------------------------------------------------------------- */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 2.5vw, 32px);
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px 12px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 700ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 260ms ease,
+    background-color 260ms ease;
+}
+
+.statCard:hover {
+  border-color: rgba(250, 204, 21, 0.35);
+  background-color: rgba(250, 204, 21, 0.03);
+}
+
+.statVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.statNumberRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 2px;
+  margin-bottom: 8px;
+}
+
+.statNumber {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  font-weight: 500;
+  color: #facc15;
+  line-height: 1;
+  text-shadow: 0 0 24px rgba(250, 204, 21, 0.35);
+  font-variant-numeric: tabular-nums;
+}
+
+.statSuffix {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(1.4rem, 2vw, 2rem);
+  font-weight: 400;
+  color: #facc15;
+}
+
+.statLabel {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+  margin: 0 0 6px;
+  text-transform: uppercase;
+}
+
+.statSublabel {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.74rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.48);
+  margin: 0;
+  max-width: 190px;
+}
+
+/* --------------------------------------------------------------------------
    REVEAL TRIGGERED STATE
    -------------------------------------------------------------------------- */
 .revealed {
@@ -137,6 +244,13 @@
 /* --------------------------------------------------------------------------
    RESPONSIVE DESIGN
    -------------------------------------------------------------------------- */
+@media (max-width: 860px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
 @media (max-width: 768px) {
   .section {
     padding: clamp(60px, 8vh, 88px) 20px;
@@ -150,12 +264,35 @@
 
 @media (max-width: 480px) {
   .headline {
-    font-size: 1.85rem;
+    font-size: clamp(1.75rem, 7vw, 2.1rem);
   }
 
   .missionQuote {
     font-size: 1.02rem;
     line-height: 1.6;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .statCard {
+    padding: 16px 8px;
+  }
+
+  .statNumber {
+    font-size: clamp(1.9rem, 7.5vw, 2.4rem);
+  }
+
+  .statLabel {
+    font-size: 0.78rem;
+  }
+
+  .statSublabel {
+    font-size: 0.68rem;
+    line-height: 1.35;
+    max-width: none;
   }
 }
 
@@ -171,7 +308,9 @@
 @media (prefers-reduced-motion: reduce) {
   .header,
   .missionBlock,
-  .missionQuote {
+  .missionQuote,
+  .statsDivider,
+  .statCard {
     transition: none !important;
     transform: none !important;
     opacity: 1 !important;

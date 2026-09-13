@@ -269,12 +269,12 @@
 
 .subscriptionSuccess {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 16px;
-  padding: 12px 18px;
-  background: rgba(250, 204, 21, 0.05);
-  border: 1px solid rgba(250, 204, 21, 0.3);
-  border-radius: 6px;
+  padding: 16px 20px;
+  background: rgba(250, 204, 21, 0.06);
+  border: 1px solid rgba(250, 204, 21, 0.35);
+  border-radius: 8px;
 }
 
 .checkCircle {
@@ -287,6 +287,13 @@
   justify-content: center;
   color: var(--accent);
   flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.successDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .successHeading {
@@ -294,14 +301,51 @@
   font-size: 1.15rem;
   font-weight: 400;
   color: var(--text-hi);
-  margin: 0 0 2px;
+  margin: 0;
 }
 
 .successSubtext {
   font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: 0.85rem;
+  font-size: 0.86rem;
   color: var(--text-mid);
+  line-height: 1.5;
   margin: 0;
+}
+
+.successActionRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 6px;
+}
+
+.successEmailLink {
+  color: var(--accent);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: underline;
+  transition: color var(--motion-fast) ease;
+}
+
+.successEmailLink:hover {
+  color: #fde047;
+}
+
+.successResetBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.78rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.successResetBtn:hover {
+  color: var(--text-hi);
 }
 
 /* --------------------------------------------------------------------------
@@ -386,6 +430,7 @@
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
   padding: 12px 0 clamp(28px, 4vh, 40px);
 }
 
@@ -922,7 +967,7 @@
 
 @media (max-width: 768px) {
   .heroSection {
-    padding-top: calc(var(--navbar-height, 80px) + 24px);
+    padding-top: calc(var(--navbar-height, 80px) + var(--safe-area-top, 0px) + 24px);
   }
 
   .heroTitle {

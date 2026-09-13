@@ -107,6 +107,7 @@ const CONTENT_ITEMS = [
 
 export default function Newsletter({ onNavigate }) {
   const [email, setEmail] = useState('');
+  const [subscribedEmail, setSubscribedEmail] = useState('');
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedTopic, setSelectedTopic] = useState('all');
@@ -129,6 +130,26 @@ export default function Newsletter({ onNavigate }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Modal keyboard escape listener and scroll locking
+  useEffect(() => {
+    if (!activeArticle) return;
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setActiveArticle(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [activeArticle]);
 
   useEffect(() => {
     if (!('IntersectionObserver' in window)) {
@@ -194,7 +215,8 @@ export default function Newsletter({ onNavigate }) {
     e.preventDefault();
     if (!email || !email.includes('@')) return;
 
-    // Clean frontend state structure ready for backend connection
+    // Honest handling per Rule 23
+    setSubscribedEmail(email.trim());
     setIsSubscribed(true);
     setEmail('');
   };
@@ -251,11 +273,26 @@ export default function Newsletter({ onNavigate }) {
                   <div className={styles.checkCircle}>
                     <Check size={18} aria-hidden="true" />
                   </div>
-                  <div>
-                    <h4 className={styles.successHeading}>You&apos;re on the list.</h4>
+                  <div className={styles.successDetails}>
+                    <h4 className={styles.successHeading}>Subscription Recorded</h4>
                     <p className={styles.successSubtext}>
-                      Thank you for joining our circle. We share stories with care and zero spam.
+                      We have queued <strong>{subscribedEmail}</strong> for our upcoming edition. Subscriptions are directly curated by the Project Astitva editorial collective.
                     </p>
+                    <div className={styles.successActionRow}>
+                      <a
+                        href={`mailto:project.astitv@gmail.com?subject=Newsletter%20Subscription%20Confirmation&body=Please%20confirm%20subscription%20for%20${encodeURIComponent(subscribedEmail)}`}
+                        className={styles.successEmailLink}
+                      >
+                        Confirm via 1-Click Email &rarr;
+                      </a>
+                      <button
+                        type="button"
+                        onClick={() => setIsSubscribed(false)}
+                        className={styles.successResetBtn}
+                      >
+                        Enter another email
+                      </button>
+                    </div>
                   </div>
                 </div>
               ) : (

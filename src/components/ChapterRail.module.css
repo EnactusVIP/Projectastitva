@@ -261,20 +261,9 @@
 }
 
 @media (max-width: 768px) {
-  .desktopRail {
-    display: none;
-  }
-
+  .desktopRail,
   .mobileRail {
-    display: block;
-    position: fixed;
-    bottom: clamp(16px, 3vh, 24px);
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 99999;
-    pointer-events: auto;
-    width: max-content;
-    max-width: calc(100vw - 32px);
+    display: none !important;
   }
 
   .mobilePill {
