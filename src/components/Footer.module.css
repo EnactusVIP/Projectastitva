@@ -309,8 +309,6 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  word-break: break-word;
-  overflow-wrap: break-word;
   transition: color 200ms ease;
 }
 
@@ -408,27 +406,13 @@
 }
 
 @media (max-width: 600px) {
-  .container {
-    padding: 48px var(--mobile-page-padding, 20px) 24px;
-  }
-
   .mainGrid {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 36px;
   }
 
   .brandColumn {
     max-width: 100%;
-  }
-
-  .navLink {
-    padding: 8px 0;
-    min-height: 38px;
-  }
-
-  .connectLink {
-    min-height: 44px;
-    padding: 8px 6px;
   }
 
   .bottomRow {

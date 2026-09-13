@@ -11,7 +11,7 @@
   display: block;
   overflow: hidden;
   line-height: 0; /* Remove inline-block gap under image */
-  background-color: #121212;
+  background-color: var(--bg-primary, #1a1a1a);
 
   /* Entrance Animation — initial state */
   opacity: 0;
@@ -61,10 +61,10 @@
   }
 }
 
-/* Mobile (< 768px) — ensure people are recognizable and heads are not cut off */
-@media (max-width: 768px) {
+/* Mobile (< 768px) — give a fixed height so people don't shrink to specks */
+@media (max-width: 767px) {
   .imageContainer {
-    height: clamp(140px, 24vh, 180px);
+    height: 160px;
     overflow: hidden;
   }
 
@@ -72,18 +72,14 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 32%;
+    object-position: center bottom;
   }
 }
 
 /* Tiny mobile (< 480px) */
 @media (max-width: 480px) {
   .imageContainer {
-    height: clamp(135px, 22vh, 160px);
-  }
-
-  .stripImage {
-    object-position: center 30%;
+    height: 130px;
   }
 }
 

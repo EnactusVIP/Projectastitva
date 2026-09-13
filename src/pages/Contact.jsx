@@ -1,55 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import {
-  Mail,
-  Phone,
-  MapPin,
-  ArrowRight,
-  Sparkles,
-  CheckCircle2,
-  X,
-  Instagram,
-  Linkedin,
-  Send,
-  MessageCircle,
-} from 'lucide-react';
+import { Mail, Phone, MapPin, ArrowRight, Sparkles, CheckCircle2, X } from 'lucide-react';
 import styles from './Contact.module.css';
-
-const SAATHI_RESPONSES = {
-  feelings: {
-    text: "I hear you deeply. Whatever feelings you are holding right now — whether confusion, sadness, relief, or exhaustion — they are completely valid. You do not have to carry everything alone. Our trained empathetic listeners can speak with you 1-on-1 on WhatsApp or Google Meet whenever you feel ready.",
-    action: { label: 'Connect on WhatsApp', href: 'https://wa.me/917982104063?text=Hello%20Project%20Astitva,%20I%20would%20like%20to%20talk%20to%20a%20support%20listener.' },
-  },
-  resources: {
-    text: "Project Astitva curates verified queer-affirmative health practitioners, legal aid under the Transgender Persons Act, and community support groups across India. You can explore our published toolkits in our Newsletter section, or write directly to us for a custom directory.",
-    action: { label: 'Explore Resources & Newsletter', href: '#newsletter' },
-  },
-  wellness: {
-    text: "Accessing mental wellness care should be compassionate and dignified. We offer free confidential listening sessions, regular art therapy circles, and anonymous expression spaces. How would you like to begin?",
-    action: { label: 'Explore Support Pathways', href: '#support' },
-  },
-  fallback: {
-    text: "Thank you for trusting me with that. I am holding space for your words. While our full AI companion model is in continuous development alongside queer mental health professionals, our human care team is ready to listen right now.",
-    action: { label: 'Email Care Team', href: 'mailto:project.astitv@gmail.com?subject=Reaching%20out%20via%20Saathi' },
-  },
-};
 
 export default function Contact({ onNavigate }) {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showSaathiModal, setShowSaathiModal] = useState(false);
-
-  // Saathi in-modal chat state
-  const [chatMessages, setChatMessages] = useState([
-    {
-      id: 'init',
-      sender: 'saathi',
-      text: 'Namaste. I am Saathi — your confidential digital sanctuary companion. I am here to listen without judgment, share affirmative resources, and walk beside you. What is on your mind today?',
-    },
-  ]);
-  const [chatInput, setChatInput] = useState('');
-  const [isThinking, setIsThinking] = useState(false);
-  const chatBottomRef = useRef(null);
 
   const [reveals, setReveals] = useState({
     hero: false,
@@ -66,33 +23,6 @@ export default function Contact({ onNavigate }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  // Handle modal escape key and scroll lock
-  useEffect(() => {
-    if (!showSaathiModal) return;
-
-    const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
-        setShowSaathiModal(false);
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      document.body.style.overflow = originalOverflow;
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [showSaathiModal]);
-
-  // Scroll chat to bottom when messages update
-  useEffect(() => {
-    if (showSaathiModal && chatBottomRef.current) {
-      chatBottomRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [chatMessages, isThinking, showSaathiModal]);
 
   useEffect(() => {
     if (!('IntersectionObserver' in window)) {
@@ -137,64 +67,11 @@ export default function Contact({ onNavigate }) {
     if (!formData.name || !formData.email || !formData.message) return;
 
     setIsSubmitting(true);
+    // Clean frontend simulated submission
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
       setFormData({ name: '', email: '', message: '' });
-    }, 600);
-  };
-
-  const handlePromptClick = (type) => {
-    const prompts = {
-      feelings: 'I need someone to talk to about my feelings.',
-      resources: 'Can you connect me to LGBTQ+ friendly resources?',
-      wellness: 'How can I access mental wellness support?',
-    };
-
-    const userText = prompts[type];
-    if (!userText) return;
-
-    const userMsg = { id: `user-${Date.now()}`, sender: 'user', text: userText };
-    setChatMessages((prev) => [...prev, userMsg]);
-    setIsThinking(true);
-
-    setTimeout(() => {
-      setIsThinking(false);
-      const res = SAATHI_RESPONSES[type];
-      setChatMessages((prev) => [
-        ...prev,
-        {
-          id: `saathi-${Date.now()}`,
-          sender: 'saathi',
-          text: res.text,
-          action: res.action,
-        },
-      ]);
-    }, 550);
-  };
-
-  const handleSendCustomChat = (e) => {
-    e.preventDefault();
-    const text = chatInput.trim();
-    if (!text) return;
-
-    const userMsg = { id: `user-${Date.now()}`, sender: 'user', text };
-    setChatMessages((prev) => [...prev, userMsg]);
-    setChatInput('');
-    setIsThinking(true);
-
-    setTimeout(() => {
-      setIsThinking(false);
-      const res = SAATHI_RESPONSES.fallback;
-      setChatMessages((prev) => [
-        ...prev,
-        {
-          id: `saathi-${Date.now()}`,
-          sender: 'saathi',
-          text: res.text,
-          action: res.action,
-        },
-      ]);
     }, 600);
   };
 
@@ -271,42 +148,6 @@ export default function Contact({ onNavigate }) {
                 </div>
               </div>
 
-              {/* Instagram */}
-              <div className={styles.contactItem}>
-                <div className={styles.iconCircle}>
-                  <Instagram size={18} className={styles.icon} aria-hidden="true" />
-                </div>
-                <div className={styles.contactText}>
-                  <span className={styles.contactLabel}>INSTAGRAM</span>
-                  <a
-                    href="https://www.instagram.com/project_.astitva"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.contactLink}
-                  >
-                    @project_.astitva
-                  </a>
-                </div>
-              </div>
-
-              {/* LinkedIn */}
-              <div className={styles.contactItem}>
-                <div className={styles.iconCircle}>
-                  <Linkedin size={18} className={styles.icon} aria-hidden="true" />
-                </div>
-                <div className={styles.contactText}>
-                  <span className={styles.contactLabel}>LINKEDIN</span>
-                  <a
-                    href="https://www.linkedin.com/company/enactus-vips-tc"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.contactLink}
-                  >
-                    Enactus VIPS-TC
-                  </a>
-                </div>
-              </div>
-
               {/* Location */}
               <div className={styles.contactItem}>
                 <div className={styles.iconCircle}>
@@ -314,7 +155,7 @@ export default function Contact({ onNavigate }) {
                 </div>
                 <div className={styles.contactText}>
                   <span className={styles.contactLabel}>LOCATION</span>
-                  <span className={styles.contactStatic}>New Delhi &bull; India</span>
+                  <span className={styles.contactStatic}>India</span>
                 </div>
               </div>
             </div>
@@ -463,10 +304,11 @@ export default function Contact({ onNavigate }) {
             )}
           </div>
         </section>
+
       </main>
 
       {/* ----------------------------------------------------------------
-          SAATHI MODAL (Interactive sanctuary dialogue)
+          SAATHI MODAL (Preview companion dialogue)
           ---------------------------------------------------------------- */}
       {showSaathiModal && (
         <div
@@ -489,7 +331,7 @@ export default function Contact({ onNavigate }) {
                   <h3 id="saathi-modal-title" className={styles.modalTitle}>
                     Saathi &mdash; AI Companion
                   </h3>
-                  <span className={styles.modalBadge}>CONFIDENTIAL SANCTUARY</span>
+                  <span className={styles.modalBadge}>CONFIDENTIAL COMPANION</span>
                 </div>
               </div>
               <button
@@ -502,121 +344,39 @@ export default function Contact({ onNavigate }) {
               </button>
             </div>
 
-            <div className={styles.modalChatStream}>
-              {chatMessages.map((msg) => (
-                <div
-                  key={msg.id}
-                  className={`${styles.chatBubbleRow} ${
-                    msg.sender === 'user' ? styles.chatBubbleUser : styles.chatBubbleSaathi
-                  }`}
-                >
-                  {msg.sender === 'saathi' && (
-                    <div className={styles.chatAvatarSmall} aria-hidden="true">
-                      <Sparkles size={12} />
-                    </div>
-                  )}
-                  <div className={styles.chatBubble}>
-                    <p className={styles.chatMessageText}>{msg.text}</p>
-                    {msg.action && (
-                      <div className={styles.chatActionWrapper}>
-                        {msg.action.href.startsWith('#') ? (
-                          <button
-                            type="button"
-                            className={styles.chatActionBtn}
-                            onClick={() => {
-                              setShowSaathiModal(false);
-                              if (onNavigate) onNavigate(msg.action.href.replace('#', ''));
-                              else window.location.hash = msg.action.href;
-                            }}
-                          >
-                            <span>{msg.action.label}</span>
-                            <ArrowRight size={13} />
-                          </button>
-                        ) : (
-                          <a
-                            href={msg.action.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={styles.chatActionBtn}
-                          >
-                            <span>{msg.action.label}</span>
-                            <ArrowRight size={13} />
-                          </a>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
-
-              {isThinking && (
-                <div className={`${styles.chatBubbleRow} ${styles.chatBubbleSaathi}`}>
-                  <div className={styles.chatAvatarSmall} aria-hidden="true">
-                    <Sparkles size={12} />
-                  </div>
-                  <div className={`${styles.chatBubble} ${styles.chatThinkingBubble}`}>
-                    <span className={styles.typingDot} />
-                    <span className={styles.typingDot} />
-                    <span className={styles.typingDot} />
-                  </div>
-                </div>
-              )}
-              <div ref={chatBottomRef} />
-            </div>
-
-            {/* Quick prompts container */}
-            <div className={styles.modalPromptSection}>
-              <span className={styles.promptHeader}>SUGGESTED CONVERSATIONS:</span>
-              <div className={styles.starterPromptChips}>
+            <div className={styles.modalBody}>
+              <p className={styles.modalWelcome}>
+                &ldquo;Namaste. I am Saathi. I am here to listen without judgment, offer helpful resources, and walk beside you in your journey.&rdquo;
+              </p>
+              <div className={styles.starterPromptList}>
+                <span className={styles.promptHeader}>STARTER CONVERSATIONS:</span>
                 <button
                   type="button"
-                  className={styles.promptChip}
-                  onClick={() => handlePromptClick('feelings')}
+                  className={styles.promptItem}
+                  onClick={() => alert('Saathi Companion is currently in active preview training. For live support, please write to project.astitv@gmail.com')}
                 >
-                  <MessageCircle size={13} />
-                  <span>Talk about my feelings</span>
+                  &ldquo;I need someone to talk to about my feelings.&rdquo;
                 </button>
                 <button
                   type="button"
-                  className={styles.promptChip}
-                  onClick={() => handlePromptClick('resources')}
+                  className={styles.promptItem}
+                  onClick={() => alert('Saathi Companion is currently in active preview training. For live support, please write to project.astitv@gmail.com')}
                 >
-                  <Sparkles size={13} />
-                  <span>LGBTQ+ friendly resources</span>
+                  &ldquo;Can you connect me to LGBTQ+ friendly resources?&rdquo;
                 </button>
                 <button
                   type="button"
-                  className={styles.promptChip}
-                  onClick={() => handlePromptClick('wellness')}
+                  className={styles.promptItem}
+                  onClick={() => alert('Saathi Companion is currently in active preview training. For live support, please write to project.astitv@gmail.com')}
                 >
-                  <CheckCircle2 size={13} />
-                  <span>Mental wellness support</span>
+                  &ldquo;How can I access mental wellness support?&rdquo;
                 </button>
               </div>
             </div>
 
-            {/* Custom Chat Input */}
-            <form onSubmit={handleSendCustomChat} className={styles.modalInputBar}>
-              <input
-                type="text"
-                placeholder="Ask Saathi a question or share a thought..."
-                value={chatInput}
-                onChange={(e) => setChatInput(e.target.value)}
-                className={styles.modalInput}
-              />
-              <button
-                type="submit"
-                disabled={!chatInput.trim()}
-                className={styles.modalSendBtn}
-                aria-label="Send message to Saathi"
-              >
-                <Send size={15} />
-              </button>
-            </form>
-
             <div className={styles.modalFooter}>
               <span className={styles.modalDisclaimer}>
-                Note: Saathi provides empathetic conversation and guidance, not emergency clinical care. For 24/7 human crisis support, call Vandrevala Foundation: +91 9999 666 555.
+                Note: Saathi provides empathetic conversation and guidance, not emergency clinical care.
               </span>
             </div>
           </div>
@@ -625,4 +385,3 @@ export default function Contact({ onNavigate }) {
     </div>
   );
 }
-

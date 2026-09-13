@@ -285,10 +285,6 @@
    RESPONSIVE DESIGN
    -------------------------------------------------------------------------- */
 @media (max-width: 768px) {
-  .mainStage {
-    padding-top: calc(var(--navbar-height, 80px) + var(--safe-area-top, 0px) + 20px);
-  }
-
   .title {
     font-size: clamp(2.6rem, 10vw, 4rem);
     letter-spacing: -0.02em;
@@ -300,7 +296,7 @@
   }
 
   .artMotif {
-    width: min(92vw, 420px);
+    width: 110vw;
   }
 
   .bottomDetail {

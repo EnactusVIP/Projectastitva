@@ -44,7 +44,37 @@ export const LANGUAGE_SEQUENCE = [
     letterSpacing: '0.06em',
     fontWeight: '500',
     fontStyle: 'normal',
-    lineLength: 165,
+    lineLength: 170,
+  },
+  {
+    id: 'te',
+    text: 'అస్తిత్వం',
+    language: 'Telugu',
+    fontFamily: 'var(--font-telugu, "Noto Sans Telugu", sans-serif)',
+    letterSpacing: '0.05em',
+    fontWeight: '500',
+    fontStyle: 'normal',
+    lineLength: 155,
+  },
+  {
+    id: 'gu',
+    text: 'અસ્તિત્વ',
+    language: 'Gujarati',
+    fontFamily: 'var(--font-gujarati, "Noto Sans Gujarati", sans-serif)',
+    letterSpacing: '0.05em',
+    fontWeight: '500',
+    fontStyle: 'normal',
+    lineLength: 145,
+  },
+  {
+    id: 'hi-return',
+    text: 'अस्तित्व',
+    language: 'Hindi',
+    fontFamily: 'var(--font-hindi, "Noto Sans Devanagari", sans-serif)',
+    letterSpacing: '0.04em',
+    fontWeight: '500',
+    fontStyle: 'normal',
+    lineLength: 150,
   },
   {
     id: 'en-final',
@@ -88,24 +118,18 @@ export default function LanguageTransition({ onComplete, languages = LANGUAGE_SE
     setTimeout(() => {
       setIsDismissed(true);
       if (onComplete) onComplete();
-    }, 450);
+    }, 650);
   }, [onComplete]);
 
-  // Allow clicking, scrolling, or pressing any key to proceed immediately
+  // Handle escape to skip
   useEffect(() => {
-    const handleDismiss = () => {
-      handleFinish();
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        handleFinish();
+      }
     };
-
-    window.addEventListener('keydown', handleDismiss);
-    window.addEventListener('wheel', handleDismiss, { passive: true, once: true });
-    window.addEventListener('touchstart', handleDismiss, { passive: true, once: true });
-
-    return () => {
-      window.removeEventListener('keydown', handleDismiss);
-      window.removeEventListener('wheel', handleDismiss);
-      window.removeEventListener('touchstart', handleDismiss);
-    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [handleFinish]);
 
   // Main Progression Engine
@@ -122,26 +146,28 @@ export default function LanguageTransition({ onComplete, languages = LANGUAGE_SE
         setTimeout(() => {
           setIsDismissed(true);
           if (onComplete) onComplete();
-        }, 450);
-      }, 650);
+        }, 650);
+      }, 950);
 
       return () => {
         if (timerRef.current) clearTimeout(timerRef.current);
       };
     }
 
-    // Refined hold duration: 280ms for an artful yet swift intro
-    const holdDuration = 280;
+    // Hold step, then advance to next language using double buffer
+    const holdDuration = 480; // Hold time where word is stationary and crisp
 
     timerRef.current = setTimeout(() => {
       const nextIndex = stepIndex + 1;
       const nextLang = languages[nextIndex];
 
       if (activeSlot === 'A') {
+        // Transition A -> B
         setLayerB({ data: nextLang, active: true });
         setLayerA((prev) => ({ ...prev, active: false }));
         setActiveSlot('B');
       } else {
+        // Transition B -> A
         setLayerA({ data: nextLang, active: true });
         setLayerB((prev) => ({ ...prev, active: false }));
         setActiveSlot('A');
@@ -160,13 +186,11 @@ export default function LanguageTransition({ onComplete, languages = LANGUAGE_SE
   return (
     <div
       className={`${styles.container} ${isRevealing ? styles.revealing : ''}`}
-      onClick={handleFinish}
-      role="button"
-      tabIndex={0}
-      aria-label="Project Astitva multilingual introduction. Click anywhere or press any key to enter directly."
+      aria-label="Project Astitva multilingual introduction"
     >
       {/* Ambient background golden undertone */}
       <div className={styles.ambientGlow} aria-hidden="true" />
+
 
       {/* Center Stage */}
       <div className={styles.centerStage}>

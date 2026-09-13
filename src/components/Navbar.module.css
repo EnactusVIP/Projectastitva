@@ -133,13 +133,23 @@
 
 /* Active link */
 .activeLink {
+  opacity: 1;
+  font-weight: 600;
+}
+
+.activeLink::after {
+  transform: scaleX(1);
+}
+
+/* Yellow accent for About Us active state */
+.aboutActiveLink {
   color: #facc15;
   opacity: 1;
   font-weight: 600;
   text-shadow: 0 0 16px rgba(250, 204, 21, 0.4);
 }
 
-.activeLink::after {
+.aboutActiveLink::after {
   background-color: #facc15;
   transform: scaleX(1);
 }
@@ -180,7 +190,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   Mobile Menu Drawer
+   Mobile Menu Overlay
    -------------------------------------------------------------------------- */
 .mobileMenu {
   position: fixed;
@@ -189,21 +199,20 @@
   width: 100%;
   height: 100vh;
   height: 100dvh;
-  background-color: rgba(14, 14, 14, 0.98);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  z-index: 9999;
+  background-color: rgba(18, 18, 18, 0.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 101;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   transform: translateX(100%);
-  transition: transform 380ms cubic-bezier(0.16, 1, 0.3, 1),
-              visibility 380ms ease;
+  transition: transform var(--transition, 300ms ease),
+              visibility var(--transition, 300ms ease);
   visibility: hidden;
   pointer-events: none;
-  padding: calc(var(--safe-area-top, 0px) + 20px) 24px calc(var(--safe-area-bottom, 0px) + 24px);
-  overflow-y: auto;
-  overscroll-behavior: contain;
+  padding: var(--spacing-xl, 80px) var(--spacing-md, 24px);
 }
 
 .mobileMenuOpen {
@@ -212,191 +221,83 @@
   pointer-events: auto;
 }
 
-/* Drawer Header */
-.mobileDrawerHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  width: 100%;
-  flex-shrink: 0;
-}
-
-.mobileBrandRow {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.mobileBrandDot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: #facc15;
-  box-shadow: 0 0 8px rgba(250, 204, 21, 0.8);
-}
-
-.mobileBrandEyebrow {
-  font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.mobileCloseBtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  min-height: 44px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  color: #ffffff;
-  cursor: pointer;
-  transition: background-color 200ms ease, border-color 200ms ease;
-}
-
-.mobileCloseBtn:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.25);
-}
-
-.mobileCloseBtn:focus-visible {
-  outline: 2px solid #facc15;
-  outline-offset: 2px;
-}
-
-/* Nav list */
 .mobileNavList {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  align-items: center;
+  gap: var(--spacing-lg, 32px);
   list-style: none;
-  margin: 20px 0;
+  margin: 0;
   padding: 0;
   width: 100%;
-  flex: 1;
 }
 
 .mobileNavItem {
   width: 100%;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-}
-
-.mobileNavItem:last-child {
-  border-bottom: none;
+  text-align: center;
 }
 
 .mobileNavLink {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  min-height: 52px;
-  padding: 12px 6px;
+  display: inline-block;
+  color: var(--text-primary, #ffffff);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.85);
-  transition: background-color 200ms ease, color 200ms ease;
-  border-radius: 8px;
+  padding: 10px 20px;
+  position: relative;
+  opacity: 0.85;
+  transition: opacity var(--transition-fast, 200ms ease),
+              transform var(--transition-fast, 200ms ease);
+}
+
+.mobileNavLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: var(--text-primary, #ffffff);
+  transform: translateX(-50%);
+  transition: width var(--transition, 300ms ease);
+  border-radius: 2px;
+}
+
+.mobileNavLink:hover {
+  opacity: 1;
+}
+
+.mobileNavLink:hover::after {
+  width: 60%;
 }
 
 .mobileNavLink:focus-visible {
-  outline: 2px solid #facc15;
-  outline-offset: 2px;
+  outline: 2px solid rgba(255, 255, 255, 0.6);
+  outline-offset: 4px;
+  border-radius: 4px;
+  opacity: 1;
 }
 
-.mobileLinkNum {
-  font-family: var(--font-heading, 'Playfair Display', serif);
-  font-style: italic;
-  font-size: 1.15rem;
-  color: rgba(255, 255, 255, 0.25);
-  width: 34px;
-  flex-shrink: 0;
-  transition: color 200ms ease;
-}
-
-.mobileLinkTextCol {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  gap: 2px;
-}
-
-.mobileLinkName {
-  font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: 1.05rem;
-  font-weight: 500;
-  letter-spacing: 0.03em;
-  color: #ffffff;
-  transition: color 200ms ease;
-}
-
-.mobileLinkSub {
-  font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: 0.72rem;
-  color: rgba(255, 255, 255, 0.45);
-  letter-spacing: 0.02em;
-}
-
-.mobileLinkArrow {
-  color: rgba(255, 255, 255, 0.2);
-  flex-shrink: 0;
-  transition: transform 200ms ease, color 200ms ease;
-}
-
-/* Active State */
 .mobileActiveLink {
-  background-color: rgba(250, 204, 21, 0.05);
-}
-
-.mobileActiveLink .mobileLinkNum {
-  color: #facc15;
-}
-
-.mobileActiveLink .mobileLinkName {
-  color: #facc15;
+  opacity: 1;
   font-weight: 600;
-  text-shadow: 0 0 16px rgba(250, 204, 21, 0.35);
 }
 
-.mobileActiveLink .mobileLinkSub {
-  color: rgba(250, 204, 21, 0.7);
+.mobileActiveLink::after {
+  width: 60%;
 }
 
-.mobileActiveLink .mobileLinkArrow {
+.mobileAboutActiveLink {
   color: #facc15;
-  transform: translateX(3px);
+  opacity: 1;
+  font-weight: 600;
 }
 
-/* Drawer Footer */
-.mobileDrawerFooter {
-  padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  flex-shrink: 0;
-}
-
-.mobileFooterText {
-  font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: 0.74rem;
-  color: rgba(255, 255, 255, 0.45);
-  margin: 0;
-}
-
-.mobileFooterTagline {
-  font-family: var(--font-heading, 'Playfair Display', serif);
-  font-style: italic;
-  font-size: 0.84rem;
-  color: rgba(250, 204, 21, 0.8);
+.mobileAboutActiveLink::after {
+  background-color: #facc15;
+  width: 60%;
 }
 
 /* --------------------------------------------------------------------------

@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import enactusLogo from '../assets/enactus-logo.png';
 import styles from './Navbar.module.css';
 
 const NAV_LINKS = [
-  { name: 'Home', href: '#home', number: '01', subtitle: 'Sanctuary & Community' },
-  { name: 'About Us', href: '#about', number: '02', subtitle: 'Our Story & Purpose' },
-  { name: 'Support', href: '#support', number: '03', subtitle: 'Care & Safe Expression' },
-  { name: 'Art Therapy', href: '#art-therapy', number: '04', subtitle: 'Creative Healing' },
-  { name: 'Newsletter', href: '#newsletter', number: '05', subtitle: 'Curated Publications' },
-  { name: 'Contact Us', href: '#contact', number: '06', subtitle: 'Get In Touch' },
+  { name: 'Home', href: '#home' },
+  { name: 'About Us', href: '#about' },
+  { name: 'Support', href: '#support' },
+  { name: 'Art Therapy', href: '#art-therapy' },
+  { name: 'Newsletter', href: '#newsletter' },
+  { name: 'Contact Us', href: '#contact' },
 ];
 
 export default function Navbar({ activePage = 'home', onNavigate }) {
@@ -148,20 +148,28 @@ export default function Navbar({ activePage = 'home', onNavigate }) {
 
         {/* Right: Desktop Navigation Links */}
         <ul className={styles.desktopNav}>
-          {NAV_LINKS.map((link) => {
-            const isActive =
-              (activePage === 'home' && link.href === '#home') ||
-              (activePage === 'about' && link.href === '#about') ||
-              (activePage === 'support' && link.href === '#support') ||
-              (activePage === 'arttherapy' && (link.href === '#art-therapy' || link.href === '#arttherapy')) ||
-              (activePage === 'newsletter' && link.href === '#newsletter') ||
-              (activePage === 'contact' && link.href === '#contact');
+           {NAV_LINKS.map((link) => {
+            const isSupportActive = activePage === 'support' && link.href === '#support';
+            const isAboutActive = activePage === 'about' && link.href === '#about';
+            const isArtTherapyActive = activePage === 'arttherapy' && (link.href === '#art-therapy' || link.href === '#arttherapy');
+            const isContactActive = activePage === 'contact' && link.href === '#contact';
+            const isNewsletterActive = activePage === 'newsletter' && link.href === '#newsletter';
+            const isCurrentPage = isAboutActive || isSupportActive || isArtTherapyActive || isContactActive || isNewsletterActive;
+            const isActive = isCurrentPage || (activePage === 'home' && activeLink === link.href);
+
+            const linkClass = `${styles.navLink} ${
+              isCurrentPage
+                ? styles.aboutActiveLink
+                : isActive
+                ? styles.activeLink
+                : ''
+            }`;
 
             return (
               <li key={link.href} className={styles.navItem}>
                 <a
                   href={link.href}
-                  className={`${styles.navLink} ${isActive ? styles.activeLink : ''}`}
+                  className={linkClass}
                   aria-current={isActive ? 'page' : undefined}
                   onClick={(e) => handleLinkClick(e, link.href)}
                 >
@@ -185,64 +193,44 @@ export default function Navbar({ activePage = 'home', onNavigate }) {
         </button>
       </div>
 
-      {/* Mobile Menu Drawer */}
+      {/* Mobile Menu Overlay */}
       <div
         id="mobile-nav-menu"
         className={`${styles.mobileMenu} ${isMenuOpen ? styles.mobileMenuOpen : ''}`}
         aria-hidden={!isMenuOpen}
       >
-        {/* Drawer Header */}
-        <div className={styles.mobileDrawerHeader}>
-          <div className={styles.mobileBrandRow}>
-            <span className={styles.mobileBrandDot} aria-hidden="true" />
-            <span className={styles.mobileBrandEyebrow}>NAVIGATION</span>
-          </div>
-          <button
-            type="button"
-            className={styles.mobileCloseBtn}
-            onClick={() => setIsMenuOpen(false)}
-            aria-label="Close navigation menu"
-          >
-            <X size={24} aria-hidden="true" />
-          </button>
-        </div>
-
-        {/* Links List */}
         <ul className={styles.mobileNavList}>
           {NAV_LINKS.map((link) => {
-            const isActive =
-              (activePage === 'home' && link.href === '#home') ||
-              (activePage === 'about' && link.href === '#about') ||
-              (activePage === 'support' && link.href === '#support') ||
-              (activePage === 'arttherapy' && (link.href === '#art-therapy' || link.href === '#arttherapy')) ||
-              (activePage === 'newsletter' && link.href === '#newsletter') ||
-              (activePage === 'contact' && link.href === '#contact');
+            const isSupportActive = activePage === 'support' && link.href === '#support';
+            const isAboutActive = activePage === 'about' && link.href === '#about';
+            const isArtTherapyActive = activePage === 'arttherapy' && (link.href === '#art-therapy' || link.href === '#arttherapy');
+            const isContactActive = activePage === 'contact' && link.href === '#contact';
+            const isNewsletterActive = activePage === 'newsletter' && link.href === '#newsletter';
+            const isCurrentPage = isAboutActive || isSupportActive || isArtTherapyActive || isContactActive || isNewsletterActive;
+            const isActive = isCurrentPage || (activePage === 'home' && activeLink === link.href);
+
+            const mobileClass = `${styles.mobileNavLink} ${
+              isCurrentPage
+                ? styles.mobileAboutActiveLink
+                : isActive
+                ? styles.mobileActiveLink
+                : ''
+            }`;
 
             return (
               <li key={link.href} className={styles.mobileNavItem}>
                 <a
                   href={link.href}
-                  className={`${styles.mobileNavLink} ${isActive ? styles.mobileActiveLink : ''}`}
+                  className={mobileClass}
                   aria-current={isActive ? 'page' : undefined}
                   onClick={(e) => handleLinkClick(e, link.href)}
                 >
-                  <span className={styles.mobileLinkNum}>{link.number}</span>
-                  <div className={styles.mobileLinkTextCol}>
-                    <span className={styles.mobileLinkName}>{link.name}</span>
-                    <span className={styles.mobileLinkSub}>{link.subtitle}</span>
-                  </div>
-                  <ArrowRight size={16} className={styles.mobileLinkArrow} aria-hidden="true" />
+                  {link.name}
                 </a>
               </li>
             );
           })}
         </ul>
-
-        {/* Drawer Footer */}
-        <div className={styles.mobileDrawerFooter}>
-          <p className={styles.mobileFooterText}>Project Astitva &bull; Enactus VIPS-TC</p>
-          <span className={styles.mobileFooterTagline}>Exist As You Are</span>
-        </div>
       </div>
     </nav>
   );
