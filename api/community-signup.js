@@ -20,8 +20,9 @@ function createSignedJwt(clientEmail, rawPrivateKey) {
   const encode = (obj) => Buffer.from(JSON.stringify(obj)).toString('base64url');
   const unsignedToken = `${encode(header)}.${encode(claimSet)}`;
 
-  let formattedKey = rawPrivateKey.trim();
-  if (formattedKey.startsWith('"') && formattedKey.endsWith('"')) {
+  let formattedKey = (rawPrivateKey || '').trim();
+  if ((formattedKey.startsWith('"') && formattedKey.endsWith('"')) ||
+      (formattedKey.startsWith("'") && formattedKey.endsWith("'"))) {
     formattedKey = formattedKey.slice(1, -1);
   }
   formattedKey = formattedKey.replace(/\\n/g, '\n');
@@ -38,21 +39,25 @@ function createSignedJwt(clientEmail, rawPrivateKey) {
  * Exchange signed JWT for a Google OAuth2 access token
  */
 async function getGoogleAccessToken(clientEmail, privateKey) {
-  const jwt = createSignedJwt(clientEmail, privateKey);
-  const res = await fetch('https://oauth2.googleapis.com/token', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({
-      grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
-      assertion: jwt,
-    }),
-  });
+  try {
+    const jwt = createSignedJwt(clientEmail, privateKey);
+    const res = await fetch('https://oauth2.googleapis.com/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+        assertion: jwt,
+      }),
+    });
 
-  const data = await res.json();
-  if (!res.ok) {
-    throw new Error(data.error_description || data.error || 'Failed to obtain Google access token');
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data.error_description || data.error || 'Failed to obtain Google access token');
+    }
+    return data.access_token;
+  } catch (err) {
+    throw new Error(`Google Auth error: ${err.message}`);
   }
-  return data.access_token;
 }
 
 /**
@@ -147,9 +152,32 @@ async function appendRowToSheet(sheetId, accessToken, tabName, rowData) {
  * Main Vercel Serverless Function Handler
  */
 export default async function handler(req, res) {
+  // Support both canonical and alias environment variable names
+  const sheetId = process.env.GOOGLE_SHEET_ID || process.env.GOOGLE_SPREADSHEET_ID;
+  const clientEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || process.env.GOOGLE_SHEETS_CLIENT_EMAIL || process.env.GOOGLE_CLIENT_EMAIL;
+  const privateKey = process.env.GOOGLE_PRIVATE_KEY || process.env.GOOGLE_SHEETS_PRIVATE_KEY;
+
+  // Safe boolean diagnostics (NEVER log or expose secret values)
+  const hasSheetId = Boolean(sheetId);
+  const hasClientEmail = Boolean(clientEmail);
+  const hasPrivateKey = Boolean(privateKey);
+
+  // Safe GET diagnostic check
+  if (req.method === 'GET') {
+    return res.status(200).json({
+      status: 'online',
+      configured: hasSheetId && hasClientEmail && hasPrivateKey,
+      diagnostics: {
+        GOOGLE_SHEET_ID: hasSheetId,
+        GOOGLE_SERVICE_ACCOUNT_EMAIL: hasClientEmail,
+        GOOGLE_PRIVATE_KEY: hasPrivateKey,
+      },
+    });
+  }
+
   // Enforce POST method
   if (req.method !== 'POST') {
-    res.setHeader('Allow', ['POST']);
+    res.setHeader('Allow', ['GET', 'POST']);
     return res.status(405).json({
       success: false,
       message: `Method ${req.method} not allowed`,
@@ -233,15 +261,17 @@ export default async function handler(req, res) {
     }
 
     // 7. Check Google Sheets Credentials
-    const sheetId = process.env.GOOGLE_SHEET_ID;
-    const clientEmail = process.env.GOOGLE_SHEETS_CLIENT_EMAIL;
-    const privateKey = process.env.GOOGLE_SHEETS_PRIVATE_KEY;
+    const missingVars = [];
+    if (!hasSheetId) missingVars.push('GOOGLE_SHEET_ID');
+    if (!hasClientEmail) missingVars.push('GOOGLE_SERVICE_ACCOUNT_EMAIL');
+    if (!hasPrivateKey) missingVars.push('GOOGLE_PRIVATE_KEY');
 
-    if (!sheetId || !clientEmail || !privateKey) {
-      console.warn('Google Sheets environment variables are missing (GOOGLE_SHEET_ID, GOOGLE_SHEETS_CLIENT_EMAIL, or GOOGLE_SHEETS_PRIVATE_KEY).');
+    if (missingVars.length > 0) {
+      console.warn(`[API] Missing environment variable(s): ${missingVars.join(', ')}`);
       return res.status(503).json({
         success: false,
-        message: 'Google Sheets integration is not configured on the server. Please verify environment variables.',
+        message: `Google Sheets integration is not configured on the server. Missing environment variable(s): ${missingVars.join(', ')}. Please verify environment variables in Vercel settings and redeploy.`,
+        missing: missingVars,
       });
     }
 
@@ -261,10 +291,23 @@ export default async function handler(req, res) {
       message: 'Successfully joined the community!',
     });
   } catch (error) {
-    console.error('Community signup API error:', error.message || error);
+    const errMsg = error.message || String(error);
+    console.error('Community signup API error:', errMsg);
+
+    let clientFriendlyMessage = 'Something went wrong while saving your details. Please try again later.';
+    if (errMsg.includes('does not have permission') || errMsg.includes('PERMISSION_DENIED')) {
+      clientFriendlyMessage = 'Permission denied: Please ensure your Google Sheet is shared with the service account email as Editor.';
+    } else if (errMsg.includes('API has not been used') || errMsg.includes('disabled')) {
+      clientFriendlyMessage = 'Google Sheets API is disabled. Please enable it in your Google Cloud Console.';
+    } else if (errMsg.includes('Google Auth error')) {
+      clientFriendlyMessage = 'Google authentication failed. Please verify that GOOGLE_PRIVATE_KEY and GOOGLE_SERVICE_ACCOUNT_EMAIL are correct in Vercel.';
+    } else if (errMsg.includes('Requested entity was not found') || errMsg.includes('404')) {
+      clientFriendlyMessage = 'Spreadsheet not found: Please verify your GOOGLE_SHEET_ID in Vercel.';
+    }
+
     return res.status(500).json({
       success: false,
-      message: 'Something went wrong while saving your details. Please try again later.',
+      message: clientFriendlyMessage,
     });
   }
 }
