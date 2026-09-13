@@ -1,10 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import astitvaHeroBg from '../assets/astitva-hero.png';
 import astitvaLogo from '../assets/astitva-logo.png';
+import CommunityJoinModal from './CommunityJoinModal';
 import styles from './Hero.module.css';
 
 export default function Hero({ onNavigate }) {
   const [stage, setStage] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const logoTriggerRef = useRef(null);
 
   useEffect(() => {
     // Cinematic, staged entrance sequence completed under 1.5s
@@ -39,11 +42,7 @@ export default function Hero({ onNavigate }) {
 
   const handleBadgeClick = (e) => {
     if (e && e.preventDefault) e.preventDefault();
-    if (onNavigate) {
-      onNavigate('about');
-    } else {
-      window.location.hash = '#about';
-    }
+    setIsModalOpen(true);
   };
 
   return (
@@ -85,24 +84,25 @@ export default function Hero({ onNavigate }) {
 
         {/* Secondary Floating Identity Marker (Circular Community Badge) */}
         <div className={`${styles.badgeWrapper} ${stage >= 6 ? styles.visible : ''}`}>
-          <a
-            href="#about"
-            className={styles.badgeLink}
-            aria-label="Explore About Project Astitva"
+          <button
+            type="button"
+            ref={logoTriggerRef}
+            className={`${styles.badgeButton} ${isModalOpen ? styles.badgeActive : ''}`}
+            aria-label="Open Project Astitva Community Signup Modal"
             onClick={handleBadgeClick}
           >
             <div className={styles.badgeGlow} aria-hidden="true" />
             <div className={styles.badgeCircle}>
               <img
                 src={astitvaLogo}
-                alt="Project Astitva identity mark"
+                alt="Project Astitva community mark"
                 className={styles.badgeImage}
               />
             </div>
             <span className={styles.badgeTooltip} aria-hidden="true">
-              Explore Our Story &rarr;
+              Join Our Community &rarr;
             </span>
-          </a>
+          </button>
         </div>
       </div>
 
@@ -121,6 +121,13 @@ export default function Hero({ onNavigate }) {
           </div>
         </button>
       </div>
+
+      {/* Community Join Modal */}
+      <CommunityJoinModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        triggerRef={logoTriggerRef}
+      />
     </section>
   );
 }
