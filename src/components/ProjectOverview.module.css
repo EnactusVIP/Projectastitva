@@ -1,35 +1,39 @@
 /* ==========================================================================
    ProjectOverview Component Styles (CSS Module)
-   Project Astitva — Three Chapters of Action (Editorial Redesign)
+   Project Astitva — Three Chapters of Action (Master Grid Architecture)
    ========================================================================== */
 
 .section {
   background-color: #141414;
-  padding: clamp(96px, 14vh, 160px) var(--page-pad, clamp(24px, 5vw, 64px));
+  padding: clamp(80px, 11vh, 120px) 0;
   position: relative;
   width: 100%;
   overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
 }
 
+/* --------------------------------------------------------------------------
+   ONE MASTER CONTAINER (Global Boundary)
+   -------------------------------------------------------------------------- */
 .container {
-  max-width: var(--max-width, 1200px);
-  margin: 0 auto;
-  width: 100%;
+  width: min(100% - 48px, 1200px);
+  margin-inline: auto;
   position: relative;
 }
 
 /* --------------------------------------------------------------------------
-   SECTION HEADER
+   SECTION HEADER (Aligned with Master Grid Columns)
    -------------------------------------------------------------------------- */
 .header {
-  text-align: left;
-  max-width: 780px;
-  margin-bottom: clamp(56px, 9vh, 92px);
+  display: grid;
+  grid-template-columns: 24px 68px minmax(0, 1fr) clamp(180px, 20vw, 220px);
+  column-gap: clamp(20px, 2.5vw, 36px);
+  margin-bottom: clamp(48px, 7.5vh, 72px);
   opacity: 0;
-  transform: translateY(22px);
+  transform: translateY(20px);
   transition:
-    opacity 900ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
@@ -38,11 +42,16 @@
   transform: translateY(0) !important;
 }
 
+.headerContent {
+  grid-column: 3 / -1;
+  max-width: 680px;
+}
+
 .eyebrowRow {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 .eyebrowDot {
@@ -71,12 +80,12 @@
 
 .headline {
   font-family: var(--font-heading, 'Playfair Display', serif);
-  font-size: clamp(2.4rem, 4.4vw, 3.8rem);
+  font-size: clamp(2.3rem, 4vw, 3.4rem);
   font-weight: 400;
   color: #ffffff;
-  line-height: 1.14;
+  line-height: 1.16;
   letter-spacing: -0.02em;
-  margin: 0 0 16px 0;
+  margin: 0 0 14px 0;
 }
 
 .headlineItalic {
@@ -86,231 +95,182 @@
 
 .subline {
   font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  font-size: clamp(0.92rem, 1.1vw, 1.05rem);
   color: rgba(255, 255, 255, 0.58);
   line-height: 1.6;
   margin: 0;
-  max-width: 540px;
 }
 
 /* --------------------------------------------------------------------------
-   CHAPTERS WRAPPER & SUBTLE CONNECTING THREAD
+   MASTER GRID CHAPTER ROWS
+   Every row shares the EXACT same 4-column geometry:
+   | rail (24px) | number (68px) | main content (1fr) | meta / CTA (220px) |
    -------------------------------------------------------------------------- */
-.chaptersWrapper {
+.chaptersList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.chapterRow {
+  display: grid;
+  grid-template-columns: 24px 68px minmax(0, 1fr) clamp(180px, 20vw, 220px);
+  column-gap: clamp(20px, 2.5vw, 36px);
+  padding: clamp(36px, 5vh, 50px) 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   position: relative;
-  width: 100%;
+  cursor: pointer;
+  outline: none;
+  background: transparent;
+  transition:
+    opacity 450ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 280ms ease;
+  will-change: opacity;
 }
 
-/* Vertical Connecting Thread Motif (Desktop / Tablet) */
-.connectingThread {
+/* Subtle Active Glow along the top divider */
+.rowGlow {
   position: absolute;
+  top: -1px;
   left: 0;
-  top: 24px;
-  bottom: 48px;
-  width: 1px;
-  background: rgba(255, 255, 255, 0.08);
-  pointer-events: none;
-  display: block;
-}
-
-.threadProgress {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+  right: 0;
+  height: 1px;
   background: linear-gradient(
-    to bottom,
-    rgba(250, 204, 21, 0.95) 0%,
-    rgba(250, 204, 21, 0.7) 75%,
-    #facc15 100%
+    to right,
+    transparent 0%,
+    rgba(250, 204, 21, 0.85) 15%,
+    rgba(250, 204, 21, 0.6) 70%,
+    transparent 100%
   );
-  box-shadow: 0 0 8px rgba(250, 204, 21, 0.5);
-  transition: height 600ms cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: height;
+  opacity: 0;
+  transform: scaleX(0.4);
+  transform-origin: left;
+  transition:
+    opacity 450ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
 }
 
-.threadNode {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.rowGlowActive {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* Focus States: Active (100%) vs Inactive (50%) */
+.chapterInactive {
+  opacity: 0.50;
+}
+
+.chapterInactive:hover {
+  opacity: 0.82;
+}
+
+.chapterActive {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   COLUMN 1: PROGRESS RAIL
+   -------------------------------------------------------------------------- */
+.railCol {
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: stretch;
+  height: 100%;
+  pointer-events: none;
+}
+
+.railSegment {
+  width: 1px;
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.08);
+  transition: background-color 400ms ease;
+}
+
+.railSegmentHidden {
+  background-color: transparent !important;
+}
+
+.railSegmentActive {
+  background-color: rgba(250, 204, 21, 0.7);
+}
+
+.railNode {
   width: 7px;
   height: 7px;
   border-radius: 50%;
   background-color: #242424;
   border: 1px solid rgba(255, 255, 255, 0.22);
+  flex-shrink: 0;
+  margin: 6px 0;
   transition:
-    background-color 450ms ease,
-    border-color 450ms ease,
-    box-shadow 450ms ease,
-    transform 450ms ease;
+    background-color 400ms ease,
+    border-color 400ms ease,
+    box-shadow 400ms ease,
+    transform 400ms ease;
 }
 
-.threadNodeActive {
+.railNodeActive {
   background-color: #facc15;
   border-color: #facc15;
   box-shadow: 0 0 12px rgba(250, 204, 21, 0.9);
-  transform: translate(-50%, -50%) scale(1.4);
+  transform: scale(1.4);
 }
 
-.threadNodePassed {
-  background-color: rgba(250, 204, 21, 0.65);
+.railNodePassed {
+  background-color: rgba(250, 204, 21, 0.7);
   border-color: #facc15;
 }
 
 /* --------------------------------------------------------------------------
-   CHAPTERS LIST & PANELS
+   COLUMN 2: CHAPTER NUMBER
    -------------------------------------------------------------------------- */
-.chaptersList {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(52px, 8.5vh, 88px);
-  width: 100%;
-  padding-left: clamp(40px, 5.5vw, 72px);
+.numberCol {
+  grid-column: 2;
+  align-self: start;
+  padding-top: 2px;
 }
 
-.chapterPanel {
-  position: relative;
-  width: 100%;
-  cursor: pointer;
-  outline: none;
-  background: transparent;
-  padding: clamp(28px, 4vh, 44px) 0;
-  border-radius: 2px;
-  transition:
-    opacity 500ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-}
-
-/* Top Hairline Divider */
-.chapterDivider {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.08);
-  overflow: hidden;
-}
-
-.dividerGlow {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    to right,
-    rgba(250, 204, 21, 0.85) 0%,
-    rgba(250, 204, 21, 0.45) 40%,
-    transparent 85%
-  );
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 550ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.dividerGlowActive {
-  transform: scaleX(1);
-}
-
-/* Chapter Focus States: Active vs Inactive */
-.chapterInactive {
-  opacity: 0.50;
-  filter: contrast(0.96);
-}
-
-.chapterInactive:hover {
-  opacity: 0.82;
-  transform: translateY(-2px);
-}
-
-.chapterActive {
-  opacity: 1;
-  filter: none;
-  transform: translateY(0);
-}
-
-/* --------------------------------------------------------------------------
-   ASYMMETRIC COMPOSITION (Desktop Rhythm)
-   -------------------------------------------------------------------------- */
-/* Chapter 01 (Awareness): Anchored to the left */
-.chapterAwareness {
-  max-width: 840px;
-  margin-right: auto;
-}
-
-/* Chapter 02 (Education): Shifts smoothly toward the right */
-.chapterEducation {
-  max-width: 820px;
-  margin-left: clamp(60px, 8vw, 140px);
-  margin-right: auto;
-}
-
-.chapterEducation .dividerGlow {
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    rgba(250, 204, 21, 0.45) 50%,
-    rgba(250, 204, 21, 0.85) 100%
-  );
-  transform-origin: right;
-}
-
-/* Chapter 03 (Support): Returns left with an expansive, grounded footprint */
-.chapterSupport {
-  max-width: 960px;
-  margin-right: auto;
-}
-
-/* --------------------------------------------------------------------------
-   CHAPTER INTERNAL CONTENT
-   -------------------------------------------------------------------------- */
-.chapterContent {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-
-/* Meta Row: Chapter Number + Concept */
-.metaRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: clamp(14px, 2.2vh, 22px);
-}
-
-.numberWrapper {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 12px;
-}
-
-.numberPrefix {
+.number {
   font-family: var(--font-heading, 'Playfair Display', serif);
   font-style: italic;
-  font-size: clamp(2.2rem, 3.6vw, 3.2rem);
+  font-size: clamp(2.4rem, 3.6vw, 3.2rem);
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.24);
+  color: rgba(255, 255, 255, 0.22);
   line-height: 1;
+  display: inline-block;
   transition:
-    color 400ms ease,
-    text-shadow 400ms ease;
+    color 350ms ease,
+    text-shadow 350ms ease;
 }
 
-.chapterActive .numberPrefix {
+.chapterActive .number {
   color: #facc15;
-  text-shadow: 0 0 24px rgba(250, 204, 21, 0.35);
+  text-shadow: 0 0 20px rgba(250, 204, 21, 0.4);
 }
 
-.chapterInactive:hover .numberPrefix {
-  color: rgba(250, 204, 21, 0.7);
+.chapterInactive:hover .number {
+  color: rgba(250, 204, 21, 0.65);
 }
 
-.numberSlash {
-  font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.18);
+/* --------------------------------------------------------------------------
+   COLUMN 3: MAIN EDITORIAL CONTENT
+   -------------------------------------------------------------------------- */
+.contentCol {
+  grid-column: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 660px;
+}
+
+.conceptRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
 }
 
 .conceptTag {
@@ -327,58 +287,27 @@
   color: #facc15;
 }
 
-.titleBadge {
-  display: inline-flex;
-  align-items: center;
-}
-
-.chapterTitle {
-  font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
-  transition: color 350ms ease;
-}
-
-.chapterActive .chapterTitle {
-  color: #ffffff;
-}
-
-/* Large Editorial Statement */
 .statement {
   font-family: var(--font-heading, 'Playfair Display', serif);
-  font-size: clamp(1.85rem, 3.2vw, 2.75rem);
+  font-size: clamp(1.8rem, 2.7vw, 2.4rem);
   font-weight: 400;
   color: rgba(255, 255, 255, 0.88);
   line-height: 1.22;
   letter-spacing: -0.015em;
-  margin: 0 0 clamp(16px, 2.5vh, 24px) 0;
-  max-width: 90%;
-  transition: color 400ms ease;
+  margin: 0;
+  transition: color 350ms ease;
 }
 
 .chapterActive .statement {
   color: #ffffff;
 }
 
-/* Narrative Row (Description + Action) */
-.narrativeRow {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: clamp(24px, 4vw, 48px);
-  margin-top: 4px;
-}
-
 .description {
   font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: clamp(0.92rem, 1.1vw, 1.02rem);
-  line-height: 1.72;
+  font-size: clamp(0.92rem, 1.05vw, 1rem);
+  line-height: 1.7;
   color: rgba(255, 255, 255, 0.58);
   margin: 0;
-  max-width: 580px;
   transition: color 350ms ease;
 }
 
@@ -386,31 +315,57 @@
   color: rgba(255, 255, 255, 0.82);
 }
 
-/* Action Button */
-.actionBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 0;
-  background: none;
-  border: none;
-  cursor: pointer;
-  flex-shrink: 0;
-  outline: none;
+/* --------------------------------------------------------------------------
+   COLUMN 4: METADATA & CTA
+   -------------------------------------------------------------------------- */
+.metaCol {
+  grid-column: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 100%;
 }
 
-.actionText {
+.categoryLabel {
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.38);
+  transition: color 350ms ease;
+  margin-top: 4px;
+}
+
+.chapterActive .categoryLabel {
+  color: #ffffff;
+}
+
+.actionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  padding: 6px 0;
+  cursor: pointer;
+  outline: none;
+  margin-bottom: 4px;
+}
+
+.actionText {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
   transition: color 300ms ease;
   white-space: nowrap;
 }
 
-.arrowIconWrap {
+.arrowWrap {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -428,110 +383,123 @@
   color: #facc15;
 }
 
-.chapterActive .arrowIconWrap {
+.chapterActive .arrowWrap {
   color: #facc15;
 }
 
-.chapterPanel:hover .arrowIconWrap,
-.actionBtn:hover .arrowIconWrap {
+.chapterRow:hover .arrowWrap,
+.actionBtn:hover .arrowWrap {
   transform: translateX(6px);
 }
 
-/* Active Baseline Accent */
-.activeAccentBar {
-  position: absolute;
-  bottom: -8px;
-  left: 0;
-  width: 44px;
-  height: 2px;
-  background: #facc15;
-  opacity: 0;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition:
-    opacity 400ms ease,
-    transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.chapterActive .activeAccentBar {
-  opacity: 1;
-  transform: scaleX(1);
-}
-
 /* Accessibility Focus State */
-.chapterPanel:focus-visible {
+.chapterRow:focus-visible {
   outline: 1px solid #facc15;
   outline-offset: 4px;
+}
+
+/* Closing Hairline */
+.closingDivider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
 /* --------------------------------------------------------------------------
    RESPONSIVE DESIGN (1024px, 768px, 480px, 390px, 375px)
    -------------------------------------------------------------------------- */
 @media (max-width: 1024px) {
-  .section {
-    padding: clamp(80px, 10vh, 120px) var(--page-pad, 28px);
-  }
-
-  .chaptersList {
-    padding-left: 36px;
-    gap: 48px;
-  }
-
-  .chapterEducation {
-    max-width: 100%;
-    margin-left: 0;
-  }
-
-  .chapterAwareness,
-  .chapterSupport {
-    max-width: 100%;
+  .header,
+  .chapterRow {
+    grid-template-columns: 24px 58px minmax(0, 1fr) 180px;
+    column-gap: 20px;
   }
 
   .statement {
-    font-size: clamp(1.7rem, 2.8vw, 2.2rem);
-    max-width: 100%;
+    font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+  }
+}
+
+@media (max-width: 860px) {
+  .header,
+  .chapterRow {
+    grid-template-columns: 24px 52px minmax(0, 1fr);
+    column-gap: 18px;
   }
 
-  .narrativeRow {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
+  .headerContent {
+    grid-column: 3 / -1;
+  }
+
+  .metaCol {
+    grid-column: 3;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 14px;
+  }
+
+  .categoryLabel {
+    margin-top: 0;
+  }
+
+  .actionBtn {
+    margin-bottom: 0;
   }
 }
 
 @media (max-width: 768px) {
   .section {
-    padding: clamp(64px, 8vh, 90px) 20px;
+    padding: clamp(64px, 8vh, 88px) 0;
   }
 
-  .connectingThread {
-    display: none;
-  }
-
-  .chaptersList {
-    padding-left: 0;
-    gap: 36px;
-  }
-
-  .chapterPanel {
-    padding: 24px 0;
+  .container {
+    width: min(100% - 40px, 1200px);
+    margin-inline: auto;
   }
 
   .header {
-    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 36px;
   }
 
-  .headline {
-    font-size: clamp(2.1rem, 7.5vw, 2.8rem);
+  .headerContent {
+    width: 100%;
+    max-width: 100%;
   }
 
-  .subline {
-    font-size: 0.95rem;
+  .railCol {
+    display: none;
+  }
+
+  .chapterRow {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 28px 0;
+  }
+
+  .numberCol {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  .number {
+    font-size: 2rem;
+  }
+
+  .contentCol {
+    width: 100%;
+    max-width: 100%;
+    gap: 10px;
   }
 
   .statement {
-    font-size: clamp(1.45rem, 5.2vw, 1.85rem);
-    line-height: 1.26;
+    font-size: clamp(1.4rem, 5.2vw, 1.8rem);
+    line-height: 1.25;
   }
 
   .description {
@@ -539,15 +507,25 @@
     line-height: 1.65;
   }
 
+  .metaCol {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .categoryLabel {
+    display: inline-block;
+    font-size: 0.75rem;
+  }
+
   .actionBtn {
-    margin-top: 6px;
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
-  .actionText {
-    font-size: 0.76rem;
-  }
-
-  /* Keep inactive chapters readable on mobile while still focused */
   .chapterInactive {
     opacity: 0.65;
   }
@@ -555,29 +533,15 @@
 
 @media (max-width: 480px) {
   .headline {
-    font-size: 1.95rem;
-  }
-
-  .metaRow {
-    margin-bottom: 12px;
-  }
-
-  .numberPrefix {
-    font-size: 1.8rem;
-  }
-
-  .conceptTag {
-    font-size: 0.7rem;
-    letter-spacing: 0.18em;
-  }
-
-  .chapterTitle {
-    font-size: 0.75rem;
+    font-size: 1.9rem;
   }
 
   .statement {
     font-size: 1.35rem;
-    margin-bottom: 12px;
+  }
+
+  .number {
+    font-size: 1.8rem;
   }
 
   .description {
@@ -587,14 +551,14 @@
 
 @media (max-width: 375px) {
   .headline {
-    font-size: 1.75rem;
+    font-size: 1.7rem;
   }
 
   .statement {
     font-size: 1.25rem;
   }
 
-  .numberPrefix {
+  .number {
     font-size: 1.6rem;
   }
 }
@@ -604,15 +568,17 @@
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   .header,
-  .chapterPanel,
-  .threadProgress,
-  .threadNode,
-  .dividerGlow,
-  .numberPrefix,
+  .chapterRow,
+  .rowGlow,
+  .railSegment,
+  .railNode,
+  .number,
+  .conceptTag,
   .statement,
   .description,
-  .arrowIconWrap,
-  .activeAccentBar {
+  .categoryLabel,
+  .actionText,
+  .arrowWrap {
     transition: none !important;
     transform: none !important;
     opacity: 1 !important;

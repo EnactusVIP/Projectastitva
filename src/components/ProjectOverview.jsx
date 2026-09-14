@@ -115,7 +115,6 @@ export default function ProjectOverview({ onNavigate }) {
   }, []);
 
   const handleChapterClick = useCallback((index) => {
-    // Lock scroll-observer override temporarily on click
     isManualClickRef.current = true;
     setActiveChapter(index);
 
@@ -146,136 +145,122 @@ export default function ProjectOverview({ onNavigate }) {
       className={styles.section}
       aria-label="What We Do — Three Chapters of Action"
     >
+      {/* Master Container: Single parent container defining the global boundary */}
       <div className={styles.container}>
-        {/* Editorial Section Header */}
+        {/* Section Header: Aligned with the master grid columns */}
         <header className={`${styles.header} ${isVisible ? styles.revealed : ''}`}>
-          <div className={styles.eyebrowRow}>
-            <span className={styles.eyebrowDot} aria-hidden="true" />
-            <span className={styles.eyebrow}>WHAT WE DO</span>
-            <span className={styles.eyebrowLine} aria-hidden="true" />
+          <div className={styles.headerContent}>
+            <div className={styles.eyebrowRow}>
+              <span className={styles.eyebrowDot} aria-hidden="true" />
+              <span className={styles.eyebrow}>WHAT WE DO</span>
+              <span className={styles.eyebrowLine} aria-hidden="true" />
+            </div>
+
+            <h2 className={styles.headline}>
+              Three pillars of <em className={styles.headlineItalic}>purpose &amp; action</em>
+            </h2>
+
+            <p className={styles.subline}>
+              Creating safer spaces through awareness, learning and care.
+            </p>
           </div>
-
-          <h2 className={styles.headline}>
-            Three pillars of <em className={styles.headlineItalic}>purpose &amp; action</em>
-          </h2>
-
-          <p className={styles.subline}>
-            Creating safer spaces through awareness, learning and care.
-          </p>
         </header>
 
-        {/* Narrative Flow: Three Chapters of Action */}
-        <div className={styles.chaptersWrapper}>
-          {/* Subtle Connecting Thread Motif */}
-          <div className={styles.connectingThread} aria-hidden="true">
-            <div
-              className={styles.threadProgress}
-              style={{
-                height: `${((activeChapter + 0.5) / CHAPTERS.length) * 100}%`,
-              }}
-            />
-            {CHAPTERS.map((ch, idx) => (
-              <div
-                key={`node-${ch.id}`}
-                className={`${styles.threadNode} ${
-                  activeChapter === idx
-                    ? styles.threadNodeActive
-                    : activeChapter > idx
-                    ? styles.threadNodePassed
-                    : ''
-                }`}
-                style={{ top: `${((idx + 0.5) / CHAPTERS.length) * 100}%` }}
-                title={`${ch.number} ${ch.concept}`}
-              />
-            ))}
-          </div>
+        {/* Chapters List: Master Grid with consistent 4-column structure */}
+        <div className={styles.chaptersList} role="region" aria-label="Action Chapters">
+          {CHAPTERS.map((chapter, index) => {
+            const isActive = activeChapter === index;
+            const isPassed = activeChapter > index;
 
-          {/* Chapters List */}
-          <div className={styles.chaptersList} role="region" aria-label="Action Chapters">
-            {CHAPTERS.map((chapter, index) => {
-              const isActive = activeChapter === index;
-              const chapterModClass =
-                index === 0
-                  ? styles.chapterAwareness
-                  : index === 1
-                  ? styles.chapterEducation
-                  : styles.chapterSupport;
+            return (
+              <article
+                key={chapter.id}
+                ref={(el) => (chapterRefs.current[index] = el)}
+                data-chapter-index={index}
+                className={`${styles.chapterRow} ${
+                  isActive ? styles.chapterActive : styles.chapterInactive
+                } ${isVisible ? styles.chapterRevealed : ''}`}
+                style={{
+                  transitionDelay: isVisible ? `${index * 120 + 80}ms` : '0ms',
+                }}
+                onClick={() => handleChapterClick(index)}
+                tabIndex={0}
+                role="button"
+                aria-expanded={isActive}
+                aria-label={`Chapter ${chapter.number}: ${chapter.title}. ${chapter.statement}`}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleChapterClick(index);
+                  }
+                }}
+              >
+                {/* Active Gold Glow Border Overlay */}
+                <div
+                  className={`${styles.rowGlow} ${isActive ? styles.rowGlowActive : ''}`}
+                  aria-hidden="true"
+                />
 
-              return (
-                <article
-                  key={chapter.id}
-                  ref={(el) => (chapterRefs.current[index] = el)}
-                  data-chapter-index={index}
-                  className={`${styles.chapterPanel} ${chapterModClass} ${
-                    isActive ? styles.chapterActive : styles.chapterInactive
-                  } ${isVisible ? styles.chapterRevealed : ''}`}
-                  style={{
-                    transitionDelay: isVisible ? `${index * 140 + 100}ms` : '0ms',
-                  }}
-                  onClick={() => handleChapterClick(index)}
-                  tabIndex={0}
-                  role="button"
-                  aria-expanded={isActive}
-                  aria-label={`Chapter ${chapter.number}: ${chapter.title}. ${chapter.statement}`}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      handleChapterClick(index);
-                    }
-                  }}
-                >
-                  {/* Subtle Top Hairline Divider with Glow */}
-                  <div className={styles.chapterDivider} aria-hidden="true">
-                    <div
-                      className={`${styles.dividerGlow} ${
-                        isActive ? styles.dividerGlowActive : ''
-                      }`}
-                    />
+                {/* Column 1: Progress Rail */}
+                <div className={styles.railCol} aria-hidden="true">
+                  <div
+                    className={`${styles.railSegment} ${
+                      index === 0 ? styles.railSegmentHidden : ''
+                    } ${isPassed || isActive ? styles.railSegmentActive : ''}`}
+                  />
+                  <div
+                    className={`${styles.railNode} ${
+                      isActive
+                        ? styles.railNodeActive
+                        : isPassed
+                        ? styles.railNodePassed
+                        : ''
+                    }`}
+                  />
+                  <div
+                    className={`${styles.railSegment} ${
+                      index === CHAPTERS.length - 1 ? styles.railSegmentHidden : ''
+                    } ${isPassed ? styles.railSegmentActive : ''}`}
+                  />
+                </div>
+
+                {/* Column 2: Chapter Number */}
+                <div className={styles.numberCol}>
+                  <span className={styles.number}>{chapter.number}</span>
+                </div>
+
+                {/* Column 3: Main Editorial Content */}
+                <div className={styles.contentCol}>
+                  <div className={styles.conceptRow}>
+                    <span className={styles.conceptTag}>{chapter.concept}</span>
                   </div>
 
-                  <div className={styles.chapterContent}>
-                    {/* Chapter Header Meta: Number + Concept Tag */}
-                    <div className={styles.metaRow}>
-                      <div className={styles.numberWrapper}>
-                        <span className={styles.numberPrefix}>{chapter.number}</span>
-                        <span className={styles.numberSlash}>/</span>
-                        <span className={styles.conceptTag}>{chapter.concept}</span>
-                      </div>
+                  <h3 className={styles.statement}>{chapter.statement}</h3>
 
-                      <div className={styles.titleBadge}>
-                        <span className={styles.chapterTitle}>{chapter.title}</span>
-                      </div>
-                    </div>
+                  <p className={styles.description}>{chapter.description}</p>
+                </div>
 
-                    {/* Large Editorial Statement */}
-                    <h3 className={styles.statement}>
-                      {chapter.statement}
-                    </h3>
+                {/* Column 4: Metadata & CTA */}
+                <div className={styles.metaCol}>
+                  <span className={styles.categoryLabel}>{chapter.title}</span>
 
-                    {/* Supporting Description & Sleek Interactive Action */}
-                    <div className={styles.narrativeRow}>
-                      <p className={styles.description}>{chapter.description}</p>
-
-                      <button
-                        type="button"
-                        className={styles.actionBtn}
-                        onClick={(e) => handleNavigate(chapter, e)}
-                        aria-label={`${chapter.actionLabel} for ${chapter.title}`}
-                      >
-                        <span className={styles.actionText}>{chapter.actionLabel}</span>
-                        <span className={styles.arrowIconWrap} aria-hidden="true">
-                          <ArrowRight size={16} className={styles.arrowIcon} />
-                        </span>
-                      </button>
-                    </div>
-
-                    {/* Active Accent Baseline */}
-                    <div className={styles.activeAccentBar} aria-hidden="true" />
-                  </div>
-                </article>
-              );
-            })}
-          </div>
+                  <button
+                    type="button"
+                    className={styles.actionBtn}
+                    onClick={(e) => handleNavigate(chapter, e)}
+                    aria-label={`${chapter.actionLabel} for ${chapter.title}`}
+                  >
+                    <span className={styles.actionText}>{chapter.actionLabel}</span>
+                    <span className={styles.arrowWrap} aria-hidden="true">
+                      <ArrowRight size={15} className={styles.arrowIcon} />
+                    </span>
+                  </button>
+                </div>
+              </article>
+            );
+          })}
+          {/* Closing Hairline Divider */}
+          <div className={styles.closingDivider} aria-hidden="true" />
         </div>
       </div>
     </section>
