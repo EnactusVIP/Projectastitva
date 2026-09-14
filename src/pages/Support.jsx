@@ -1,30 +1,36 @@
-import { useEffect, useRef, useState } from 'react';
-import { ArrowRight, Heart, ShieldCheck, Users } from 'lucide-react';
+import { useEffect, useRef, useState, useCallback } from 'react';
+import { ArrowRight } from 'lucide-react';
 import styles from './Support.module.css';
 
 import communityIllustration from '../assets/support-community-hero.png';
 
-const SUPPORT_PILLARS = [
+const SUPPORT_PHILOSOPHIES = [
   {
     number: '01',
+    concept: 'CARE',
     title: 'Mental Health First',
+    statement: 'Your wellbeing comes first.',
     body:
       'Connecting individuals with trained empathetic listeners and guidance because your mental health is not a luxury, it is a right.',
-    icon: Heart,
+    actionLabel: 'Reach out for guidance',
   },
   {
     number: '02',
+    concept: 'CONVERSATION',
     title: 'Safe Conversations',
+    statement: 'Being heard can change everything.',
     body:
       'A confidential, judgement-free space to share, process, and be heard. We believe in the transformative power of simply being listened to.',
-    icon: ShieldCheck,
+    actionLabel: 'Begin a conversation',
   },
   {
     number: '03',
+    concept: 'COMMUNITY',
     title: 'Community Networks',
+    statement: 'Support becomes stronger together.',
     body:
       'Peer-led support circles, group sessions, and community touchpoints because solidarity is a form of care.',
-    icon: Users,
+    actionLabel: 'Explore support circles',
   },
 ];
 
@@ -59,12 +65,15 @@ export default function Support({ onNavigate }) {
   });
 
   const [heroParallaxY, setHeroParallaxY] = useState(0);
+  const [activePillar, setActivePillar] = useState(0);
+  const [isChangingPillar, setIsChangingPillar] = useState(false);
 
   const heroRef = useRef(null);
   const pillarsRef = useRef(null);
   const howRef = useRef(null);
   const commitmentRef = useRef(null);
   const closingRef = useRef(null);
+  const switchTimeoutRef = useRef(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -122,6 +131,20 @@ export default function Support({ onNavigate }) {
     };
   }, []);
 
+  const handlePillarSelect = useCallback(
+    (index) => {
+      if (index === activePillar) return;
+      setIsChangingPillar(true);
+      if (switchTimeoutRef.current) clearTimeout(switchTimeoutRef.current);
+
+      switchTimeoutRef.current = setTimeout(() => {
+        setActivePillar(index);
+        setIsChangingPillar(false);
+      }, 180);
+    },
+    [activePillar]
+  );
+
   const handleContactClick = (e) => {
     if (e && e.preventDefault) e.preventDefault();
     if (onNavigate) onNavigate('contact');
@@ -133,6 +156,8 @@ export default function Support({ onNavigate }) {
     if (onNavigate) onNavigate('about');
     else window.location.hash = '#about';
   };
+
+  const currentPhilosophy = SUPPORT_PHILOSOPHIES[activePillar];
 
   return (
     <div className={styles.pageContainer}>
@@ -189,38 +214,132 @@ export default function Support({ onNavigate }) {
           </div>
         </section>
 
-        {/* ---- PILLARS ---- */}
-        <section ref={pillarsRef} className={styles.pillarsSection} aria-label="How we support you">
+        {/* ---- WHAT WE OFFER / SUPPORT PHILOSOPHIES ---- */}
+        <section
+          ref={pillarsRef}
+          className={styles.pillarsSection}
+          aria-label="What We Offer — Three ways Astitva creates a space to be heard"
+        >
           <div className={styles.pillarsInner}>
+            {/* Section Header */}
             <div className={`${styles.revealElement} ${reveals.pillars ? styles.revealed : ''} ${styles.sectionHeader}`}>
-              <span className={styles.sectionEyebrow}>WHAT WE OFFER</span>
+              <div className={styles.eyebrowRow}>
+                <span className={styles.eyebrowDot} aria-hidden="true" />
+                <span className={styles.sectionEyebrow}>WHAT WE OFFER</span>
+                <span className={styles.eyebrowLine} aria-hidden="true" />
+              </div>
+
               <h2 className={styles.sectionHeadline}>
                 Support that starts with{' '}
                 <em className={styles.accentItalic}>listening</em>
               </h2>
+
               <p className={styles.sectionSubtext}>
                 Every person's journey is different. Our support is built around that truth.
               </p>
             </div>
 
-            <div className={styles.pillarsGrid}>
-              {SUPPORT_PILLARS.map((pillar, i) => {
-                const Icon = pillar.icon;
-                return (
+            {/* Editorial Split Composition */}
+            <div className={`${styles.editorialWrapper} ${reveals.pillars ? styles.revealed : ''}`}>
+              {/* Left Column: Interactive Chapter Navigation */}
+              <div className={styles.chapterNavCol} role="tablist" aria-label="Support philosophies">
+                {/* Connecting Thread Motif (Desktop) */}
+                <div className={styles.connectingThread} aria-hidden="true">
                   <div
-                    key={pillar.number}
-                    className={`${styles.pillarCard} ${reveals.pillars ? styles.pillarVisible : ''}`}
-                    style={{ transitionDelay: reveals.pillars ? `${i * 120}ms` : '0ms' }}
-                  >
-                    <div className={styles.pillarTopRow}>
-                      <span className={styles.pillarNumber}>{pillar.number}</span>
-                      <Icon size={18} className={styles.pillarIcon} aria-hidden="true" />
-                    </div>
-                    <h3 className={styles.pillarTitle}>{pillar.title}</h3>
-                    <p className={styles.pillarBody}>{pillar.body}</p>
+                    className={styles.threadProgress}
+                    style={{
+                      height: `${((activePillar + 0.5) / SUPPORT_PHILOSOPHIES.length) * 100}%`,
+                    }}
+                  />
+                  {SUPPORT_PHILOSOPHIES.map((item, i) => (
+                    <div
+                      key={`thread-${item.number}`}
+                      className={`${styles.threadNode} ${
+                        activePillar === i
+                          ? styles.threadNodeActive
+                          : activePillar > i
+                          ? styles.threadNodePassed
+                          : ''
+                      }`}
+                      style={{
+                        top: `${((i + 0.5) / SUPPORT_PHILOSOPHIES.length) * 100}%`,
+                      }}
+                    />
+                  ))}
+                </div>
+
+                {/* Chapter Selection Tabs */}
+                <div className={styles.chapterItems}>
+                  {SUPPORT_PHILOSOPHIES.map((pillar, i) => {
+                    const isActive = activePillar === i;
+                    return (
+                      <button
+                        key={pillar.number}
+                        type="button"
+                        role="tab"
+                        aria-selected={isActive}
+                        tabIndex={0}
+                        className={`${styles.chapterTab} ${
+                          isActive ? styles.chapterTabActive : styles.chapterTabInactive
+                        }`}
+                        onClick={() => handlePillarSelect(i)}
+                      >
+                        <div className={styles.chapterTabTop}>
+                          <span className={styles.chapterNumber}>{pillar.number}</span>
+                          <span className={styles.chapterSlash}>/</span>
+                          <span className={styles.chapterConcept}>{pillar.concept}</span>
+                        </div>
+                        <h3 className={styles.chapterTitle}>{pillar.title}</h3>
+                        <div className={styles.activeTabIndicator} aria-hidden="true" />
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Right Column: Active Support Philosophy Display */}
+              <div
+                className={`${styles.activeDisplayCol} ${
+                  isChangingPillar ? styles.displayChanging : styles.displayActive
+                }`}
+                role="tabpanel"
+                aria-label={currentPhilosophy.title}
+              >
+                <div className={styles.displayCard}>
+                  <div className={styles.displayMetaRow}>
+                    <span className={styles.displayConceptBadge}>
+                      {currentPhilosophy.number} &mdash; {currentPhilosophy.concept}
+                    </span>
+                    <span className={styles.displayTitleBadge}>{currentPhilosophy.title}</span>
                   </div>
-                );
-              })}
+
+                  <h3 className={styles.displayStatement}>
+                    &ldquo;{currentPhilosophy.statement}&rdquo;
+                  </h3>
+
+                  <p className={styles.displayBody}>
+                    {currentPhilosophy.body}
+                  </p>
+
+                  <div className={styles.displayActionRow}>
+                    <button
+                      type="button"
+                      className={styles.displayActionBtn}
+                      onClick={handleContactClick}
+                      aria-label={`${currentPhilosophy.actionLabel} (Go to Contact)`}
+                    >
+                      <span className={styles.displayActionText}>
+                        {currentPhilosophy.actionLabel}
+                      </span>
+                      <span className={styles.arrowWrap} aria-hidden="true">
+                        <ArrowRight size={15} className={styles.displayArrow} />
+                      </span>
+                    </button>
+                  </div>
+
+                  <div className={styles.displayAccentBar} aria-hidden="true" />
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -271,7 +390,6 @@ export default function Support({ onNavigate }) {
             </p>
           </div>
         </section>
-
 
         {/* ---- CLOSING CTA ---- */}
         <section ref={closingRef} className={styles.closingSection} aria-label="Get in touch">

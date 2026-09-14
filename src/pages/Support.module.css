@@ -370,73 +370,335 @@
   margin: 0;
 }
 
-.pillarsGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(20px, 2.5vw, 32px);
+.eyebrowRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
-.pillarCard {
-  background-color: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 4px;
-  padding: clamp(28px, 3.5vw, 40px);
+.eyebrowDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--accent, #facc15);
+  box-shadow: 0 0 10px rgba(250, 204, 21, 0.85);
+  flex-shrink: 0;
+}
+
+.eyebrowLine {
+  width: 32px;
+  height: 1px;
+  background: linear-gradient(to right, rgba(250, 204, 21, 0.6), transparent);
+}
+
+/* Editorial Split Composition */
+.editorialWrapper {
+  display: grid;
+  grid-template-columns: minmax(280px, 36%) 1fr;
+  gap: clamp(36px, 5vw, 64px);
+  align-items: start;
+  width: 100%;
+}
+
+/* Left Column: Interactive Chapter Navigation */
+.chapterNavCol {
+  position: relative;
+  display: flex;
+  padding-left: 28px;
+  width: 100%;
+}
+
+.connectingThread {
+  position: absolute;
+  left: 4px;
+  top: 20px;
+  bottom: 28px;
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+}
+
+.threadProgress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(250, 204, 21, 0.95) 0%,
+    rgba(250, 204, 21, 0.7) 80%,
+    #facc15 100%
+  );
+  box-shadow: 0 0 8px rgba(250, 204, 21, 0.5);
+  transition: height 450ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: height;
+}
+
+.threadNode {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #242424;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  transition:
+    background-color 400ms ease,
+    border-color 400ms ease,
+    box-shadow 400ms ease,
+    transform 400ms ease;
+}
+
+.threadNodeActive {
+  background-color: #facc15;
+  border-color: #facc15;
+  box-shadow: 0 0 12px rgba(250, 204, 21, 0.9);
+  transform: translate(-50%, -50%) scale(1.4);
+}
+
+.threadNodePassed {
+  background-color: rgba(250, 204, 21, 0.65);
+  border-color: #facc15;
+}
+
+.chapterItems {
   display: flex;
   flex-direction: column;
-  position: relative;
-  opacity: 0;
-  transform: translateY(24px);
-  transition:
-    opacity var(--motion-std) var(--ease-ed),
-    transform var(--motion-std) var(--ease-ed),
-    border-color var(--motion-fast) ease,
-    background-color var(--motion-fast) ease;
+  width: 100%;
+  gap: 12px;
 }
 
-.pillarCard:hover {
-  border-color: rgba(250, 204, 21, 0.25);
+.chapterTab {
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  padding: 16px 20px;
+  border-radius: 4px;
+  position: relative;
+  transition:
+    opacity 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 250ms ease,
+    transform 250ms ease;
+  outline: none;
+  width: 100%;
+}
+
+.chapterTabInactive {
+  opacity: 0.45;
+}
+
+.chapterTabInactive:hover {
+  opacity: 0.8;
+  background-color: rgba(255, 255, 255, 0.02);
+  transform: translateX(4px);
+}
+
+.chapterTabActive {
+  opacity: 1;
   background-color: rgba(255, 255, 255, 0.035);
 }
 
-.pillarVisible {
+.chapterTabTop {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.chapterNumber {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-style: italic;
+  font-size: 1.9rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.24);
+  transition: color 350ms ease, text-shadow 350ms ease;
+}
+
+.chapterTabActive .chapterNumber {
+  color: #facc15;
+  text-shadow: 0 0 20px rgba(250, 204, 21, 0.4);
+}
+
+.chapterSlash {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.15);
+}
+
+.chapterConcept {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  transition: color 350ms ease;
+}
+
+.chapterTabActive .chapterConcept {
+  color: #facc15;
+}
+
+.chapterTitle {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(1.2rem, 1.4vw, 1.45rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0;
+  line-height: 1.3;
+  transition: color 350ms ease;
+}
+
+.chapterTabActive .chapterTitle {
+  color: #ffffff;
+}
+
+.activeTabIndicator {
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background-color: #facc15;
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.chapterTabActive .activeTabIndicator {
+  transform: scaleY(1);
+}
+
+.chapterTab:focus-visible {
+  outline: 1px solid #facc15;
+  outline-offset: 2px;
+}
+
+/* Right Column: Active Support Philosophy Display */
+.activeDisplayCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+
+.displayCard {
+  padding: clamp(32px, 5vh, 48px) clamp(28px, 4vw, 48px);
+  background-color: rgba(255, 255, 255, 0.02);
+  border-left: 2px solid rgba(250, 204, 21, 0.4);
+  border-radius: 0 4px 4px 0;
+  position: relative;
+  transition:
+    opacity 240ms ease,
+    transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.displayChanging .displayCard {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.displayActive .displayCard {
   opacity: 1;
   transform: translateY(0);
 }
 
-.pillarTopRow {
+.displayMetaRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 24px;
+  margin-bottom: 18px;
 }
 
-.pillarNumber {
-  font-family: var(--font-heading, 'Playfair Display', serif);
-  font-style: italic;
-  font-size: 2rem;
-  line-height: 1;
-  color: rgba(255, 255, 255, 0.2);
-}
-
-.pillarIcon {
-  color: var(--accent);
-}
-
-.pillarTitle {
-  font-family: var(--font-heading, 'Playfair Display', serif);
-  font-size: clamp(1.35rem, 1.8vw, 1.6rem);
-  font-weight: 400;
-  color: var(--text-hi);
-  margin: 0 0 14px;
-  line-height: 1.3;
-}
-
-.pillarBody {
+.displayConceptBadge {
   font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: 0.95rem;
-  line-height: 1.75;
-  color: var(--text-lo);
-  margin: 0;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #facc15;
+}
+
+.displayTitleBadge {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.displayStatement {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  margin: 0 0 20px 0;
+}
+
+.displayBody {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(1rem, 1.15vw, 1.12rem);
+  line-height: 1.78;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 0 32px 0;
+  max-width: 620px;
+}
+
+.displayActionRow {
+  display: flex;
+  align-items: center;
+}
+
+.displayActionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 0;
+  outline: none;
+}
+
+.displayActionText {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #facc15;
+  transition: color 250ms ease;
+}
+
+.arrowWrap {
+  display: flex;
+  align-items: center;
+  color: #facc15;
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.displayArrow {
+  display: block;
+}
+
+.displayActionBtn:hover .arrowWrap {
+  transform: translateX(6px);
+}
+
+.displayAccentBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 44px;
+  height: 2px;
+  background-color: #facc15;
 }
 
 /* --------------------------------------------------------------------------
@@ -963,8 +1225,62 @@
     font-size: clamp(3.2rem, 12vw, 4.8rem);
   }
 
-  .pillarsGrid {
+  .editorialWrapper {
     grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .connectingThread {
+    display: none;
+  }
+
+  .chapterNavCol {
+    padding-left: 0;
+  }
+
+  .chapterItems {
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 8px;
+    padding-bottom: 6px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .chapterTab {
+    flex: 1;
+    min-width: 140px;
+    padding: 12px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .chapterTabActive {
+    border-color: rgba(250, 204, 21, 0.4);
+    background: rgba(250, 204, 21, 0.05);
+  }
+
+  .activeTabIndicator {
+    display: none;
+  }
+
+  .displayCard {
+    padding: 28px 20px;
+    border-left: none;
+    border-top: 2px solid rgba(250, 204, 21, 0.45);
+    border-radius: 4px;
+  }
+
+  .displayTitleBadge {
+    display: none;
+  }
+
+  .displayStatement {
+    font-size: clamp(1.6rem, 5.5vw, 2.1rem);
+  }
+
+  .displayBody {
+    font-size: 0.96rem;
+    line-height: 1.7;
+    margin-bottom: 24px;
   }
 
   .howRow {
