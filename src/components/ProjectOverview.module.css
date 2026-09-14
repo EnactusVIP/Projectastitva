@@ -1,19 +1,21 @@
 /* ==========================================================================
    ProjectOverview Component Styles (CSS Module)
-   Project Astitva — Phase 3 Editorial Impact Rows
+   Project Astitva — Three Chapters of Action (Editorial Redesign)
    ========================================================================== */
 
 .section {
   background-color: #141414;
-  padding: clamp(80px, 11vh, 130px) var(--page-pad, clamp(24px, 5vw, 64px));
+  padding: clamp(96px, 14vh, 160px) var(--page-pad, clamp(24px, 5vw, 64px));
   position: relative;
   width: 100%;
+  overflow: hidden;
 }
 
 .container {
   max-width: var(--max-width, 1200px);
   margin: 0 auto;
   width: 100%;
+  position: relative;
 }
 
 /* --------------------------------------------------------------------------
@@ -21,21 +23,26 @@
    -------------------------------------------------------------------------- */
 .header {
   text-align: left;
-  max-width: 720px;
-  margin-bottom: clamp(48px, 7vh, 72px);
+  max-width: 780px;
+  margin-bottom: clamp(56px, 9vh, 92px);
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(22px);
   transition:
-    opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 900ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
+}
+
+.revealed {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
 }
 
 .eyebrowRow {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .eyebrowDot {
@@ -43,7 +50,7 @@
   height: 5px;
   border-radius: 50%;
   background-color: #facc15;
-  box-shadow: 0 0 8px rgba(250, 204, 21, 0.7);
+  box-shadow: 0 0 10px rgba(250, 204, 21, 0.85);
   flex-shrink: 0;
 }
 
@@ -64,61 +71,129 @@
 
 .headline {
   font-family: var(--font-heading, 'Playfair Display', serif);
-  font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+  font-size: clamp(2.4rem, 4.4vw, 3.8rem);
   font-weight: 400;
   color: #ffffff;
-  line-height: 1.18;
-  letter-spacing: -0.015em;
-  margin: 0;
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px 0;
 }
 
 .headlineItalic {
   font-style: italic;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.subline {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  color: rgba(255, 255, 255, 0.58);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 540px;
 }
 
 /* --------------------------------------------------------------------------
-   EDITORIAL ROWS
+   CHAPTERS WRAPPER & SUBTLE CONNECTING THREAD
    -------------------------------------------------------------------------- */
-.rowsList {
-  display: flex;
-  flex-direction: column;
+.chaptersWrapper {
+  position: relative;
   width: 100%;
 }
 
-.row {
+/* Vertical Connecting Thread Motif (Desktop / Tablet) */
+.connectingThread {
+  position: absolute;
+  left: 0;
+  top: 24px;
+  bottom: 48px;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+  display: block;
+}
+
+.threadProgress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(250, 204, 21, 0.95) 0%,
+    rgba(250, 204, 21, 0.7) 75%,
+    #facc15 100%
+  );
+  box-shadow: 0 0 8px rgba(250, 204, 21, 0.5);
+  transition: height 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: height;
+}
+
+.threadNode {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #242424;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  transition:
+    background-color 450ms ease,
+    border-color 450ms ease,
+    box-shadow 450ms ease,
+    transform 450ms ease;
+}
+
+.threadNodeActive {
+  background-color: #facc15;
+  border-color: #facc15;
+  box-shadow: 0 0 12px rgba(250, 204, 21, 0.9);
+  transform: translate(-50%, -50%) scale(1.4);
+}
+
+.threadNodePassed {
+  background-color: rgba(250, 204, 21, 0.65);
+  border-color: #facc15;
+}
+
+/* --------------------------------------------------------------------------
+   CHAPTERS LIST & PANELS
+   -------------------------------------------------------------------------- */
+.chaptersList {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(52px, 8.5vh, 88px);
+  width: 100%;
+  padding-left: clamp(40px, 5.5vw, 72px);
+}
+
+.chapterPanel {
   position: relative;
   width: 100%;
-  padding: clamp(32px, 4.5vh, 44px) 0;
   cursor: pointer;
   outline: none;
   background: transparent;
-  opacity: 0;
-  transform: translateY(24px);
+  padding: clamp(28px, 4vh, 44px) 0;
+  border-radius: 2px;
   transition:
-    opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1),
-    background-color 240ms ease;
+    opacity 500ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
-.rowVisible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Top hairline that illuminates on hover */
-.rowBorderTop {
+/* Top Hairline Divider */
+.chapterDivider {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 1px;
-  background-color: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.08);
   overflow: hidden;
 }
 
-.rowBorderGlow {
+.dividerGlow {
   position: absolute;
   top: 0;
   left: 0;
@@ -126,282 +201,401 @@
   height: 100%;
   background: linear-gradient(
     to right,
-    transparent,
-    rgba(250, 204, 21, 0.9) 25%,
-    rgba(250, 204, 21, 0.9) 75%,
-    transparent
+    rgba(250, 204, 21, 0.85) 0%,
+    rgba(250, 204, 21, 0.45) 40%,
+    transparent 85%
   );
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 360ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 550ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.row:hover .rowBorderGlow {
+.dividerGlowActive {
   transform: scaleX(1);
 }
 
-.rowInner {
-  display: grid;
-  grid-template-columns: 80px 220px 1fr auto;
-  align-items: center;
-  gap: clamp(20px, 3vw, 44px);
-  padding: 0 4px;
+/* Chapter Focus States: Active vs Inactive */
+.chapterInactive {
+  opacity: 0.50;
+  filter: contrast(0.96);
 }
 
-/* Column 1: Number */
-.numberCol {
-  flex-shrink: 0;
+.chapterInactive:hover {
+  opacity: 0.82;
+  transform: translateY(-2px);
 }
 
-.number {
-  font-family: var(--font-heading, 'Playfair Display', serif);
-  font-style: italic;
-  font-size: clamp(2rem, 3.4vw, 3rem);
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.28);
-  line-height: 1;
-  display: inline-block;
-  transition:
-    color 240ms ease,
-    transform 240ms ease;
-}
-
-/* Column 2: Title */
-.titleCol {
-  flex-shrink: 0;
-}
-
-.title {
-  font-family: var(--font-heading, 'Playfair Display', serif);
-  font-size: clamp(1.75rem, 2.5vw, 2.4rem);
-  font-weight: 400;
-  color: #ffffff;
-  margin: 0;
-  letter-spacing: -0.015em;
-  line-height: 1.2;
-  transition:
-    color 240ms ease,
-    text-shadow 240ms ease;
-}
-
-/* Column 3: Description */
-.descCol {
-  max-width: 520px;
-}
-
-.description {
-  font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: clamp(0.88rem, 1.05vw, 0.96rem);
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.52);
-  margin: 0;
-  transition: color 240ms ease;
-}
-
-/* Column 4: Interactive Action */
-.actionCol {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-left: auto;
-}
-
-.actionText {
-  font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: 0.74rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
-  transition: color 240ms ease;
-  white-space: nowrap;
-}
-
-.arrowCircle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.6);
-  transition:
-    border-color 240ms ease,
-    background-color 240ms ease,
-    color 240ms ease,
-    transform 240ms ease;
-  flex-shrink: 0;
-}
-
-.arrowIcon {
-  transition: transform 240ms ease;
-}
-
-/* --------------------------------------------------------------------------
-   HOVER PHYSICS
-   -------------------------------------------------------------------------- */
-.row:hover {
-  transform: translateX(8px);
-}
-
-.row:hover .number {
-  color: #facc15;
-  transform: scale(1.06);
-}
-
-.row:hover .title {
-  color: #ffffff;
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
-}
-
-.row:hover .description {
-  color: rgba(255, 255, 255, 0.82);
-}
-
-.row:hover .actionText {
-  color: #facc15;
-}
-
-.row:hover .arrowCircle {
-  border-color: rgba(250, 204, 21, 0.5);
-  background-color: rgba(250, 204, 21, 0.1);
-  color: #facc15;
-  transform: scale(1.06);
-}
-
-.row:hover .arrowIcon {
-  transform: translateX(4px);
-}
-
-.row:focus-visible {
-  outline: 1px solid #facc15;
-  outline-offset: 6px;
-  border-radius: 4px;
-}
-
-/* Closing bottom hairline */
-.bottomHairline {
-  width: 100%;
-  height: 1px;
-  background-color: rgba(255, 255, 255, 0.08);
-  opacity: 0;
-  transform: translateY(12px);
-  transition:
-    opacity 800ms ease,
-    transform 800ms ease;
-}
-
-/* --------------------------------------------------------------------------
-   REVEAL TRIGGERED STATE
-   -------------------------------------------------------------------------- */
-.revealed {
+.chapterActive {
   opacity: 1;
+  filter: none;
   transform: translateY(0);
 }
 
 /* --------------------------------------------------------------------------
-   RESPONSIVE DESIGN (1440, 1280, 1024, 768, 480, 430, 390, 375)
+   ASYMMETRIC COMPOSITION (Desktop Rhythm)
    -------------------------------------------------------------------------- */
-@media (max-width: 1024px) {
-  .rowInner {
-    grid-template-columns: 60px 180px 1fr auto;
-    gap: 24px;
-  }
+/* Chapter 01 (Awareness): Anchored to the left */
+.chapterAwareness {
+  max-width: 840px;
+  margin-right: auto;
 }
 
-@media (max-width: 860px) {
-  .rowInner {
-    grid-template-columns: 50px 160px 1fr auto;
-    gap: 20px;
+/* Chapter 02 (Education): Shifts smoothly toward the right */
+.chapterEducation {
+  max-width: 820px;
+  margin-left: clamp(60px, 8vw, 140px);
+  margin-right: auto;
+}
+
+.chapterEducation .dividerGlow {
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(250, 204, 21, 0.45) 50%,
+    rgba(250, 204, 21, 0.85) 100%
+  );
+  transform-origin: right;
+}
+
+/* Chapter 03 (Support): Returns left with an expansive, grounded footprint */
+.chapterSupport {
+  max-width: 960px;
+  margin-right: auto;
+}
+
+/* --------------------------------------------------------------------------
+   CHAPTER INTERNAL CONTENT
+   -------------------------------------------------------------------------- */
+.chapterContent {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Meta Row: Chapter Number + Concept */
+.metaRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: clamp(14px, 2.2vh, 22px);
+}
+
+.numberWrapper {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.numberPrefix {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-style: italic;
+  font-size: clamp(2.2rem, 3.6vw, 3.2rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.24);
+  line-height: 1;
+  transition:
+    color 400ms ease,
+    text-shadow 400ms ease;
+}
+
+.chapterActive .numberPrefix {
+  color: #facc15;
+  text-shadow: 0 0 24px rgba(250, 204, 21, 0.35);
+}
+
+.chapterInactive:hover .numberPrefix {
+  color: rgba(250, 204, 21, 0.7);
+}
+
+.numberSlash {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.18);
+}
+
+.conceptTag {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  transition: color 350ms ease;
+}
+
+.chapterActive .conceptTag {
+  color: #facc15;
+}
+
+.titleBadge {
+  display: inline-flex;
+  align-items: center;
+}
+
+.chapterTitle {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  transition: color 350ms ease;
+}
+
+.chapterActive .chapterTitle {
+  color: #ffffff;
+}
+
+/* Large Editorial Statement */
+.statement {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(1.85rem, 3.2vw, 2.75rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.22;
+  letter-spacing: -0.015em;
+  margin: 0 0 clamp(16px, 2.5vh, 24px) 0;
+  max-width: 90%;
+  transition: color 400ms ease;
+}
+
+.chapterActive .statement {
+  color: #ffffff;
+}
+
+/* Narrative Row (Description + Action) */
+.narrativeRow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: clamp(24px, 4vw, 48px);
+  margin-top: 4px;
+}
+
+.description {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.92rem, 1.1vw, 1.02rem);
+  line-height: 1.72;
+  color: rgba(255, 255, 255, 0.58);
+  margin: 0;
+  max-width: 580px;
+  transition: color 350ms ease;
+}
+
+.chapterActive .description {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+/* Action Button */
+.actionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  outline: none;
+}
+
+.actionText {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+  transition: color 300ms ease;
+  white-space: nowrap;
+}
+
+.arrowIconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.38);
+  transition:
+    color 300ms ease,
+    transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.arrowIcon {
+  display: block;
+}
+
+.chapterActive .actionText {
+  color: #facc15;
+}
+
+.chapterActive .arrowIconWrap {
+  color: #facc15;
+}
+
+.chapterPanel:hover .arrowIconWrap,
+.actionBtn:hover .arrowIconWrap {
+  transform: translateX(6px);
+}
+
+/* Active Baseline Accent */
+.activeAccentBar {
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 44px;
+  height: 2px;
+  background: #facc15;
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition:
+    opacity 400ms ease,
+    transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.chapterActive .activeAccentBar {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* Accessibility Focus State */
+.chapterPanel:focus-visible {
+  outline: 1px solid #facc15;
+  outline-offset: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE DESIGN (1024px, 768px, 480px, 390px, 375px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .section {
+    padding: clamp(80px, 10vh, 120px) var(--page-pad, 28px);
   }
 
-  .actionText {
-    display: none;
+  .chaptersList {
+    padding-left: 36px;
+    gap: 48px;
+  }
+
+  .chapterEducation {
+    max-width: 100%;
+    margin-left: 0;
+  }
+
+  .chapterAwareness,
+  .chapterSupport {
+    max-width: 100%;
+  }
+
+  .statement {
+    font-size: clamp(1.7rem, 2.8vw, 2.2rem);
+    max-width: 100%;
+  }
+
+  .narrativeRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
   }
 }
 
 @media (max-width: 768px) {
   .section {
-    padding: clamp(60px, 9vh, 90px) 20px;
+    padding: clamp(64px, 8vh, 90px) 20px;
+  }
+
+  .connectingThread {
+    display: none;
+  }
+
+  .chaptersList {
+    padding-left: 0;
+    gap: 36px;
+  }
+
+  .chapterPanel {
+    padding: 24px 0;
   }
 
   .header {
-    margin-bottom: 36px;
+    margin-bottom: 40px;
   }
 
-  .rowInner {
-    grid-template-columns: 1fr;
-    gap: 12px;
+  .headline {
+    font-size: clamp(2.1rem, 7.5vw, 2.8rem);
   }
 
-  .numberCol {
-    margin-bottom: -4px;
+  .subline {
+    font-size: 0.95rem;
   }
 
-  .number {
-    font-size: 1.8rem;
-  }
-
-  .title {
-    font-size: 1.7rem;
+  .statement {
+    font-size: clamp(1.45rem, 5.2vw, 1.85rem);
+    line-height: 1.26;
   }
 
   .description {
     font-size: 0.92rem;
+    line-height: 1.65;
   }
 
-  .actionCol {
-    margin-left: 0;
-    margin-top: 8px;
+  .actionBtn {
+    margin-top: 6px;
   }
 
   .actionText {
-    display: inline-block;
-    color: #facc15;
+    font-size: 0.76rem;
   }
 
-  .row {
-    padding: 26px 0;
-  }
-
-  .row:hover {
-    transform: translateX(4px);
+  /* Keep inactive chapters readable on mobile while still focused */
+  .chapterInactive {
+    opacity: 0.65;
   }
 }
 
 @media (max-width: 480px) {
   .headline {
-    font-size: 1.85rem;
+    font-size: 1.95rem;
   }
 
-  .title {
-    font-size: 1.5rem;
+  .metaRow {
+    margin-bottom: 12px;
   }
 
-  .number {
-    font-size: 1.6rem;
+  .numberPrefix {
+    font-size: 1.8rem;
+  }
+
+  .conceptTag {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+  }
+
+  .chapterTitle {
+    font-size: 0.75rem;
+  }
+
+  .statement {
+    font-size: 1.35rem;
+    margin-bottom: 12px;
   }
 
   .description {
     font-size: 0.88rem;
-    line-height: 1.6;
-  }
-
-  .arrowCircle {
-    width: 32px;
-    height: 32px;
   }
 }
 
 @media (max-width: 375px) {
   .headline {
-    font-size: 1.7rem;
+    font-size: 1.75rem;
   }
 
-  .title {
-    font-size: 1.4rem;
+  .statement {
+    font-size: 1.25rem;
+  }
+
+  .numberPrefix {
+    font-size: 1.6rem;
   }
 }
 
@@ -410,15 +604,15 @@
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   .header,
-  .row,
-  .rowBorderGlow,
-  .number,
-  .title,
+  .chapterPanel,
+  .threadProgress,
+  .threadNode,
+  .dividerGlow,
+  .numberPrefix,
+  .statement,
   .description,
-  .actionText,
-  .arrowCircle,
-  .arrowIcon,
-  .bottomHairline {
+  .arrowIconWrap,
+  .activeAccentBar {
     transition: none !important;
     transform: none !important;
     opacity: 1 !important;
