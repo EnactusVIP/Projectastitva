@@ -661,33 +661,47 @@ export default function AboutUs({ onNavigate, showFooter = false }) {
 
 
         {/* ------------------------------------------------------------------
-            5. CHAPTER 05: THE BELIEF (Emotional Climax Cathedral)
+            5. CHAPTER 05: THE BELIEF (Emotional Climax — Unified Editorial Grid)
             ------------------------------------------------------------------ */}
         <section
           id="chapter-belief"
           ref={beliefRef}
-          className={styles.beliefScene}
+          className={styles.chapterScene}
           aria-labelledby="chapter-belief-heading"
         >
-          <div
-            className={`${styles.revealElement} ${
-              reveals.belief ? styles.revealed : ''
-            } ${styles.beliefWrapper}`}
-          >
-            <span className={styles.beliefWatermark} aria-hidden="true">
-              05
-            </span>
-            <span className={styles.chapterTag}>The Belief</span>
+          <div className={styles.chapterContent}>
+            <div
+              className={`${styles.revealElement} ${
+                reveals.belief ? styles.revealed : ''
+              } ${styles.chapterHeader}`}
+            >
+              <span className={styles.chapterNumber} aria-hidden="true">
+                05
+              </span>
+              <span className={styles.chapterTag}>The Belief</span>
+            </div>
 
-            <h2 id="chapter-belief-heading" className={styles.beliefClimaxHeading}>
-              You don&rsquo;t have to figure everything out alone.
-            </h2>
+            <div className={styles.beliefStage}>
+              <h2
+                id="chapter-belief-heading"
+                className={`${styles.revealElement} ${
+                  reveals.belief ? styles.revealed : ''
+                } ${styles.delay100} ${styles.beliefHeading}`}
+              >
+                You don&rsquo;t have to figure everything out{' '}
+                <span className={styles.beliefHighlight}>alone</span>.
+              </h2>
 
-            <p className={styles.beliefSupportingCopy}>
-              At the heart of Astitva is the belief that you don’t have to
-              figure everything out alone. It’s a space to talk without judgment,
-              seek support without hesitation, and simply be yourself.
-            </p>
+              <p
+                className={`${styles.revealElement} ${
+                  reveals.belief ? styles.revealed : ''
+                } ${styles.delay200} ${styles.beliefBody}`}
+              >
+                At the heart of Astitva is the belief that you don’t have to
+                figure everything out alone. It’s a space to talk without judgment,
+                seek support without hesitation, and simply be yourself.
+              </p>
+            </div>
           </div>
         </section>
 

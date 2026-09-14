@@ -663,71 +663,44 @@
 }
 
 /* --------------------------------------------------------------------------
-   THE BELIEF — Emotional Climax (Peak of the Story)
+   CHAPTER 05: THE BELIEF — Emotional Climax (Unified Editorial Grid)
    -------------------------------------------------------------------------- */
-.beliefScene {
-  max-width: 980px;
-  margin: 0 auto;
-  padding: var(--section-v) var(--page-pad);
-  text-align: center;
-  position: relative;
-}
-
-.beliefScene::before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: var(--page-pad);
-  right: var(--page-pad);
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--border-sub) 20%,
-    var(--border-sub) 80%,
-    transparent
-  );
-}
-
-.beliefWrapper {
+.beliefStage {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  gap: clamp(24px, 3.5vh, 36px);
+  width: 100%;
 }
 
-.beliefWatermark {
+.beliefHeading {
   font-family: var(--font-heading, 'Playfair Display', serif);
-  font-style: italic;
-  font-size: clamp(5rem, 9vw, 10rem);
-  line-height: 0.8;
-  color: rgba(255, 255, 255, 0.05);
-  user-select: none;
-  margin-bottom: 8px;
-  letter-spacing: -0.05em;
-}
-
-/* The emotional climax — largest narrative statement */
-.beliefClimaxHeading {
-  font-family: var(--font-heading, 'Playfair Display', serif);
-  font-size: clamp(2.6rem, 5.5vw, 5rem);
+  font-size: clamp(2.4rem, 4.4vw, 4rem);
   font-style: italic;
   font-weight: 400;
   line-height: 1.18;
   color: var(--text-hi);
-  margin: 16px auto 32px;
-  max-width: 860px;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.022em;
+  max-width: 920px;
+  margin: 0;
+  text-align: left;
 }
 
-.beliefSupportingCopy {
+.beliefHighlight {
+  color: var(--accent);
+  display: inline;
+}
+
+.beliefBody {
   font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  font-size: clamp(1.02rem, 1.2vw, 1.15rem);
   font-weight: 350;
-  line-height: 1.9;
-  color: rgba(255, 255, 255, 0.72);
-  max-width: 660px;
-  margin: 0 auto;
+  line-height: 1.85;
+  color: rgba(255, 255, 255, 0.76);
+  letter-spacing: 0.01em;
+  max-width: 680px;
+  margin: 0;
+  text-align: left;
 }
 
 /* --------------------------------------------------------------------------
@@ -1025,7 +998,6 @@
   .chapterScene + .chapterScene::before,
   .impactSection + .chapterScene::before,
   .soulScene::before,
-  .beliefScene::before,
   .impactSection::before,
   .closingScene::before {
     left: clamp(20px, 5vw, 40px);
@@ -1066,10 +1038,6 @@
   }
 
   .soulScene {
-    padding: clamp(56px, 8vh, 80px) clamp(20px, 5vw, 40px);
-  }
-
-  .beliefScene {
     padding: clamp(56px, 8vh, 80px) clamp(20px, 5vw, 40px);
   }
 
