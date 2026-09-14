@@ -329,7 +329,7 @@ export default function Contact({ onNavigate }) {
                 </div>
                 <div>
                   <h3 id="saathi-modal-title" className={styles.modalTitle}>
-                    Saathi &mdash; AI Companion
+                    Saathi: AI Companion
                   </h3>
                   <span className={styles.modalBadge}>CONFIDENTIAL COMPANION</span>
                 </div>

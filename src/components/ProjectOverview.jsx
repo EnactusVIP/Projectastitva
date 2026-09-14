@@ -143,7 +143,7 @@ export default function ProjectOverview({ onNavigate }) {
       id="what-we-do"
       ref={sectionRef}
       className={styles.section}
-      aria-label="What We Do — Three Chapters of Action"
+      aria-label="What We Do: Three Chapters of Action"
     >
       {/* Master Container: Single parent container defining the global boundary */}
       <div className={styles.container}>

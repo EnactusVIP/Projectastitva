@@ -166,7 +166,7 @@ export default function Footer({ onNavigate }) {
         {/* Bottom Row */}
         <div className={styles.bottomRow}>
           <p className={styles.copyright}>
-            &copy; 2024 Project Astitva &mdash; Enactus VIPS-TC. All rights reserved.
+            &copy; 2026 Project Astitva, Enactus VIPS-TC. All rights reserved.
           </p>
           <p className={styles.madeWithPurpose}>
             Made with purpose.

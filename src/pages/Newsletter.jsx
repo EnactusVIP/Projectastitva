@@ -458,7 +458,7 @@ export default function Newsletter({ onNavigate }) {
 
             <div className={styles.modalFooter}>
               <span className={styles.modalSignature}>
-                Project Astitva &mdash; An initiative for dignity and authentic existence.
+                Project Astitva: An initiative for dignity and authentic existence.
               </span>
               <button
                 type="button"

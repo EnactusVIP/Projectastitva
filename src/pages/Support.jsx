@@ -218,7 +218,7 @@ export default function Support({ onNavigate }) {
         <section
           ref={pillarsRef}
           className={styles.pillarsSection}
-          aria-label="What We Offer — Three ways Astitva creates a space to be heard"
+          aria-label="What We Offer: Three ways Astitva creates a space to be heard"
         >
           <div className={styles.pillarsInner}>
             {/* Section Header */}
@@ -385,7 +385,7 @@ export default function Support({ onNavigate }) {
             </p>
             <blockquote className={`${styles.revealElement} ${reveals.commitment ? styles.revealed : ''} ${styles.delay100} ${styles.commitmentQuote}`}>
               &ldquo;No one should have to earn the right to be cared for.
-              Dignity is not conditional &mdash; and neither is our support.&rdquo;
+              Dignity is not conditional. Neither is our support.&rdquo;
             </blockquote>
             <p className={`${styles.revealElement} ${reveals.commitment ? styles.revealed : ''} ${styles.delay200} ${styles.commitmentBody}`}>
               Project Astitva was built on the belief that LGBTQ+ individuals deserve access to

@@ -42,7 +42,7 @@ export default function SDGCard({
         <div className={styles.cardFaceFront}>
           <img
             src={image}
-            alt={`SDG ${number} — ${title}`}
+            alt={`SDG ${number}: ${title}`}
             className={styles.cardImage}
             loading="lazy"
           />

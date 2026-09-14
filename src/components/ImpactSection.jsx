@@ -64,7 +64,7 @@ export default function ImpactSection() {
         {/* Existing approved mission statement */}
         <div className={`${styles.missionBlock} ${isVisible ? styles.revealed : ''}`}>
           <blockquote className={styles.missionQuote}>
-            &ldquo;To create a world where every individual can exist authentically &mdash; free from prejudice, discrimination, and fear. Project Astitva stands as a testament to the belief that identity is not a choice to be judged, but a truth to be celebrated.&rdquo;
+            &ldquo;To create a world where every individual can exist authentically, free from prejudice, discrimination, and fear. Project Astitva stands as a testament to the belief that identity is not a choice to be judged, but a truth to be celebrated.&rdquo;
           </blockquote>
         </div>
       </div>

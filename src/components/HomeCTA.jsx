@@ -80,7 +80,7 @@ export default function HomeCTA({ onNavigate }) {
 
         {/* Supporting Human Statement */}
         <p className={styles.subtext}>
-          Whether you need a listening ear, a compassionate community, or a space to simply be yourself &mdash; you belong here.
+          Whether you need a listening ear, a compassionate community, or a space to simply be yourself: you belong here.
         </p>
 
         {/* Actions */}
