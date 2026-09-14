@@ -7,7 +7,7 @@
   /* Layout */
   --page-max:    1200px;
   --page-pad:    clamp(24px, 5vw, 72px);
-  --section-v:   clamp(80px, 10vh, 120px);
+  --section-v:   clamp(52px, 6.5vh, 80px);
   --chapter-gap: clamp(28px, 4vh, 48px);
   --content-gap: clamp(14px, 2vw, 24px);
 
@@ -149,24 +149,26 @@
     transparent 100%
   );
   pointer-events: none;
-  z-index: 2;
+  z-index: 5;
 }
 
 .heroBottomFade {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 0;
-  height: clamp(100px, 16vh, 180px);
+  bottom: -1px;
+  height: clamp(180px, 28vh, 280px);
   background: linear-gradient(
     to bottom,
     transparent 0%,
-    rgba(20, 20, 20, 0.5) 40%,
-    rgba(20, 20, 20, 0.9) 80%,
+    rgba(20, 20, 20, 0.25) 20%,
+    rgba(20, 20, 20, 0.7) 45%,
+    rgba(20, 20, 20, 0.95) 70%,
+    #141414 85%,
     #141414 100%
   );
   pointer-events: none;
-  z-index: 2;
+  z-index: 5;
 }
 
 .heroContentContainer {
@@ -323,7 +325,8 @@
   position: relative;
   max-width: var(--page-max, 1200px);
   margin: 0 auto;
-  padding: var(--section-v) var(--page-pad);
+  padding: clamp(56px, 7vh, 84px) var(--page-pad) clamp(44px, 5.5vh, 64px);
+  scroll-margin-top: calc(var(--navbar-height, 80px) + 20px);
 }
 
 .pillarsSection::before {
@@ -708,7 +711,8 @@
   position: relative;
   max-width: var(--page-max, 1200px);
   margin: 0 auto;
-  padding: var(--section-v) var(--page-pad);
+  padding: clamp(48px, 6vh, 68px) var(--page-pad) clamp(32px, 4vh, 44px);
+  scroll-margin-top: calc(var(--navbar-height, 80px) + 20px);
 }
 
 .howSection::before {
@@ -732,14 +736,15 @@
   width: 100%;
 }
 
-.howEyebrowRow {
-  margin-bottom: clamp(32px, 4vh, 48px);
+.howHeader {
+  margin-bottom: clamp(24px, 3vh, 36px);
 }
 
 .howRows {
   display: flex;
   flex-direction: column;
   gap: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .howRow {
@@ -747,17 +752,13 @@
   grid-template-columns: 1.1fr 1px 1.2fr;
   gap: clamp(24px, 4vw, 56px);
   align-items: center;
-  padding: clamp(32px, 4.5vh, 48px) 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: clamp(20px, 2.8vh, 32px) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(16px);
   transition:
     opacity var(--motion-std) var(--ease-ed),
     transform var(--motion-std) var(--ease-ed);
-}
-
-.howRow:first-child {
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .howRowVisible {
@@ -901,25 +902,9 @@
   position: relative;
   max-width: var(--page-max, 1200px);
   margin: 0 auto;
-  padding: var(--section-v) var(--page-pad);
+  padding: clamp(32px, 4.5vh, 48px) var(--page-pad) clamp(44px, 5.5vh, 60px);
   text-align: center;
-}
-
-.commitmentSection::before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: var(--page-pad);
-  right: var(--page-pad);
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--border-sub) 20%,
-    var(--border-sub) 80%,
-    transparent
-  );
+  scroll-margin-top: calc(var(--navbar-height, 80px) + 20px);
 }
 
 .commitmentInner {
@@ -931,11 +916,11 @@
 }
 
 .rainbowFilament {
-  width: min(220px, 55%);
+  width: min(200px, 50%);
   height: 2px;
   background: var(--accent-rainbow, linear-gradient(90deg, #facc15, #f97316, #ec4899, #8b5cf6, #3b82f6));
   border-radius: 2px;
-  margin-bottom: 32px;
+  margin-bottom: clamp(16px, 2.2vh, 22px);
   box-shadow: 0 0 12px rgba(255, 237, 0, 0.2);
 }
 
@@ -946,25 +931,25 @@
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 24px;
+  margin-bottom: clamp(14px, 1.8vh, 18px);
 }
 
 .commitmentQuote {
   font-family: var(--font-heading, 'Playfair Display', serif);
   font-style: italic;
-  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+  font-size: clamp(1.4rem, 2.2vw, 2.05rem);
   font-weight: 400;
   color: var(--text-hi);
-  line-height: 1.45;
-  margin: 0 0 28px;
+  line-height: 1.42;
+  margin: 0 0 clamp(16px, 2vh, 22px);
   padding: 0;
   border: none;
 }
 
 .commitmentBody {
   font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: clamp(0.98rem, 1.15vw, 1.1rem);
-  line-height: 1.9;
+  font-size: clamp(0.95rem, 1.08vw, 1.06rem);
+  line-height: 1.8;
   color: rgba(255, 255, 255, 0.7);
   margin: 0;
 }
@@ -1066,11 +1051,12 @@
   position: relative;
   max-width: var(--page-max, 1200px);
   margin: 0 auto;
-  padding: clamp(48px, 7vh, 80px) var(--page-pad) var(--section-v);
+  padding: clamp(40px, 5vh, 56px) var(--page-pad) clamp(60px, 8vh, 90px);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  scroll-margin-top: calc(var(--navbar-height, 80px) + 20px);
 }
 
 .closingSection::before {
@@ -1283,9 +1269,17 @@
     margin-bottom: 24px;
   }
 
+  .pillarsSection,
+  .howSection,
+  .commitmentSection,
+  .closingSection {
+    scroll-margin-top: calc(var(--navbar-height, 70px) + 12px);
+  }
+
   .howRow {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 12px;
+    padding: 18px 0;
   }
 
   .howDivider {

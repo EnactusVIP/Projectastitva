@@ -181,9 +181,9 @@ export default function Support({ onNavigate }) {
               loading="eager"
             />
             <div className={`${styles.heroOverlay} ${reveals.hero ? styles.heroOverlayLoaded : ''}`} />
-            <div className={styles.heroTopFade} />
-            <div className={styles.heroBottomFade} />
           </div>
+          <div className={styles.heroTopFade} aria-hidden="true" />
+          <div className={styles.heroBottomFade} aria-hidden="true" />
 
           <div className={styles.heroContentContainer}>
             <div className={styles.heroTextColumn}>
@@ -347,8 +347,12 @@ export default function Support({ onNavigate }) {
         {/* ---- HOW WE HELP ---- */}
         <section ref={howRef} className={styles.howSection} aria-label="Our approach to support">
           <div className={styles.howInner}>
-            <div className={`${styles.revealElement} ${reveals.how ? styles.revealed : ''} ${styles.howEyebrowRow}`}>
-              <span className={styles.sectionEyebrow}>HOW WE HELP</span>
+            <div className={`${styles.revealElement} ${reveals.how ? styles.revealed : ''} ${styles.howHeader}`}>
+              <div className={styles.eyebrowRow}>
+                <span className={styles.eyebrowDot} aria-hidden="true" />
+                <span className={styles.sectionEyebrow}>HOW WE HELP</span>
+                <span className={styles.eyebrowLine} aria-hidden="true" />
+              </div>
             </div>
 
             <div className={styles.howRows}>
