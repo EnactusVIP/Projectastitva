@@ -9,7 +9,7 @@ const SUPPORT_PILLARS = [
     number: '01',
     title: 'Mental Health First',
     body:
-      'Connecting individuals with trained empathetic listeners and guidance — because your mental health is not a luxury, it is a right.',
+      'Connecting individuals with trained empathetic listeners and guidance because your mental health is not a luxury, it is a right.',
     icon: Heart,
   },
   {
@@ -23,7 +23,7 @@ const SUPPORT_PILLARS = [
     number: '03',
     title: 'Community Networks',
     body:
-      'Peer-led support circles, group sessions, and community touchpoints — because solidarity is a form of care.',
+      'Peer-led support circles, group sessions, and community touchpoints because solidarity is a form of care.',
     icon: Users,
   },
 ];
@@ -33,19 +33,19 @@ const HOW_WE_HELP = [
     tag: 'GUIDANCE',
     headline: 'Someone to talk to',
     copy:
-      'Whether you are navigating identity, family relationships, mental health, or workplace discrimination — Project Astitva is here. Our team connects you with resources, peer counsellors, and community allies who understand.',
+      'Whether you are navigating identity, family relationships, mental health, or workplace discrimination Project Astitva is here. Our team connects you with resources, peer counsellors, and community allies who understand.',
   },
   {
     tag: 'RESOURCES',
     headline: 'Curated support pathways',
     copy:
-      'From legal aid directories to mental wellness tools, we help you find the right next step — not a generic answer, but a human one tailored to where you are right now.',
+      'From legal aid directories to mental wellness tools, we help you find the right next step not a generic answer, but a human one tailored to where you are right now.',
   },
   {
     tag: 'OUTREACH',
     headline: 'Workshops & awareness',
     copy:
-      'We run sensitivity training, awareness workshops, and open dialogue sessions for institutions, workplaces, and schools — creating cultures where every person feels seen.',
+      'We run sensitivity training, awareness workshops, and open dialogue sessions for institutions, workplaces, and schools creating cultures where every person feels seen.',
   },
 ];
 
@@ -265,7 +265,7 @@ export default function Support({ onNavigate }) {
             </blockquote>
             <p className={`${styles.revealElement} ${reveals.commitment ? styles.revealed : ''} ${styles.delay200} ${styles.commitmentBody}`}>
               Project Astitva was built on the belief that LGBTQ+ individuals deserve access to
-              compassionate, culturally sensitive support — not clinical detachment. Every
+              compassionate, culturally sensitive support not clinical detachment. Every
               interaction we facilitate is grounded in respect, confidentiality, and genuine care.
             </p>
           </div>

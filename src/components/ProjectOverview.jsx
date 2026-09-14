@@ -86,7 +86,7 @@ export default function ProjectOverview({ onNavigate }) {
       id="what-we-do"
       ref={sectionRef}
       className={styles.section}
-      aria-label="What We Do — Impact Areas"
+      aria-label="What We Do Impact Areas"
     >
       <div className={styles.container}>
         {/* Section Header */}

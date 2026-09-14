@@ -46,7 +46,7 @@ export default function Hero({ onNavigate }) {
   };
 
   return (
-    <section id="home" className={styles.hero} aria-label="Hero — Project Astitva">
+    <section id="home" className={styles.hero} aria-label="Hero Project Astitva">
       {/* Background illustration with multi-level atmospheric overlays */}
       <div className={styles.bgWrapper} aria-hidden="true">
         <img

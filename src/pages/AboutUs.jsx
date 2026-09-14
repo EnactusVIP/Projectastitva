@@ -444,7 +444,7 @@ export default function AboutUs({ onNavigate, showFooter = false }) {
                 </p>
 
                 <p className={styles.narrativeBody}>
-                  We provide confidential, empathetic, and continuous support —
+                  We provide confidential, empathetic, and continuous support
                   ensuring no one has to navigate their journey in silence or
                   isolation.
                 </p>
@@ -586,7 +586,7 @@ export default function AboutUs({ onNavigate, showFooter = false }) {
                   One-on-one sessions with trained professionals.
                 </p>
                 <p className={styles.editorialBodyText}>
-                  When you need more than an algorithm — real people, real empathy, genuine
+                  When you need more than an algorithm real people, real empathy, genuine
                   presence. Astitva connects you to certified counsellors who understand your
                   journey.
                 </p>
@@ -626,7 +626,7 @@ export default function AboutUs({ onNavigate, showFooter = false }) {
                 </p>
                 <p className={styles.editorialBodyText}>
                   No appointments. No waiting rooms. Our AI is available every hour of every
-                  day — a private space to process, explore, and find calm.
+                  day a private space to process, explore, and find calm.
                 </p>
                 <div className={styles.editorialBadgeGroup}>
                   <Sparkles size={16} className={styles.editorialBadgeIcon} aria-hidden="true" />

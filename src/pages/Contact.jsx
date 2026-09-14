@@ -163,7 +163,7 @@ export default function Contact({ onNavigate }) {
         </section>
 
         {/* ----------------------------------------------------------------
-            3. AI CHAT CTA — SAATHI (Refined Editorial Treatment)
+            3. AI CHAT CTA SAATHI (Refined Editorial Treatment)
             ---------------------------------------------------------------- */}
         <section ref={saathiRef} className={styles.saathiSection} aria-label="AI Companion Saathi">
           <div className={`${styles.revealElement} ${reveals.saathi ? styles.revealed : ''} ${styles.saathiCard}`}>
@@ -179,7 +179,7 @@ export default function Contact({ onNavigate }) {
               </h3>
 
               <p className={styles.saathiDescription}>
-                A private, judgment-free space to reflect, explore your feelings, or find helpful resources whenever you need them — day or night.
+                A private, judgment-free space to reflect, explore your feelings, or find helpful resources whenever you need them day or night.
               </p>
 
               <button

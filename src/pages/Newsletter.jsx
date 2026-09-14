@@ -41,7 +41,7 @@ const CONTENT_ITEMS = [
     topic: 'family',
     topicLabel: 'COMING OUT TO FAMILY',
     readTime: '5 min read',
-    body: `The pressure to disclose your identity to family can feel overwhelming, especially when conversations around dinner tables carry unspoken conditions.\n\nRemember: choosing silence in an unsupportive environment is not shame—it is self-preservation. You owe your safety and emotional well-being first priority. Building an independent support system outside of family often gives you the strength to navigate home relationships with greater confidence.`,
+    body: `The pressure to disclose your identity to family can feel overwhelming, especially when conversations around dinner tables carry unspoken conditions.\n\nRemember: choosing silence in an unsupportive environment is not shame it is self-preservation. You owe your safety and emotional well-being first priority. Building an independent support system outside of family often gives you the strength to navigate home relationships with greater confidence.`,
   },
   {
     id: '03',
@@ -70,7 +70,7 @@ const CONTENT_ITEMS = [
   {
     id: '05',
     number: '05',
-    title: 'Project Astitva Dispatch — Issue 01: Community & Belonging',
+    title: 'Project Astitva Dispatch Issue 01: Community & Belonging',
     synopsis: 'A monthly summary of grassroots conversations, partner milestones, and our ongoing mission to build inclusive spaces.',
     category: 'news',
     categoryLabel: 'NEWS UPDATE',
@@ -89,7 +89,7 @@ const CONTENT_ITEMS = [
     topic: 'friends',
     topicLabel: 'COMING OUT TO FRIENDS',
     readTime: '4 min read',
-    body: `Friends often become our chosen family. When deciding to share your identity with a friend, observe how they speak about other marginalized communities. True friendship does not merely tolerate who you are—it embraces and protects your authenticity.`,
+    body: `Friends often become our chosen family. When deciding to share your identity with a friend, observe how they speak about other marginalized communities. True friendship does not merely tolerate who you are it embraces and protects your authenticity.`,
   },
   {
     id: '07',
