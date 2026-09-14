@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Heart, ShieldCheck, Users } from 'lucide-react';
 import styles from './Support.module.css';
 
-import communityIllustration from '../assets/support-hero.png';
+import communityIllustration from '../assets/support-community-hero.png';
 
 const SUPPORT_PILLARS = [
   {
@@ -156,6 +156,7 @@ export default function Support({ onNavigate }) {
               loading="eager"
             />
             <div className={`${styles.heroOverlay} ${reveals.hero ? styles.heroOverlayLoaded : ''}`} />
+            <div className={styles.heroTopFade} />
             <div className={styles.heroBottomFade} />
           </div>
 
