@@ -285,40 +285,59 @@
 }
 
 :global([data-theme="dark"]) .container {
-  background-color: #171717;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  max-width: 780px;
 }
 
 :global([data-theme="dark"]) .headline {
   color: #ffffff;
 }
 
+:global([data-theme="dark"]) .headlineItalic {
+  color: rgba(255, 255, 255, 0.92);
+}
+
 :global([data-theme="dark"]) .subtext {
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.58);
 }
 
 :global([data-theme="dark"]) .primaryAction {
-  background-color: #facc15;
-  color: #141414;
-  border-color: #facc15;
-  box-shadow: 0 4px 18px rgba(250, 204, 21, 0.25);
+  background-color: rgba(250, 204, 21, 0.08);
+  border: 1px solid rgba(250, 204, 21, 0.38);
+  color: #facc15;
+  box-shadow: none;
 }
 
 :global([data-theme="dark"]) .primaryAction:hover {
-  background-color: #fde047;
+  background-color: #facc15;
   color: #141414;
-  box-shadow: 0 8px 24px rgba(250, 204, 21, 0.35);
+  border-color: #facc15;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(250, 204, 21, 0.24);
 }
 
 :global([data-theme="dark"]) .secondaryAction {
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: rgba(255, 255, 255, 0.85);
   background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.65);
 }
 
 :global([data-theme="dark"]) .secondaryAction:hover {
-  background-color: rgba(255, 255, 255, 0.08);
-  border-color: #ffffff;
   color: #ffffff;
+  background: transparent;
+  border: none;
+  transform: translateX(3px);
 }
+
+:global([data-theme="dark"]) .secondaryArrow {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+:global([data-theme="dark"]) .secondaryAction:hover .secondaryArrow {
+  color: #facc15;
+}
+

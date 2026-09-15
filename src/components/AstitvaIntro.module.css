@@ -312,12 +312,6 @@
   color: rgba(255, 255, 255, 0.25);
 }
 
-:global([data-theme="dark"]) .quoteCard {
-  background-color: #1a1a1a;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
-}
-
 :global([data-theme="dark"]) .englishQuote {
   color: #ffffff;
 }
@@ -326,7 +320,16 @@
   color: rgba(255, 255, 255, 0.58);
 }
 
+:global([data-theme="dark"]) .pillarItem {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+:global([data-theme="dark"]) .pillarDot {
+  color: #facc15;
+}
+
 :global([data-theme="dark"]) .drawingLine {
+
   background: linear-gradient(
     to right,
     transparent 0%,
