@@ -19,18 +19,15 @@
 
   /* Color aliases */
   --accent:      #facc15;
-  --accent-glow: rgba(250, 204, 21, 0.35);
-  --text-hi:     #ffffff;
-  --text-mid:    rgba(255, 255, 255, 0.82);
-  --text-lo:     rgba(255, 255, 255, 0.55);
-  --border-sub:  rgba(255, 255, 255, 0.07);
+  --accent-gold: #B45309;
+  --accent-glow: rgba(244, 196, 0, 0.35);
+  --text-hi:     #242424;
+  --text-mid:    #4A4A4A;
+  --text-lo:     #686868;
+  --border-sub:  #E5E1D8;
 
-  background-color: #141414;
-  background-image:
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(250, 204, 21, 0.035), transparent 70%),
-    radial-gradient(ellipse 60% 40% at 90% 40%, rgba(255, 140, 0, 0.02), transparent 60%),
-    radial-gradient(ellipse 70% 50% at 10% 80%, rgba(117, 7, 135, 0.025), transparent 70%);
-  color: var(--text-primary, #ffffff);
+  background-color: #FAF9F6;
+  color: var(--text-primary, #242424);
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
@@ -91,7 +88,7 @@
   font-weight: 600;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-gold);
 }
 
 .heroEyebrowLine {
@@ -119,7 +116,7 @@
 .titleLineItalic {
   display: block;
   font-style: italic;
-  color: rgba(255, 255, 255, 0.9);
+  color: #555555;
 }
 
 .heroSubtitle {
@@ -176,7 +173,7 @@
   font-weight: 600;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-gold);
   display: inline-block;
   margin-bottom: 14px;
 }
@@ -193,7 +190,7 @@
 
 .accentItalic {
   font-style: italic;
-  color: var(--accent);
+  color: var(--accent-gold);
 }
 
 .statementText {
@@ -210,8 +207,8 @@
   background: linear-gradient(
     to bottom,
     transparent,
-    rgba(250, 204, 21, 0.4) 25%,
-    rgba(255, 255, 255, 0.15) 75%,
+    rgba(244, 196, 0, 0.8) 25%,
+    rgba(221, 216, 206, 0.6) 75%,
     transparent
   );
 }
@@ -227,25 +224,26 @@
   align-items: center;
   gap: 20px;
   padding: 16px 20px;
-  background-color: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background-color: #FFFFFF;
+  border: 1px solid #E5E1D8;
   border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(40, 30, 20, 0.04);
   transition:
     background-color var(--motion-fast) ease,
     border-color var(--motion-fast) ease;
 }
 
 .contactItem:hover {
-  background-color: rgba(255, 255, 255, 0.04);
-  border-color: rgba(250, 204, 21, 0.3);
+  background-color: #FAF9F6;
+  border-color: var(--accent);
 }
 
 .iconCircle {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background-color: rgba(250, 204, 21, 0.08);
-  border: 1px solid rgba(250, 204, 21, 0.2);
+  background-color: #FAF9F6;
+  border: 1px solid #DDD8CE;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -253,7 +251,7 @@
 }
 
 .icon {
-  color: var(--accent);
+  color: var(--accent-gold);
 }
 
 .contactText {
@@ -268,7 +266,7 @@
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
+  color: #8A867E;
 }
 
 .contactLink {
@@ -281,7 +279,7 @@
 }
 
 .contactLink:hover {
-  color: var(--accent);
+  color: var(--accent-gold);
 }
 
 .contactStatic {
@@ -303,9 +301,10 @@
 
 .saathiCard {
   position: relative;
-  border: 1px solid rgba(250, 204, 21, 0.25);
+  border: 1px solid #DDD8CE;
   border-radius: 6px;
-  background: rgba(255, 255, 255, 0.02);
+  background: #FFFFFF;
+  box-shadow: 0 8px 30px rgba(40, 30, 20, 0.05);
   padding: clamp(36px, 5vw, 56px);
   overflow: hidden;
   transition:
@@ -314,8 +313,8 @@
 }
 
 .saathiCard:hover {
-  border-color: rgba(250, 204, 21, 0.45);
-  background: rgba(255, 255, 255, 0.035);
+  border-color: var(--accent);
+  background: #FAF9F6;
 }
 
 .saathiGlow {
@@ -347,12 +346,12 @@
   font-weight: 600;
   letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-gold);
   margin-bottom: 14px;
 }
 
 .saathiBadgeIcon {
-  color: var(--accent);
+  color: var(--accent-gold);
 }
 
 .saathiHeading {
@@ -365,7 +364,7 @@
 }
 
 .accentText {
-  color: var(--accent);
+  color: var(--accent-gold);
   font-style: italic;
 }
 
@@ -391,10 +390,11 @@
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: #242424;
 }
 
 .saathiArrow {
+  color: var(--accent-gold);
   transition: transform var(--motion-fast) ease;
 }
 
@@ -494,14 +494,14 @@
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.7);
+  color: #242424;
 }
 
 .formInput,
 .formTextarea {
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #FFFFFF;
+  border: 1px solid #DDD8CE;
   border-radius: 4px;
   padding: 14px 18px;
   font-family: var(--font-body, 'Inter', sans-serif);
@@ -516,14 +516,14 @@
 
 .formInput::placeholder,
 .formTextarea::placeholder {
-  color: rgba(255, 255, 255, 0.3);
+  color: #99938A;
 }
 
 .formInput:focus,
 .formTextarea:focus {
   border-color: var(--accent);
-  background-color: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 0 14px rgba(250, 204, 21, 0.2);
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(244, 196, 0, 0.18);
 }
 
 .formTextarea {
@@ -545,8 +545,8 @@
   align-items: center;
   gap: 10px;
   padding: 14px 34px;
-  background-color: var(--accent);
-  color: #121212;
+  background-color: #242424;
+  color: #FFFFFF;
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 0.88rem;
   font-weight: 600;
@@ -557,14 +557,16 @@
   transition:
     transform var(--motion-fast) ease,
     background-color var(--motion-fast) ease,
+    color var(--motion-fast) ease,
     box-shadow var(--motion-fast) ease;
-  box-shadow: 0 4px 20px rgba(250, 204, 21, 0.22);
+  box-shadow: 0 4px 18px rgba(40, 30, 20, 0.12);
 }
 
 .submitButton:hover {
-  background-color: #fde047;
+  background-color: #F4C400;
+  color: #242424;
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(250, 204, 21, 0.36);
+  box-shadow: 0 8px 28px rgba(244, 196, 0, 0.35);
 }
 
 .submitButton:disabled {
@@ -575,21 +577,21 @@
 .privacyNote {
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.4);
+  color: #8A867E;
 }
 
 .successBanner {
   display: flex;
   gap: 16px;
   padding: 28px;
-  border: 1px solid rgba(250, 204, 21, 0.4);
-  background: rgba(250, 204, 21, 0.05);
+  border: 1px solid rgba(244, 196, 0, 0.4);
+  background: rgba(244, 196, 0, 0.06);
   border-radius: 6px;
   align-items: flex-start;
 }
 
 .successIcon {
-  color: var(--accent);
+  color: var(--accent-gold);
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -621,7 +623,7 @@
   margin-top: 10px;
   background: none;
   border: none;
-  color: var(--accent);
+  color: var(--accent-gold);
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 0.84rem;
   font-weight: 600;
@@ -653,7 +655,7 @@
   left: 0;
   right: 0;
   height: 90px;
-  background: linear-gradient(to bottom, #141414 0%, transparent 100%);
+  background: linear-gradient(to bottom, #FAF9F6 0%, transparent 100%);
   z-index: 2;
   pointer-events: none;
 }
@@ -664,7 +666,7 @@
   left: 0;
   right: 0;
   height: 90px;
-  background: linear-gradient(to top, #141414 0%, transparent 100%);
+  background: linear-gradient(to top, #FAF9F6 0%, transparent 100%);
   z-index: 2;
   pointer-events: none;
 }
@@ -693,7 +695,7 @@
 .modalBackdrop {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(30, 25, 20, 0.40);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   z-index: 1000;
@@ -704,13 +706,13 @@
 }
 
 .modalCard {
-  background-color: #1a1a1a;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background-color: #FAF9F6;
+  border: 1px solid #E5E1D8;
   border-radius: 8px;
   width: 100%;
   max-width: 560px;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 24px 60px rgba(40, 30, 20, 0.16);
 }
 
 .modalHeader {
@@ -718,7 +720,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 24px 28px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid #E5E1D8;
 }
 
 .modalTitleRow {
@@ -731,15 +733,15 @@
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: rgba(250, 204, 21, 0.12);
-  border: 1px solid rgba(250, 204, 21, 0.3);
+  background: rgba(244, 196, 0, 0.15);
+  border: 1px solid rgba(244, 196, 0, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .accentIcon {
-  color: var(--accent);
+  color: var(--accent-gold);
 }
 
 .modalTitle {
@@ -755,14 +757,14 @@
   font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.18em;
-  color: var(--accent);
+  color: var(--accent-gold);
   text-transform: uppercase;
 }
 
 .modalCloseBtn {
   background: none;
   border: none;
-  color: rgba(255, 255, 255, 0.5);
+  color: #686868;
   cursor: pointer;
   padding: 4px;
   transition: color var(--motion-fast) ease;
@@ -784,7 +786,7 @@
   font-style: italic;
   font-size: 1.15rem;
   line-height: 1.6;
-  color: var(--text-mid);
+  color: #4A4A4A;
   margin: 0;
   border-left: 2px solid var(--accent);
   padding-left: 16px;
@@ -801,13 +803,13 @@
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.18em;
-  color: rgba(255, 255, 255, 0.45);
+  color: #8A867E;
 }
 
 .promptItem {
   text-align: left;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #FFFFFF;
+  border: 1px solid #E5E1D8;
   border-radius: 4px;
   padding: 12px 16px;
   color: var(--text-hi);
@@ -820,21 +822,21 @@
 }
 
 .promptItem:hover {
-  background: rgba(250, 204, 21, 0.06);
-  border-color: rgba(250, 204, 21, 0.3);
-  color: var(--accent);
+  background: #FAF9F6;
+  border-color: var(--accent);
+  color: var(--accent-gold);
 }
 
 .modalFooter {
   padding: 16px 28px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  background-color: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid #E5E1D8;
+  background-color: #F4F1EA;
 }
 
 .modalDisclaimer {
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.4);
+  color: #8A867E;
   line-height: 1.4;
 }
 

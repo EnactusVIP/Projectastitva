@@ -1,12 +1,37 @@
 /* ===== CSS Variables ===== */
 :root {
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #242424;
-  --bg-card: #1f1f1f;
-  --text-primary: #ffffff;
-  --text-secondary: #f5f5f5;
-  --text-muted: #d0d0d0;
-  --text-dim: #999999;
+  /* Foundational Light Palette */
+  --bg-primary: #FAF9F6;
+  --bg-secondary: #F4F1EA;
+  --bg-section-soft: #F8F5EF;
+  --bg-card: #FFFFFF;
+  --bg-footer: #F4F1EA;
+
+  /* Typography */
+  --text-primary: #242424;
+  --text-secondary: #686868;
+  --text-muted: #888888;
+  --text-dim: #A8A29E;
+
+  /* Borders & Hairlines */
+  --border: #E5E1D8;
+  --border-subtle: #F4F1EA;
+  --border-strong: #DDD8CE;
+
+  /* Elevation Shadows */
+  --shadow-card: 0 8px 30px rgba(36, 36, 36, 0.06);
+  --shadow-hover: 0 14px 36px rgba(36, 36, 36, 0.09);
+  --shadow-modal: 0 24px 60px rgba(36, 36, 36, 0.16);
+
+  /* Signature Accents & Contrast */
+  --accent-primary: #F4C400;
+  --accent-warm: #FACC15;
+  --accent-gold: #B45309;
+  --dark-contrast: #272727;
+  --accent-purple: #7D6A9F;
+  --bg-purple: #E9DFF0;
+  --accent-soft: #FFF4B8;
+
   --accent-rainbow: linear-gradient(
     to right,
     #e40303,
@@ -50,14 +75,22 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-primary, #FAF9F6);
+}
+
+body,
+#root,
+.app-layout,
+main {
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background-color: var(--bg-primary, #FAF9F6);
+  min-height: 100vh;
+  line-height: 1.6;
 }
 
 body {
-  font-family: var(--font-body);
-  color: var(--text-primary);
-  background-color: var(--bg-primary);
   overflow-x: hidden;
-  line-height: 1.6;
 }
 
 a {
@@ -97,7 +130,7 @@ button {
 
 /* ===== Selection ===== */
 ::selection {
-  background: rgba(117, 7, 135, 0.3);
+  background: rgba(244, 196, 0, 0.25);
   color: var(--text-primary);
 }
 
@@ -111,17 +144,17 @@ button {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #444;
+  background: #DDD8CE;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #B8B2A6;
 }
 
 /* ===== Focus States ===== */
 :focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline: 2px solid var(--accent-primary);
   outline-offset: 2px;
 }
 

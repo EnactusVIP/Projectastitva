@@ -5,10 +5,10 @@
 
 .footer {
   position: relative;
-  background-color: #121212;
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  background-color: var(--bg-footer, #F4F1EA);
+  border-top: 1px solid var(--border-strong, #DDD8CE);
   width: 100%;
-  color: var(--text-primary, #ffffff);
+  color: var(--text-primary, #242424);
 }
 
 .container {
@@ -44,7 +44,7 @@
   font-family: var(--font-heading, 'Playfair Display', serif);
   font-size: clamp(1.55rem, 2.1vw, 1.95rem);
   font-weight: 400;
-  color: #ffffff;
+  color: var(--text-primary, #242424);
   letter-spacing: -0.015em;
   margin: 0 0 6px;
   line-height: 1.2;
@@ -54,7 +54,7 @@
   font-family: var(--font-heading, 'Playfair Display', serif);
   font-size: 0.94rem;
   font-style: italic;
-  color: rgba(250, 204, 21, 0.92);
+  color: var(--accent-gold, #B45309);
   letter-spacing: 0.08em;
   margin: 0 0 14px;
   line-height: 1.3;
@@ -64,7 +64,7 @@
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 0.86rem;
   line-height: 1.65;
-  color: rgba(255, 255, 255, 0.52);
+  color: var(--text-muted, #686868);
   max-width: 360px;
   margin: 0;
 }
@@ -72,7 +72,7 @@
 /* Subtle Enactus Connection */
 .enactusSubtle {
   padding-top: 18px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid var(--border, #E5E1D8);
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -81,10 +81,10 @@
 .enactusLabel {
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 0.64rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.35);
+  color: var(--text-dim, #8A867E);
 }
 
 .enactusBrandRow {
@@ -97,8 +97,8 @@
   height: 28px;
   width: auto;
   object-fit: contain;
-  opacity: 0.82;
-  filter: brightness(0.92) contrast(1.05);
+  opacity: 0.9;
+  filter: contrast(1.05);
   transition: opacity 200ms ease;
   flex-shrink: 0;
 }
@@ -118,13 +118,13 @@
   font-size: 0.76rem;
   font-weight: 600;
   letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.82);
+  color: var(--text-primary, #242424);
 }
 
 .enactusInstitution {
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.42);
+  color: var(--text-secondary, #4A4A4A);
   font-weight: 400;
 }
 
@@ -134,10 +134,10 @@
 .columnHeading {
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 0.72rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: #facc15;
+  color: var(--accent-gold, #B45309);
   margin: 0 0 20px;
 }
 
@@ -169,7 +169,7 @@
   text-decoration: none;
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 0.88rem;
-  color: rgba(255, 255, 255, 0.62);
+  color: var(--text-primary, #242424);
   padding: 3px 0;
   transition:
     color 200ms ease,
@@ -181,7 +181,7 @@
   display: inline-block;
   width: 0;
   height: 1px;
-  background-color: #facc15;
+  background-color: var(--accent-primary, #F4C400);
   transition: width 220ms ease;
 }
 
@@ -195,11 +195,11 @@
   transition:
     opacity 200ms ease,
     transform 200ms ease;
-  color: #facc15;
+  color: var(--accent-gold, #B45309);
 }
 
 .navLink:hover {
-  color: #facc15;
+  color: var(--accent-gold, #B45309);
   transform: translateX(4px);
 }
 
@@ -213,7 +213,7 @@
 }
 
 .navLink:focus-visible {
-  outline: 1px solid #facc15;
+  outline: 1px solid var(--accent-primary, #F4C400);
   outline-offset: 4px;
   border-radius: 2px;
 }
@@ -259,7 +259,7 @@
 }
 
 .connectLink:hover {
-  background-color: rgba(255, 255, 255, 0.035);
+  background-color: rgba(40, 30, 20, 0.04);
   transform: translateX(3px);
 }
 
@@ -270,8 +270,8 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.035);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: #FFFFFF;
+  border: 1px solid var(--border, #E5E1D8);
   transition:
     border-color 200ms ease,
     color 200ms ease,
@@ -281,7 +281,7 @@
 }
 
 .connectIcon {
-  color: rgba(255, 255, 255, 0.55);
+  color: var(--text-secondary, #4A4A4A);
   transition:
     color 200ms ease,
     transform 200ms ease;
@@ -297,7 +297,7 @@
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 0.8rem;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.82);
+  color: var(--text-primary, #242424);
   transition: color 200ms ease;
 }
 
@@ -305,7 +305,7 @@
 .connectMeta {
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 0.74rem;
-  color: rgba(255, 255, 255, 0.44);
+  color: var(--text-muted, #686868);
   display: flex;
   align-items: center;
   gap: 6px;
@@ -320,32 +320,32 @@
   text-transform: uppercase;
   padding: 1px 6px;
   border-radius: 10px;
-  background-color: rgba(250, 204, 21, 0.08);
-  border: 1px solid rgba(250, 204, 21, 0.24);
-  color: #facc15;
+  background-color: rgba(244, 196, 0, 0.15);
+  border: 1px solid var(--accent-primary, #F4C400);
+  color: var(--accent-gold, #B45309);
 }
 
 /* Hover state for functional connect links */
 .connectLink:hover .connectIconWrapper {
-  border-color: rgba(250, 204, 21, 0.38);
-  background-color: rgba(250, 204, 21, 0.08);
+  border-color: var(--accent-primary, #F4C400);
+  background-color: #FFF4B8;
   transform: translateY(-1px);
 }
 
 .connectLink:hover .connectIcon {
-  color: #facc15;
+  color: var(--accent-gold, #B45309);
 }
 
 .connectLink:hover .connectTitle {
-  color: #ffffff;
+  color: var(--accent-gold, #B45309);
 }
 
 .connectLink:hover .connectValue {
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--text-primary, #242424);
 }
 
 .connectLink:focus-visible {
-  outline: 1px solid #facc15;
+  outline: 1px solid var(--accent-primary, #F4C400);
   outline-offset: 4px;
 }
 
@@ -358,8 +358,8 @@
   background: linear-gradient(
     to right,
     transparent,
-    rgba(255, 255, 255, 0.08) 12%,
-    rgba(255, 255, 255, 0.08) 88%,
+    var(--border-strong, #DDD8CE) 12%,
+    var(--border-strong, #DDD8CE) 88%,
     transparent
   );
   margin-bottom: 24px;
@@ -372,7 +372,7 @@
   gap: 20px;
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.42);
+  color: var(--text-dim, #8A867E);
   flex-wrap: wrap;
 }
 
@@ -386,7 +386,7 @@
   font-family: var(--font-heading, 'Playfair Display', serif);
   font-style: italic;
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.48);
+  color: var(--text-muted, #686868);
   letter-spacing: 0.04em;
 }
 

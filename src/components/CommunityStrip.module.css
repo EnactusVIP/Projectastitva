@@ -11,7 +11,7 @@
   display: block;
   overflow: hidden;
   line-height: 0; /* Remove inline-block gap under image */
-  background-color: var(--bg-primary, #1a1a1a);
+  background-color: var(--bg-footer, #EFECE4);
 
   /* Entrance Animation — initial state */
   opacity: 0;

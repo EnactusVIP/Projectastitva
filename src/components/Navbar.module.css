@@ -20,11 +20,11 @@
 }
 
 .scrolled {
-  background-color: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom-color: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  background-color: rgba(250, 249, 246, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom-color: var(--border, #E5E1D8);
+  box-shadow: 0 4px 20px rgba(40, 30, 20, 0.04);
 }
 
 .container {
@@ -53,11 +53,11 @@
 }
 
 .logoLink:hover {
-  opacity: 0.9;
+  opacity: 0.85;
 }
 
 .logoLink:focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.6);
+  outline: 2px solid var(--accent-primary, #F4C400);
   outline-offset: 4px;
 }
 
@@ -87,16 +87,15 @@
 }
 
 .navLink {
-  color: var(--text-primary, #ffffff);
+  color: var(--text-primary, #242424);
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 0.885rem;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 0.02em;
   text-decoration: none;
   padding: 8px 2px;
   position: relative;
-  opacity: 0.92;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  opacity: 0.82;
   transition: opacity var(--transition-fast, 200ms ease),
               color var(--transition-fast, 200ms ease);
 }
@@ -109,7 +108,7 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: var(--text-primary, #ffffff);
+  background-color: var(--accent-primary, #F4C400);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform var(--transition, 300ms ease);
@@ -118,6 +117,7 @@
 
 .navLink:hover {
   opacity: 1;
+  color: var(--text-primary, #242424);
 }
 
 .navLink:hover::after {
@@ -125,7 +125,7 @@
 }
 
 .navLink:focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.6);
+  outline: 2px solid var(--accent-primary, #F4C400);
   outline-offset: 4px;
   border-radius: 2px;
   opacity: 1;
@@ -135,22 +135,23 @@
 .activeLink {
   opacity: 1;
   font-weight: 600;
+  color: var(--text-primary, #242424);
 }
 
 .activeLink::after {
   transform: scaleX(1);
+  background-color: var(--accent-primary, #F4C400);
 }
 
-/* Yellow accent for About Us active state */
+/* Yellow accent indicator for active pages */
 .aboutActiveLink {
-  color: #facc15;
+  color: var(--text-primary, #242424);
   opacity: 1;
   font-weight: 600;
-  text-shadow: 0 0 16px rgba(250, 204, 21, 0.4);
 }
 
 .aboutActiveLink::after {
-  background-color: #facc15;
+  background-color: var(--accent-primary, #F4C400);
   transform: scaleX(1);
 }
 
@@ -168,7 +169,7 @@
   padding: 0;
   border: none;
   background: transparent;
-  color: var(--text-primary, #ffffff);
+  color: var(--text-primary, #242424);
   cursor: pointer;
   border-radius: 8px;
   transition: background-color var(--transition-fast, 200ms ease),
@@ -177,11 +178,11 @@
 }
 
 .hamburger:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(40, 30, 20, 0.06);
 }
 
 .hamburger:focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.6);
+  outline: 2px solid var(--accent-primary, #F4C400);
   outline-offset: 2px;
 }
 
@@ -199,9 +200,10 @@
   width: 100%;
   height: 100vh;
   height: 100dvh;
-  background-color: rgba(18, 18, 18, 0.97);
+  background-color: rgba(250, 249, 246, 0.98);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  border-left: 1px solid var(--border, #E5E1D8);
   z-index: 101;
   display: flex;
   flex-direction: column;
@@ -239,7 +241,7 @@
 
 .mobileNavLink {
   display: inline-block;
-  color: var(--text-primary, #ffffff);
+  color: var(--text-primary, #242424);
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 1.35rem;
   font-weight: 500;
@@ -259,7 +261,7 @@
   left: 50%;
   width: 0;
   height: 2px;
-  background-color: var(--text-primary, #ffffff);
+  background-color: var(--accent-primary, #F4C400);
   transform: translateX(-50%);
   transition: width var(--transition, 300ms ease);
   border-radius: 2px;
@@ -274,7 +276,7 @@
 }
 
 .mobileNavLink:focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.6);
+  outline: 2px solid var(--accent-primary, #F4C400);
   outline-offset: 4px;
   border-radius: 4px;
   opacity: 1;
@@ -287,16 +289,17 @@
 
 .mobileActiveLink::after {
   width: 60%;
+  background-color: var(--accent-primary, #F4C400);
 }
 
 .mobileAboutActiveLink {
-  color: #facc15;
+  color: var(--text-primary, #242424);
   opacity: 1;
   font-weight: 600;
 }
 
 .mobileAboutActiveLink::after {
-  background-color: #facc15;
+  background-color: var(--accent-primary, #F4C400);
   width: 60%;
 }
 

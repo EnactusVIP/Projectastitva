@@ -4,11 +4,11 @@
    ========================================================================== */
 
 .section {
-  background-color: #141414;
+  background-color: var(--bg-primary, #FAF9F6);
   padding: clamp(80px, 11vh, 120px) var(--page-pad, clamp(24px, 5vw, 64px)) clamp(72px, 10vh, 110px);
   position: relative;
   overflow: hidden;
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  border-top: 1px solid var(--border, #E5E1D8);
 }
 
 .ambientGlow {
@@ -20,7 +20,7 @@
   height: min(300px, 50vw);
   background: radial-gradient(
     circle,
-    rgba(250, 204, 21, 0.035) 0%,
+    rgba(244, 196, 0, 0.04) 0%,
     transparent 70%
   );
   filter: blur(50px);
@@ -64,24 +64,24 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background-color: #facc15;
-  box-shadow: 0 0 8px rgba(250, 204, 21, 0.7);
+  background-color: var(--accent-gold, #B45309);
+  box-shadow: 0 0 8px rgba(244, 196, 0, 0.5);
   flex-shrink: 0;
 }
 
 .eyebrow {
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: clamp(0.72rem, 0.85vw, 0.78rem);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: #facc15;
+  color: var(--accent-gold, #B45309);
 }
 
 .eyebrowLine {
   width: 32px;
   height: 1px;
-  background: linear-gradient(to right, rgba(250, 204, 21, 0.6), transparent);
+  background: linear-gradient(to right, rgba(180, 83, 9, 0.4), transparent);
 }
 
 /* --------------------------------------------------------------------------
@@ -91,7 +91,7 @@
   font-family: var(--font-heading, 'Playfair Display', serif);
   font-size: clamp(2.4rem, 4.4vw, 3.6rem);
   font-weight: 400;
-  color: #ffffff;
+  color: var(--text-primary, #242424);
   line-height: 1.16;
   letter-spacing: -0.02em;
   margin: 0 0 16px;
@@ -99,14 +99,14 @@
 
 .headlineItalic {
   font-style: italic;
-  color: rgba(255, 255, 255, 0.92);
+  color: var(--text-primary, #242424);
 }
 
 .subtext {
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: clamp(0.95rem, 1.2vw, 1.05rem);
   line-height: 1.7;
-  color: rgba(255, 255, 255, 0.58);
+  color: var(--text-muted, #686868);
   max-width: 600px;
   margin: 0 0 clamp(36px, 5vh, 48px);
 }
@@ -128,9 +128,9 @@
   gap: 10px;
   padding: 13px 30px;
   border-radius: 40px;
-  background-color: rgba(250, 204, 21, 0.08);
-  border: 1px solid rgba(250, 204, 21, 0.38);
-  color: #facc15;
+  background-color: #242424;
+  border: 1px solid #242424;
+  color: #FFFFFF;
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 0.78rem;
   font-weight: 600;
@@ -144,14 +144,15 @@
     transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1),
     box-shadow 260ms ease;
   outline: none;
+  box-shadow: 0 4px 14px rgba(36, 36, 36, 0.16);
 }
 
 .primaryAction:hover {
-  background-color: #facc15;
-  color: #141414;
-  border-color: #facc15;
+  background-color: var(--accent-primary, #F4C400);
+  color: #242424;
+  border-color: var(--accent-primary, #F4C400);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(250, 204, 21, 0.24);
+  box-shadow: 0 8px 24px rgba(244, 196, 0, 0.32);
 }
 
 .actionArrow {
@@ -163,7 +164,7 @@
 }
 
 .primaryAction:focus-visible {
-  outline: 2px solid #facc15;
+  outline: 2px solid var(--accent-primary, #F4C400);
   outline-offset: 4px;
 }
 
@@ -171,14 +172,17 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 13px 18px;
+  padding: 13px 24px;
   background: transparent;
-  border: none;
-  color: rgba(255, 255, 255, 0.65);
+  border: 1px solid var(--border-strong, #DDD8CE);
+  border-radius: 40px;
+  color: var(--text-primary, #242424);
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 0.86rem;
   cursor: pointer;
   transition:
+    background-color 240ms ease,
+    border-color 240ms ease,
     color 240ms ease,
     transform 240ms ease;
   outline: none;
@@ -186,23 +190,24 @@
 
 .secondaryArrow {
   transition: transform 240ms ease;
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--accent-gold, #B45309);
 }
 
 .secondaryAction:hover {
-  color: #ffffff;
-  transform: translateX(3px);
+  background-color: var(--bg-secondary, #F4F1EA);
+  border-color: var(--border-strong, #DDD8CE);
+  color: var(--text-primary, #242424);
+  transform: translateX(2px);
 }
 
 .secondaryAction:hover .secondaryArrow {
-  color: #facc15;
   transform: translateX(3px);
 }
 
 .secondaryAction:focus-visible {
-  outline: 1px solid rgba(255, 255, 255, 0.4);
+  outline: 1px solid var(--accent-primary, #F4C400);
   outline-offset: 4px;
-  border-radius: 4px;
+  border-radius: 40px;
 }
 
 /* --------------------------------------------------------------------------

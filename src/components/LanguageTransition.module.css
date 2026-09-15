@@ -10,7 +10,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #121214;
+  background-color: var(--bg-primary, #FAF9F6);
   overflow: hidden;
   user-select: none;
   opacity: 1;
@@ -40,8 +40,8 @@
   height: min(400px, 70vh);
   background: radial-gradient(
     ellipse 60% 50% at 50% 50%,
-    rgba(250, 204, 21, 0.055) 0%,
-    rgba(212, 175, 55, 0.025) 45%,
+    rgba(244, 196, 0, 0.08) 0%,
+    rgba(212, 175, 55, 0.03) 45%,
     transparent 75%
   );
   pointer-events: none;
@@ -87,7 +87,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: clamp(2.6rem, 6.2vw, 4.4rem);
-  color: #fbfbfb;
+  color: var(--text-primary, #242424);
   line-height: 1.15;
   text-align: center;
   white-space: nowrap;
@@ -213,7 +213,7 @@
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(250, 204, 21, 0.75);
+  color: var(--accent-gold, #B45309);
   transition: opacity 220ms ease, transform 220ms ease;
 }
 

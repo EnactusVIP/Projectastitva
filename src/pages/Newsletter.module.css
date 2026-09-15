@@ -18,18 +18,15 @@
 
   /* Color tokens */
   --accent:      #facc15;
-  --accent-glow: rgba(250, 204, 21, 0.35);
-  --text-hi:     #ffffff;
-  --text-mid:    rgba(255, 255, 255, 0.82);
-  --text-lo:     rgba(255, 255, 255, 0.55);
-  --border-sub:  rgba(255, 255, 255, 0.08);
+  --accent-gold: #B45309;
+  --accent-glow: rgba(244, 196, 0, 0.35);
+  --text-hi:     #242424;
+  --text-mid:    #4A4A4A;
+  --text-lo:     #686868;
+  --border-sub:  #E5E1D8;
 
-  background-color: #141414;
-  background-image:
-    radial-gradient(ellipse 80% 50% at 50% -15%, rgba(250, 204, 21, 0.035), transparent 70%),
-    radial-gradient(ellipse 60% 40% at 88% 45%, rgba(255, 140, 0, 0.02), transparent 60%),
-    radial-gradient(ellipse 70% 50% at 12% 80%, rgba(117, 7, 135, 0.025), transparent 70%);
-  color: var(--text-primary, #ffffff);
+  background-color: #FAF9F6;
+  color: var(--text-primary, #242424);
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
@@ -90,7 +87,7 @@
   font-weight: 600;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-gold);
 }
 
 .eyebrowLine {
@@ -118,7 +115,7 @@
 .titleLineItalic {
   display: block;
   font-style: italic;
-  color: rgba(255, 255, 255, 0.9);
+  color: #555555;
 }
 
 .heroSubtitle {
@@ -141,9 +138,10 @@
 }
 
 .signupCard {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #FFFFFF;
+  border: 1px solid #E5E1D8;
   border-radius: 6px;
+  box-shadow: 0 8px 30px rgba(40, 30, 20, 0.05);
   padding: clamp(32px, 4.5vw, 52px);
   display: grid;
   grid-template-columns: 1fr 1.3fr;
@@ -174,7 +172,7 @@
   font-weight: 600;
   letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-gold);
   margin-bottom: 10px;
 }
 
@@ -189,7 +187,7 @@
 
 .accentItalic {
   font-style: italic;
-  color: var(--accent);
+  color: var(--accent-gold);
 }
 
 .signupFormCol {
@@ -205,8 +203,8 @@
 .inputWrapper {
   display: flex;
   align-items: stretch;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #FFFFFF;
+  border: 1px solid #DDD8CE;
   border-radius: 40px;
   padding: 4px 6px 4px 20px;
   transition:
@@ -216,7 +214,7 @@
 
 .inputWrapper:focus-within {
   border-color: var(--accent);
-  box-shadow: 0 0 16px rgba(250, 204, 21, 0.2);
+  box-shadow: 0 0 0 3px rgba(244, 196, 0, 0.18);
 }
 
 .emailInput {
@@ -231,7 +229,7 @@
 }
 
 .emailInput::placeholder {
-  color: rgba(255, 255, 255, 0.35);
+  color: #99938A;
 }
 
 .subscribeButton {
@@ -240,8 +238,8 @@
   gap: 8px;
   padding: 11px 26px;
   border-radius: 30px;
-  background-color: var(--accent);
-  color: #121212;
+  background-color: #242424;
+  color: #FFFFFF;
   border: none;
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 0.84rem;
@@ -250,19 +248,21 @@
   cursor: pointer;
   transition:
     background-color var(--motion-fast) ease,
+    color var(--motion-fast) ease,
     transform var(--motion-fast) ease;
   flex-shrink: 0;
 }
 
 .subscribeButton:hover {
-  background-color: #fde047;
+  background-color: #F4C400;
+  color: #242424;
   transform: translateX(2px);
 }
 
 .formNote {
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.4);
+  color: #8A867E;
   line-height: 1.5;
   padding-left: 6px;
 }
@@ -272,8 +272,8 @@
   align-items: center;
   gap: 16px;
   padding: 12px 18px;
-  background: rgba(250, 204, 21, 0.05);
-  border: 1px solid rgba(250, 204, 21, 0.3);
+  background: rgba(244, 196, 0, 0.08);
+  border: 1px solid rgba(244, 196, 0, 0.4);
   border-radius: 6px;
 }
 
@@ -281,11 +281,11 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background-color: rgba(250, 204, 21, 0.15);
+  background-color: rgba(244, 196, 0, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--accent);
+  color: var(--accent-gold);
   flex-shrink: 0;
 }
 
@@ -344,7 +344,7 @@
   display: flex;
   align-items: center;
   gap: clamp(24px, 4vw, 44px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid #E5E1D8;
 }
 
 .categoryTab {
@@ -356,7 +356,7 @@
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
+  color: #8A867E;
   cursor: pointer;
   position: relative;
   transition: color var(--motion-fast) ease;
@@ -367,7 +367,7 @@
 }
 
 .categoryTabActive {
-  color: var(--accent);
+  color: var(--accent-gold);
 }
 
 .activeUnderline {
@@ -377,7 +377,7 @@
   right: 0;
   height: 2px;
   background-color: var(--accent);
-  box-shadow: 0 0 10px rgba(250, 204, 21, 0.4);
+  box-shadow: 0 0 10px rgba(244, 196, 0, 0.4);
 }
 
 /* Topic Filters (Horizontal scroll on mobile without overflow) */
@@ -401,11 +401,11 @@
 }
 
 .topicPill {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: #FFFFFF;
+  border: 1px solid #E5E1D8;
   border-radius: 20px;
   padding: 6px 15px;
-  color: rgba(255, 255, 255, 0.55);
+  color: #686868;
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 0.72rem;
   font-weight: 500;
@@ -420,15 +420,15 @@
 }
 
 .topicPill:hover {
-  border-color: rgba(255, 255, 255, 0.25);
+  border-color: var(--accent);
   color: var(--text-hi);
-  background: rgba(255, 255, 255, 0.05);
+  background: #FAF9F6;
 }
 
 .topicPillActive {
   border-color: var(--accent);
-  background: rgba(250, 204, 21, 0.08);
-  color: var(--accent);
+  background: #FAF9F6;
+  color: var(--accent-gold);
   font-weight: 600;
 }
 
@@ -443,7 +443,7 @@
   font-weight: 600;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-gold);
   display: block;
   margin-bottom: 8px;
 }
@@ -510,12 +510,12 @@
   font-style: italic;
   font-size: clamp(1.6rem, 2.5vw, 2.2rem);
   line-height: 1;
-  color: rgba(255, 255, 255, 0.2);
+  color: #DDD8CE;
   transition: color var(--motion-fast) ease;
 }
 
 .editorialRow:hover .rowNumber {
-  color: var(--accent);
+  color: var(--accent-gold);
 }
 
 .rowBodyCol {
@@ -537,14 +537,14 @@
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-gold);
 }
 
 .metaDot {
   width: 3px;
   height: 3px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: #DDD8CE;
 }
 
 .rowTopic {
@@ -553,13 +553,13 @@
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
+  color: #8A867E;
 }
 
 .rowReadTime {
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 0.68rem;
-  color: rgba(255, 255, 255, 0.35);
+  color: #8A867E;
 }
 
 .rowTitle {
@@ -573,8 +573,7 @@
 }
 
 .editorialRow:hover .rowTitle {
-  color: #ffffff;
-  text-shadow: 0 0 18px rgba(255, 255, 255, 0.2);
+  color: var(--text-primary, #242424);
 }
 
 .rowSynopsis {
@@ -590,7 +589,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: rgba(255, 255, 255, 0.4);
+  color: #8A867E;
   transition:
     color var(--motion-fast) ease,
     transform var(--motion-fast) ease;
@@ -610,7 +609,7 @@
 }
 
 .rowArrow {
-  color: var(--accent);
+  color: var(--accent-gold);
   transition: transform var(--motion-fast) ease;
 }
 
@@ -629,12 +628,12 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: rgba(255, 255, 255, 0.06);
-  transition: background-color var(--motion-fast) ease;
+  background: #E5E1D8;
+  transition: background var(--motion-fast) ease;
 }
 
 .editorialRow:hover .rowExpandDivider {
-  background: linear-gradient(to right, var(--accent) 0%, rgba(250, 204, 21, 0.3) 50%, rgba(255, 255, 255, 0.06) 100%);
+  background: linear-gradient(to right, var(--accent) 0%, rgba(244, 196, 0, 0.3) 50%, #E5E1D8 100%);
 }
 
 /* Empty State */
@@ -644,8 +643,8 @@
   align-items: center;
   text-align: center;
   padding: clamp(50px, 8vh, 80px) 20px;
-  background: rgba(255, 255, 255, 0.015);
-  border: 1px dashed rgba(255, 255, 255, 0.1);
+  background: #FFFFFF;
+  border: 1px dashed #DDD8CE;
   border-radius: 6px;
   margin: 20px 0;
 }
@@ -656,7 +655,7 @@
   font-weight: 600;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-gold);
   margin-bottom: 8px;
 }
 
@@ -670,8 +669,8 @@
 
 .clearFilterButton {
   background: none;
-  border: 1px solid rgba(250, 204, 21, 0.4);
-  color: var(--accent);
+  border: 1px solid #DDD8CE;
+  color: #242424;
   border-radius: 30px;
   padding: 8px 20px;
   font-family: var(--font-body, 'Inter', sans-serif);
@@ -684,8 +683,8 @@
 }
 
 .clearFilterButton:hover {
-  background: var(--accent);
-  color: #121212;
+  background: #242424;
+  color: #FFFFFF;
 }
 
 /* --------------------------------------------------------------------------
@@ -694,7 +693,7 @@
 .modalBackdrop {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.82);
+  background-color: rgba(30, 25, 20, 0.40);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   z-index: 1000;
@@ -705,14 +704,14 @@
 }
 
 .modalCard {
-  background-color: #181818;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background-color: #FAF9F6;
+  border: 1px solid #E5E1D8;
   border-radius: 8px;
   width: 100%;
   max-width: 680px;
   max-height: 85vh;
   overflow-y: auto;
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 24px 60px rgba(40, 30, 20, 0.16);
 }
 
 .modalHeader {
@@ -720,7 +719,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 24px 30px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid #E5E1D8;
 }
 
 .modalMetaRow {
@@ -735,7 +734,7 @@
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.16em;
-  color: var(--accent);
+  color: var(--accent-gold);
   text-transform: uppercase;
 }
 
@@ -744,20 +743,20 @@
   font-size: 0.7rem;
   font-weight: 500;
   letter-spacing: 0.12em;
-  color: rgba(255, 255, 255, 0.5);
+  color: #8A867E;
   text-transform: uppercase;
 }
 
 .modalReadTime {
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.4);
+  color: #8A867E;
 }
 
 .modalCloseButton {
   background: none;
   border: none;
-  color: rgba(255, 255, 255, 0.5);
+  color: #686868;
   cursor: pointer;
   padding: 4px;
   transition: color var(--motion-fast) ease;
@@ -797,14 +796,14 @@
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 1.02rem;
   line-height: 1.85;
-  color: rgba(255, 255, 255, 0.78);
+  color: #4A4A4A;
   margin: 0;
 }
 
 .modalFooter {
   padding: 20px 30px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  background-color: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid #E5E1D8;
+  background-color: #F4F1EA;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -815,13 +814,13 @@
 .modalSignature {
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.45);
+  color: #8A867E;
 }
 
 .modalReturnBtn {
   background: none;
   border: none;
-  color: var(--accent);
+  color: var(--accent-gold);
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 0.82rem;
   font-weight: 600;
