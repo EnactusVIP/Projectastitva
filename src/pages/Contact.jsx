@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { Mail, Phone, MapPin, ArrowRight, Sparkles, CheckCircle2, X } from 'lucide-react';
+import { Mail, Phone, MapPin, ArrowRight, Sparkles, CheckCircle2 } from 'lucide-react';
+import SaathiChatModal from '../components/SaathiChatModal';
 import styles from './Contact.module.css';
 
 export default function Contact({ onNavigate }) {
@@ -308,80 +309,12 @@ export default function Contact({ onNavigate }) {
       </main>
 
       {/* ----------------------------------------------------------------
-          SAATHI MODAL (Preview companion dialogue)
+          SAATHI AI COMPANION MODAL
           ---------------------------------------------------------------- */}
-      {showSaathiModal && (
-        <div
-          className={styles.modalBackdrop}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="saathi-modal-title"
-          onClick={() => setShowSaathiModal(false)}
-        >
-          <div
-            className={styles.modalCard}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className={styles.modalHeader}>
-              <div className={styles.modalTitleRow}>
-                <div className={styles.saathiAvatarCircle}>
-                  <Sparkles size={18} className={styles.accentIcon} />
-                </div>
-                <div>
-                  <h3 id="saathi-modal-title" className={styles.modalTitle}>
-                    Saathi: AI Companion
-                  </h3>
-                  <span className={styles.modalBadge}>CONFIDENTIAL COMPANION</span>
-                </div>
-              </div>
-              <button
-                type="button"
-                className={styles.modalCloseBtn}
-                onClick={() => setShowSaathiModal(false)}
-                aria-label="Close Saathi modal"
-              >
-                <X size={20} />
-              </button>
-            </div>
-
-            <div className={styles.modalBody}>
-              <p className={styles.modalWelcome}>
-                &ldquo;Namaste. I am Saathi. I am here to listen without judgment, offer helpful resources, and walk beside you in your journey.&rdquo;
-              </p>
-              <div className={styles.starterPromptList}>
-                <span className={styles.promptHeader}>STARTER CONVERSATIONS:</span>
-                <button
-                  type="button"
-                  className={styles.promptItem}
-                  onClick={() => alert('Saathi Companion is currently in active preview training. For live support, please write to project.astitv@gmail.com')}
-                >
-                  &ldquo;I need someone to talk to about my feelings.&rdquo;
-                </button>
-                <button
-                  type="button"
-                  className={styles.promptItem}
-                  onClick={() => alert('Saathi Companion is currently in active preview training. For live support, please write to project.astitv@gmail.com')}
-                >
-                  &ldquo;Can you connect me to LGBTQ+ friendly resources?&rdquo;
-                </button>
-                <button
-                  type="button"
-                  className={styles.promptItem}
-                  onClick={() => alert('Saathi Companion is currently in active preview training. For live support, please write to project.astitv@gmail.com')}
-                >
-                  &ldquo;How can I access mental wellness support?&rdquo;
-                </button>
-              </div>
-            </div>
-
-            <div className={styles.modalFooter}>
-              <span className={styles.modalDisclaimer}>
-                Note: Saathi provides empathetic conversation and guidance, not emergency clinical care.
-              </span>
-            </div>
-          </div>
-        </div>
-      )}
+      <SaathiChatModal
+        isOpen={showSaathiModal}
+        onClose={() => setShowSaathiModal(false)}
+      />
     </div>
   );
 }
