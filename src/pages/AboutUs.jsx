@@ -350,49 +350,51 @@ export default function AboutUs({ onNavigate, showFooter = false }) {
           className={styles.impactSection}
           aria-labelledby="sdg-impact-heading"
         >
-          <div className={styles.impactHeader}>
-            <span
-              className={`${styles.revealElement} ${
-                reveals.impact ? styles.revealed : ''
-              } ${styles.impactEyebrow}`}
-            >
-              OUR IMPACT
-            </span>
-            <h2
-              id="sdg-impact-heading"
-              className={`${styles.revealElement} ${
-                reveals.impact ? styles.revealed : ''
-              } ${styles.delay100} ${styles.impactTitle}`}
-            >
-              Aligned with the Sustainable Development Goals
-            </h2>
-            <div
-              className={`${styles.revealElement} ${
-                reveals.impact ? styles.revealed : ''
-              } ${styles.delay200} ${styles.impactSubtitleRow}`}
-            >
-              <p className={styles.impactDescription}>
-                Project Astitva directly champions global targets for health,
-                inclusive learning, reduced inequality, and institutional justice.
-              </p>
+          <div className={styles.impactInner}>
+            <div className={styles.impactHeader}>
+              <span
+                className={`${styles.revealElement} ${
+                  reveals.impact ? styles.revealed : ''
+                } ${styles.impactEyebrow}`}
+              >
+                OUR IMPACT
+              </span>
+              <h2
+                id="sdg-impact-heading"
+                className={`${styles.revealElement} ${
+                  reveals.impact ? styles.revealed : ''
+                } ${styles.delay100} ${styles.impactTitle}`}
+              >
+                Aligned with the Sustainable Development Goals
+              </h2>
+              <div
+                className={`${styles.revealElement} ${
+                  reveals.impact ? styles.revealed : ''
+                } ${styles.delay200} ${styles.impactSubtitleRow}`}
+              >
+                <p className={styles.impactDescription}>
+                  Project Astitva directly champions global targets for health,
+                  inclusive learning, reduced inequality, and institutional justice.
+                </p>
+              </div>
             </div>
-          </div>
 
-          <div className={styles.sdgGrid}>
-            {SDG_DATA.map((sdg, index) => (
-              <SDGCard
-                key={sdg.number}
-                number={sdg.number}
-                title={sdg.title}
-                description={sdg.description}
-                image={sdg.image}
-                accentColor={sdg.accentColor}
-                isFlipped={!!flippedCards[sdg.number]}
-                onFlip={() => handleCardFlip(sdg.number)}
-                isVisible={reveals.impact}
-                delay={index * 100}
-              />
-            ))}
+            <div className={styles.sdgGrid}>
+              {SDG_DATA.map((sdg, index) => (
+                <SDGCard
+                  key={sdg.number}
+                  number={sdg.number}
+                  title={sdg.title}
+                  description={sdg.description}
+                  image={sdg.image}
+                  accentColor={sdg.accentColor}
+                  isFlipped={!!flippedCards[sdg.number]}
+                  onFlip={() => handleCardFlip(sdg.number)}
+                  isVisible={reveals.impact}
+                  delay={index * 100}
+                />
+              ))}
+            </div>
           </div>
         </section>
 
@@ -402,7 +404,7 @@ export default function AboutUs({ onNavigate, showFooter = false }) {
         <section
           id="chapter-idea"
           ref={ideaRef}
-          className={styles.chapterScene}
+          className={`${styles.chapterScene} ${styles.sceneIdea}`}
           aria-labelledby="chapter-idea-heading"
         >
           <div className={styles.chapterContent}>
@@ -459,7 +461,7 @@ export default function AboutUs({ onNavigate, showFooter = false }) {
         <section
           id="chapter-why"
           ref={whyRef}
-          className={styles.chapterScene}
+          className={`${styles.chapterScene} ${styles.sceneWhy}`}
           aria-labelledby="chapter-why-heading"
         >
           <div className={styles.chapterContent}>
@@ -534,7 +536,7 @@ export default function AboutUs({ onNavigate, showFooter = false }) {
         <section
           id="chapter-human"
           ref={humanRef}
-          className={styles.chapterScene}
+          className={`${styles.chapterScene} ${styles.sceneHuman}`}
           aria-labelledby="chapter-human-heading"
         >
           <div className={styles.chapterContent}>
@@ -601,7 +603,7 @@ export default function AboutUs({ onNavigate, showFooter = false }) {
         <section
           id="chapter-ai"
           ref={aiRef}
-          className={styles.chapterScene}
+          className={`${styles.chapterScene} ${styles.sceneAi}`}
           aria-labelledby="chapter-ai-heading"
         >
           <div className={styles.chapterContent}>
@@ -666,7 +668,7 @@ export default function AboutUs({ onNavigate, showFooter = false }) {
         <section
           id="chapter-belief"
           ref={beliefRef}
-          className={styles.chapterScene}
+          className={`${styles.chapterScene} ${styles.sceneBelief}`}
           aria-labelledby="chapter-belief-heading"
         >
           <div className={styles.chapterContent}>
@@ -713,34 +715,36 @@ export default function AboutUs({ onNavigate, showFooter = false }) {
           className={styles.closingScene}
           aria-label="Closing Call to Action"
         >
-          <div
-            className={`${styles.revealElement} ${
-              reveals.closing ? styles.revealed : ''
-            }`}
-          >
-            <span className={styles.closingTagline}>EXIST AS YOU ARE</span>
+          <div className={styles.closingInner}>
+            <div
+              className={`${styles.revealElement} ${
+                reveals.closing ? styles.revealed : ''
+              }`}
+            >
+              <span className={styles.closingTagline}>EXIST AS YOU ARE</span>
 
-            <p className={styles.closingHeadline}>
-              Take the first step in a safe space where your story matters.
-            </p>
+              <p className={styles.closingHeadline}>
+                Take the first step in a safe space where your story matters.
+              </p>
 
-            <div className={styles.closingButtonRow}>
-              <button
-                type="button"
-                className={styles.primaryPill}
-                onClick={handleSupportClick}
-              >
-                <span>Explore Support</span>
-                <ArrowRight size={17} aria-hidden="true" />
-              </button>
+              <div className={styles.closingButtonRow}>
+                <button
+                  type="button"
+                  className={styles.primaryPill}
+                  onClick={handleSupportClick}
+                >
+                  <span>Explore Support</span>
+                  <ArrowRight size={17} aria-hidden="true" />
+                </button>
 
-              <button
-                type="button"
-                className={styles.secondaryPill}
-                onClick={handleHomeClick}
-              >
-                <span>Return to Home</span>
-              </button>
+                <button
+                  type="button"
+                  className={styles.secondaryPill}
+                  onClick={handleHomeClick}
+                >
+                  <span>Return to Home</span>
+                </button>
+              </div>
             </div>
           </div>
         </section>

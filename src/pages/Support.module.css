@@ -314,31 +314,19 @@
    -------------------------------------------------------------------------- */
 .pillarsSection {
   position: relative;
-  max-width: var(--page-max, 1200px);
-  margin: 0 auto;
-  padding: clamp(56px, 7vh, 84px) var(--page-pad) clamp(44px, 5.5vh, 64px);
+  width: 100%;
+  padding: clamp(56px, 7vh, 84px) 0 clamp(44px, 5.5vh, 64px);
+  background-color: var(--bg-secondary, #F4F1EA);
+  border-top: 1px solid var(--border-sub, #E3DED4);
   scroll-margin-top: calc(var(--navbar-height, 80px) + 20px);
-}
-
-.pillarsSection::before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: var(--page-pad);
-  right: var(--page-pad);
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--border-sub) 20%,
-    var(--border-sub) 80%,
-    transparent
-  );
 }
 
 .pillarsInner {
   width: 100%;
+  max-width: var(--page-max, 1200px);
+  margin: 0 auto;
+  padding: 0 var(--page-pad);
+  box-sizing: border-box;
 }
 
 .sectionHeader {
@@ -701,31 +689,19 @@
    -------------------------------------------------------------------------- */
 .howSection {
   position: relative;
-  max-width: var(--page-max, 1200px);
-  margin: 0 auto;
-  padding: clamp(48px, 6vh, 68px) var(--page-pad) clamp(32px, 4vh, 44px);
+  width: 100%;
+  padding: clamp(56px, 7vh, 80px) 0 clamp(40px, 5vh, 56px);
+  background-color: var(--bg-primary, #FAF9F6);
+  border-top: 1px solid var(--border-sub, #E3DED4);
   scroll-margin-top: calc(var(--navbar-height, 80px) + 20px);
-}
-
-.howSection::before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: var(--page-pad);
-  right: var(--page-pad);
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--border-sub) 20%,
-    var(--border-sub) 80%,
-    transparent
-  );
 }
 
 .howInner {
   width: 100%;
+  max-width: var(--page-max, 1200px);
+  margin: 0 auto;
+  padding: 0 var(--page-pad);
+  box-sizing: border-box;
 }
 
 .howHeader {
@@ -893,9 +869,10 @@
    -------------------------------------------------------------------------- */
 .commitmentSection {
   position: relative;
-  max-width: var(--page-max, 1200px);
-  margin: 0 auto;
-  padding: clamp(32px, 4.5vh, 48px) var(--page-pad) clamp(44px, 5.5vh, 60px);
+  width: 100%;
+  padding: clamp(48px, 6.5vh, 72px) 0;
+  background-color: var(--bg-section-soft, #F8F5EF);
+  border-top: 1px solid var(--border-sub, #E3DED4);
   text-align: center;
   scroll-margin-top: calc(var(--navbar-height, 80px) + 20px);
 }
@@ -906,6 +883,8 @@
   align-items: center;
   max-width: 840px;
   margin: 0 auto;
+  padding: 0 var(--page-pad);
+  box-sizing: border-box;
 }
 
 .rainbowFilament {
@@ -952,33 +931,22 @@
    -------------------------------------------------------------------------- */
 .reachSection {
   position: relative;
-  max-width: var(--page-max, 1200px);
-  margin: 0 auto;
-  padding: var(--section-v) var(--page-pad);
-}
-
-.reachSection::before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: var(--page-pad);
-  right: var(--page-pad);
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--border-sub) 20%,
-    var(--border-sub) 80%,
-    transparent
-  );
+  width: 100%;
+  padding: var(--section-v) 0;
+  background-color: var(--bg-primary, #FAF9F6);
+  border-top: 1px solid var(--border-sub, #E3DED4);
 }
 
 .reachInner {
+  width: 100%;
+  max-width: var(--page-max, 1200px);
+  margin: 0 auto;
+  padding: 0 var(--page-pad);
   display: grid;
   grid-template-columns: 1fr 1.6fr;
   gap: clamp(32px, 5vw, 72px);
   align-items: center;
+  box-sizing: border-box;
 }
 
 .reachHeader {
@@ -1042,9 +1010,10 @@
    -------------------------------------------------------------------------- */
 .closingSection {
   position: relative;
-  max-width: var(--page-max, 1200px);
-  margin: 0 auto;
-  padding: clamp(40px, 5vh, 56px) var(--page-pad) clamp(60px, 8vh, 90px);
+  width: 100%;
+  padding: clamp(52px, 7vh, 76px) 0 clamp(68px, 9vh, 96px);
+  background-color: var(--bg-secondary, #F4F1EA);
+  border-top: 1px solid var(--border-sub, #E3DED4);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1052,28 +1021,15 @@
   scroll-margin-top: calc(var(--navbar-height, 80px) + 20px);
 }
 
-.closingSection::before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: var(--page-pad);
-  right: var(--page-pad);
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--border-sub) 20%,
-    var(--border-sub) 80%,
-    transparent
-  );
-}
-
 .closingInner {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
   max-width: 620px;
+  margin: 0 auto;
+  padding: 0 var(--page-pad);
+  box-sizing: border-box;
 }
 
 .closingTagline {

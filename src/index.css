@@ -6,31 +6,32 @@
   --bg-section-soft: #F8F5EF;
   --bg-card: #FFFFFF;
   --bg-footer: #F4F1EA;
+  --bg-contrast: #292929;
 
   /* Typography */
   --text-primary: #242424;
   --text-secondary: #686868;
-  --text-muted: #888888;
+  --text-muted: #8A8781;
   --text-dim: #A8A29E;
 
   /* Borders & Hairlines */
-  --border: #E5E1D8;
-  --border-subtle: #F4F1EA;
-  --border-strong: #DDD8CE;
+  --border: #E3DED4;
+  --border-subtle: #EDE8DF;
+  --border-strong: #D5CFC3;
 
   /* Elevation Shadows */
-  --shadow-card: 0 8px 30px rgba(36, 36, 36, 0.06);
-  --shadow-hover: 0 14px 36px rgba(36, 36, 36, 0.09);
-  --shadow-modal: 0 24px 60px rgba(36, 36, 36, 0.16);
+  --shadow-card: 0 8px 30px rgba(40, 30, 20, 0.05);
+  --shadow-hover: 0 14px 36px rgba(40, 30, 20, 0.08);
+  --shadow-modal: 0 24px 60px rgba(40, 30, 20, 0.16);
 
   /* Signature Accents & Contrast */
   --accent-primary: #F4C400;
   --accent-warm: #FACC15;
   --accent-gold: #B45309;
-  --dark-contrast: #272727;
-  --accent-purple: #7D6A9F;
+  --dark-contrast: #292929;
+  --accent-purple: #E9E1F0;
   --bg-purple: #E9DFF0;
-  --accent-soft: #FFF4B8;
+  --accent-soft: #FFF4C2;
 
   --accent-rainbow: linear-gradient(
     to right,

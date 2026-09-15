@@ -4,12 +4,12 @@
    ========================================================================== */
 
 .section {
-  background-color: var(--bg-section-soft, #F8F5EF);
+  background-color: var(--bg-primary, #FAF9F6);
   padding: clamp(80px, 11vh, 120px) 0;
   position: relative;
   width: 100%;
   overflow: hidden;
-  border-top: 1px solid var(--border, #E5E1D8);
+  border-top: 1px solid var(--border, #E3DED4);
 }
 
 /* --------------------------------------------------------------------------
@@ -116,25 +116,30 @@
   display: grid;
   grid-template-columns: 24px 68px minmax(0, 1fr) clamp(180px, 20vw, 220px);
   column-gap: clamp(20px, 2.5vw, 36px);
-  padding: clamp(36px, 5vh, 50px) 0;
-  border-top: 1px solid var(--border, #E5E1D8);
+  padding: clamp(34px, 4.5vh, 46px) clamp(16px, 2vw, 24px);
+  margin-inline: clamp(-16px, -2vw, -24px);
+  border-radius: 14px;
+  border: 1px solid transparent;
+  border-top: 1px solid var(--border, #E3DED4);
   position: relative;
   cursor: pointer;
   outline: none;
   background: transparent;
   transition:
-    opacity 450ms cubic-bezier(0.16, 1, 0.3, 1),
-    background-color 280ms ease;
-  will-change: opacity;
+    opacity 400ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 300ms ease,
+    border-color 300ms ease,
+    box-shadow 300ms ease;
+  will-change: opacity, background-color;
 }
 
 /* Subtle Active Glow along the top divider */
 .rowGlow {
   position: absolute;
   top: -1px;
-  left: 0;
-  right: 0;
-  height: 1.5px;
+  left: clamp(16px, 2vw, 24px);
+  right: clamp(16px, 2vw, 24px);
+  height: 2px;
   background: linear-gradient(
     to right,
     transparent 0%,
@@ -156,17 +161,21 @@
   transform: scaleX(1);
 }
 
-/* Focus States: Active (100%) vs Inactive (50%) */
+/* Focus States: Active vs Inactive */
 .chapterInactive {
-  opacity: 0.55;
+  opacity: 0.65;
 }
 
 .chapterInactive:hover {
-  opacity: 0.85;
+  opacity: 0.92;
+  background-color: rgba(255, 255, 255, 0.45);
 }
 
 .chapterActive {
   opacity: 1;
+  background-color: #FFFFFF;
+  border: 1px solid var(--border, #E3DED4);
+  box-shadow: var(--shadow-card);
 }
 
 /* --------------------------------------------------------------------------

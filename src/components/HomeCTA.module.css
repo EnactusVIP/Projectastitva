@@ -31,12 +31,17 @@
 .container {
   position: relative;
   z-index: 2;
-  max-width: 780px;
+  max-width: 920px;
   margin: 0 auto;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: var(--bg-contrast, #292929);
+  border-radius: 24px;
+  padding: clamp(52px, 8vh, 80px) clamp(28px, 5vw, 64px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
   opacity: 0;
   transform: translateY(22px);
   transition:
@@ -64,8 +69,8 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background-color: var(--accent-gold, #B45309);
-  box-shadow: 0 0 8px rgba(244, 196, 0, 0.5);
+  background-color: var(--accent-primary, #F4C400);
+  box-shadow: 0 0 10px rgba(244, 196, 0, 0.7);
   flex-shrink: 0;
 }
 
@@ -75,13 +80,13 @@
   font-weight: 700;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--accent-gold, #B45309);
+  color: var(--accent-primary, #F4C400);
 }
 
 .eyebrowLine {
   width: 32px;
   height: 1px;
-  background: linear-gradient(to right, rgba(180, 83, 9, 0.4), transparent);
+  background: linear-gradient(to right, rgba(244, 196, 0, 0.6), transparent);
 }
 
 /* --------------------------------------------------------------------------
@@ -91,7 +96,7 @@
   font-family: var(--font-heading, 'Playfair Display', serif);
   font-size: clamp(2.4rem, 4.4vw, 3.6rem);
   font-weight: 400;
-  color: var(--text-primary, #242424);
+  color: #FAF9F6;
   line-height: 1.16;
   letter-spacing: -0.02em;
   margin: 0 0 16px;
@@ -99,14 +104,14 @@
 
 .headlineItalic {
   font-style: italic;
-  color: var(--text-primary, #242424);
+  color: #FAF9F6;
 }
 
 .subtext {
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: clamp(0.95rem, 1.2vw, 1.05rem);
   line-height: 1.7;
-  color: var(--text-muted, #686868);
+  color: #D5CFC3;
   max-width: 600px;
   margin: 0 0 clamp(36px, 5vh, 48px);
 }
@@ -128,12 +133,12 @@
   gap: 10px;
   padding: 13px 30px;
   border-radius: 40px;
-  background-color: #242424;
-  border: 1px solid #242424;
-  color: #FFFFFF;
+  background-color: var(--accent-primary, #F4C400);
+  border: 1px solid var(--accent-primary, #F4C400);
+  color: #242424;
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 0.78rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   cursor: pointer;
@@ -144,15 +149,15 @@
     transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1),
     box-shadow 260ms ease;
   outline: none;
-  box-shadow: 0 4px 14px rgba(36, 36, 36, 0.16);
+  box-shadow: 0 4px 18px rgba(244, 196, 0, 0.35);
 }
 
 .primaryAction:hover {
-  background-color: var(--accent-primary, #F4C400);
+  background-color: #FAF9F6;
   color: #242424;
-  border-color: var(--accent-primary, #F4C400);
+  border-color: #FAF9F6;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(244, 196, 0, 0.32);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
 }
 
 .actionArrow {
@@ -174,9 +179,9 @@
   gap: 8px;
   padding: 13px 24px;
   background: transparent;
-  border: 1px solid var(--border-strong, #DDD8CE);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 40px;
-  color: var(--text-primary, #242424);
+  color: #FAF9F6;
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 0.86rem;
   cursor: pointer;
@@ -190,13 +195,13 @@
 
 .secondaryArrow {
   transition: transform 240ms ease;
-  color: var(--accent-gold, #B45309);
+  color: var(--accent-primary, #F4C400);
 }
 
 .secondaryAction:hover {
-  background-color: var(--bg-secondary, #F4F1EA);
-  border-color: var(--border-strong, #DDD8CE);
-  color: var(--text-primary, #242424);
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: #FAF9F6;
+  color: #FFFFFF;
   transform: translateX(2px);
 }
 

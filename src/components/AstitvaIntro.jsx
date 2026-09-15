@@ -68,7 +68,16 @@ export default function AstitvaIntro() {
           &ldquo;मैं वो राह हूँ जो अभी बनी नहीं, मैं वो अस्तित्व हूँ जो कभी मिटेगा नहीं।&rdquo;
         </p>
 
-        {/* Step 4: Thin Gold Hairline that slowly draws across */}
+        {/* Step 4: Three Core Brand Pillars */}
+        <div className={`${styles.pillarsRow} ${isVisible ? styles.revealed : ''}`} aria-label="Astitva Pillars">
+          <span className={styles.pillarItem}>Existence</span>
+          <span className={styles.pillarDot} aria-hidden="true">•</span>
+          <span className={styles.pillarItem}>Identity</span>
+          <span className={styles.pillarDot} aria-hidden="true">•</span>
+          <span className={styles.pillarItem}>Belonging</span>
+        </div>
+
+        {/* Step 5: Thin Gold Hairline that slowly draws across */}
         <div className={styles.dividerContainer} aria-hidden="true">
           <div className={`${styles.drawingLine} ${isVisible ? styles.lineDrawn : ''}`} />
         </div>

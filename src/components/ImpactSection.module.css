@@ -4,11 +4,11 @@
    ========================================================================== */
 
 .section {
-  background-color: var(--bg-primary, #FAF9F6);
+  background-color: var(--bg-section-soft, #F8F5EF);
   padding: clamp(80px, 11vh, 120px) var(--page-pad, clamp(24px, 5vw, 64px));
   position: relative;
   overflow: hidden;
-  border-top: 1px solid var(--border, #E5E1D8);
+  border-top: 1px solid var(--border, #E3DED4);
 }
 
 .ambientGlow {
@@ -127,6 +127,63 @@
 }
 
 /* --------------------------------------------------------------------------
+   IMPACT NUMBERS & METRICS ROW
+   -------------------------------------------------------------------------- */
+.metricsRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 780px;
+  margin: clamp(48px, 6vh, 64px) auto 0;
+  padding: clamp(24px, 3vh, 32px) clamp(20px, 3vw, 40px);
+  background: #FFFFFF;
+  border: 1px solid var(--border, #E3DED4);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 800ms cubic-bezier(0.16, 1, 0.3, 1) 280ms,
+    transform 800ms cubic-bezier(0.16, 1, 0.3, 1) 280ms;
+  will-change: opacity, transform;
+}
+
+.metricItem {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.metricNumber {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-weight: 700;
+  color: var(--text-primary, #242424);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.metricLabel {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.72rem, 0.85vw, 0.8rem);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted, #8A8781);
+}
+
+.metricDivider {
+  width: 1px;
+  height: 48px;
+  background-color: var(--border, #E3DED4);
+  margin: 0 clamp(12px, 2vw, 24px);
+}
+
+/* --------------------------------------------------------------------------
    REVEAL TRIGGERED STATE
    -------------------------------------------------------------------------- */
 .revealed {
@@ -145,6 +202,28 @@
   .missionQuote {
     font-size: 1.12rem;
     line-height: 1.65;
+  }
+
+  .metricNumber {
+    font-size: 2.2rem;
+  }
+
+  .metricLabel {
+    font-size: 0.72rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .metricsRow {
+    flex-direction: column;
+    gap: 20px;
+    padding: 28px 20px;
+  }
+
+  .metricDivider {
+    width: 48px;
+    height: 1px;
+    margin: 0 auto;
   }
 }
 

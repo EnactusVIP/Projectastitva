@@ -67,6 +67,24 @@ export default function ImpactSection() {
             &ldquo;To create a world where every individual can exist authentically, free from prejudice, discrimination, and fear. Project Astitva stands as a testament to the belief that identity is not a choice to be judged, but a truth to be celebrated.&rdquo;
           </blockquote>
         </div>
+
+        {/* Impact Numbers & Metrics */}
+        <div className={`${styles.metricsRow} ${isVisible ? styles.revealed : ''}`}>
+          <div className={styles.metricItem}>
+            <span className={styles.metricNumber}>500+</span>
+            <span className={styles.metricLabel}>Lives Impacted</span>
+          </div>
+          <div className={styles.metricDivider} aria-hidden="true" />
+          <div className={styles.metricItem}>
+            <span className={styles.metricNumber}>20+</span>
+            <span className={styles.metricLabel}>Events &amp; Workshops</span>
+          </div>
+          <div className={styles.metricDivider} aria-hidden="true" />
+          <div className={styles.metricItem}>
+            <span className={styles.metricNumber}>10+</span>
+            <span className={styles.metricLabel}>Community Dialogues</span>
+          </div>
+        </div>
       </div>
     </section>
   );

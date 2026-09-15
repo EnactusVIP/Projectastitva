@@ -87,19 +87,33 @@ export default function ArtTherapy({ onNavigate }) {
             &ldquo;A new space for expression, reflection and creativity.&rdquo;
           </p>
 
-          {/* Secondary / Hover Detail */}
+          {/* Secondary / Action Detail */}
           <div className={`${styles.bottomDetail} ${stage >= 6 ? styles.visible : ''}`}>
-            <span className={styles.detailText}>Something new is taking shape.</span>
-            <button
-              type="button"
-              className={styles.inProgressAction}
-              onClick={handleBackToHome}
-              aria-label="Explore Project Astitva Home"
-            >
-              <span className={styles.inProgressLine} aria-hidden="true" />
-              <span className={styles.inProgressText}>IN PROGRESS</span>
-              <span className={styles.arrow} aria-hidden="true">→</span>
-            </button>
+            <span className={styles.detailText}>Something thoughtful is taking shape.</span>
+            <div className={styles.actionsRow}>
+              <button
+                type="button"
+                className={styles.primaryActionBtn}
+                onClick={(e) => {
+                  if (e && e.preventDefault) e.preventDefault();
+                  if (onNavigate) onNavigate('support');
+                  else window.location.hash = '#support';
+                }}
+                aria-label="Explore Support Services"
+              >
+                <span>Explore Support Services</span>
+                <span className={styles.arrow} aria-hidden="true">→</span>
+              </button>
+              <button
+                type="button"
+                className={styles.inProgressAction}
+                onClick={handleBackToHome}
+                aria-label="Return to Project Astitva Home"
+              >
+                <span className={styles.inProgressLine} aria-hidden="true" />
+                <span className={styles.inProgressText}>Return to Home</span>
+              </button>
+            </div>
           </div>
         </div>
       </main>

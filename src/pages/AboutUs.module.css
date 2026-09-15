@@ -69,33 +69,38 @@
    CHAPTER WRAPPERS — Unified grid, consistent padding
    -------------------------------------------------------------------------- */
 .chapterScene {
-  max-width: var(--page-max, 1200px);
-  margin: 0 auto;
-  padding: var(--section-v) var(--page-pad);
+  width: 100%;
+  padding: var(--section-v) 0;
   position: relative;
-}
-
-/* Subtle hairline separator between adjacent chapter scenes */
-.chapterScene + .chapterScene::before,
-.impactSection + .chapterScene::before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: var(--page-pad);
-  right: var(--page-pad);
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--border-sub) 20%,
-    var(--border-sub) 80%,
-    transparent
-  );
+  border-top: 1px solid var(--border-sub, #E3DED4);
 }
 
 .chapterContent {
   width: 100%;
+  max-width: var(--page-max, 1200px);
+  margin: 0 auto;
+  padding: 0 var(--page-pad);
+  box-sizing: border-box;
+}
+
+.sceneIdea {
+  background-color: var(--bg-primary, #FAF9F6);
+}
+
+.sceneWhy {
+  background-color: var(--bg-section-soft, #F8F5EF);
+}
+
+.sceneHuman {
+  background-color: var(--bg-primary, #FAF9F6);
+}
+
+.sceneAi {
+  background-color: var(--bg-section-soft, #F8F5EF);
+}
+
+.sceneBelief {
+  background-color: var(--bg-secondary, #F4F1EA);
 }
 
 .chapterHeader {
@@ -569,28 +574,12 @@
    BRAND SOUL & CULTURAL MANIFESTO
    -------------------------------------------------------------------------- */
 .soulScene {
-  max-width: var(--page-max, 1200px);
-  margin: 0 auto;
-  padding: var(--section-v) var(--page-pad);
+  width: 100%;
+  padding: var(--section-v) 0;
+  background-color: var(--bg-secondary, #F4F1EA);
+  border-top: 1px solid var(--border-sub, #E3DED4);
   text-align: center;
   position: relative;
-}
-
-.soulScene::before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: var(--page-pad);
-  right: var(--page-pad);
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--border-sub) 20%,
-    var(--border-sub) 80%,
-    transparent
-  );
 }
 
 .soulContainer {
@@ -599,6 +588,8 @@
   align-items: center;
   max-width: 800px;
   margin: 0 auto;
+  padding: 0 var(--page-pad);
+  box-sizing: border-box;
 }
 
 .rainbowFilament {
@@ -700,35 +691,27 @@
    OUR IMPACT — SDG Section
    -------------------------------------------------------------------------- */
 .impactSection {
-  max-width: var(--page-max, 1200px);
-  margin: 0 auto;
-  padding: var(--section-v) var(--page-pad);
-  display: flex;
-  flex-direction: column;
+  width: 100%;
+  padding: var(--section-v) 0;
+  background-color: var(--bg-secondary, #F4F1EA);
+  border-top: 1px solid var(--border-sub, #E3DED4);
   position: relative;
 }
 
-@media (min-width: 1025px) {
-  .impactSection {
-    padding-right: clamp(68px, 7.5vw, 115px);
-  }
+.impactInner {
+  width: 100%;
+  max-width: var(--page-max, 1200px);
+  margin: 0 auto;
+  padding: 0 var(--page-pad);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
-.impactSection::before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: var(--page-pad);
-  right: var(--page-pad);
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--border-sub) 20%,
-    var(--border-sub) 80%,
-    transparent
-  );
+@media (min-width: 1025px) {
+  .impactInner {
+    padding-right: clamp(68px, 7.5vw, 115px);
+  }
 }
 
 .impactHeader {
@@ -788,31 +771,23 @@
    CLOSING CTA
    -------------------------------------------------------------------------- */
 .closingScene {
+  width: 100%;
+  padding: clamp(48px, 7vh, 80px) 0 var(--section-v);
+  background-color: var(--bg-primary, #FAF9F6);
+  border-top: 1px solid var(--border-sub, #E3DED4);
+  position: relative;
+}
+
+.closingInner {
+  width: 100%;
   max-width: var(--page-max, 1200px);
   margin: 0 auto;
-  padding: clamp(48px, 7vh, 80px) var(--page-pad) var(--section-v);
+  padding: 0 var(--page-pad);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  position: relative;
-}
-
-.closingScene::before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: var(--page-pad);
-  right: var(--page-pad);
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--border-sub) 20%,
-    var(--border-sub) 80%,
-    transparent
-  );
+  box-sizing: border-box;
 }
 
 .closingTagline {
