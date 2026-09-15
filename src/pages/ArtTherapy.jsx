@@ -54,7 +54,11 @@ export default function ArtTherapy({ onNavigate }) {
           <div className={styles.editorialColumnMain}>
             {/* Eyebrow and Status */}
             <div className={`${styles.eyebrowRow} ${stage >= 2 ? styles.visible : ''}`}>
-              <span className={styles.eyebrow}>ART THERAPY / FORTHCOMING SPACE</span>
+              <div className={styles.eyebrowGroup}>
+                <span className={styles.eyebrow}>ART THERAPY</span>
+                <span className={styles.eyebrowSlash} aria-hidden="true">/</span>
+                <span className={styles.eyebrowSub}>FORTHCOMING SPACE</span>
+              </div>
               <span className={styles.eyebrowDivider} aria-hidden="true">•</span>
               <span className={styles.phaseBadge}>PHASE 02</span>
             </div>
