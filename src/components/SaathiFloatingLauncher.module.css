@@ -1,0 +1,421 @@
+/* ==========================================================================
+   Saathi Futuristic Floating AI Launcher & Teaser Popup
+   Project Astitva — Fixed Position HUD Teaser
+   ========================================================================== */
+
+.floatingContainer {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  z-index: 998;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   MINI TEASER POPUP CARD
+   -------------------------------------------------------------------------- */
+.teaserCard {
+  pointer-events: auto;
+  width: 350px;
+  background-color: #181818;
+  border: 1px solid rgba(244, 196, 0, 0.32);
+  border-radius: 8px;
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.45),
+    0 0 20px rgba(244, 196, 0, 0.08);
+  overflow: hidden;
+  cursor: pointer;
+  transform-origin: bottom right;
+  animation: popupOpen 360ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  margin-bottom: 8px;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.teaserCard:hover {
+  border-color: rgba(244, 196, 0, 0.55);
+  box-shadow:
+    0 20px 48px rgba(0, 0, 0, 0.55),
+    0 0 24px rgba(244, 196, 0, 0.14);
+}
+
+@keyframes popupOpen {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Header inside Teaser */
+.teaserHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 14px;
+  background-color: #202020;
+  border-bottom: 1px solid rgba(244, 196, 0, 0.18);
+}
+
+.teaserIdentity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sparkleGlyph {
+  color: #F4C400;
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
+.teaserTitle {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #FAF9F6;
+}
+
+.teaserStatus {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+  margin-right: 12px;
+}
+
+.statusDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #F4C400;
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+.statusLabel {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #F4C400;
+}
+
+.teaserCloseBtn {
+  background: none;
+  border: none;
+  color: #888888;
+  cursor: pointer;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  transition: color 150ms ease;
+}
+
+.teaserCloseBtn:hover {
+  color: #FFFFFF;
+}
+
+.teaserCloseBtn:focus-visible {
+  outline: 1px solid #F4C400;
+}
+
+/* Body inside Teaser */
+.teaserBody {
+  padding: 16px 18px 14px;
+  min-height: 102px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background:
+    linear-gradient(rgba(24, 24, 24, 0.98), rgba(24, 24, 24, 0.98)),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.012) 2px,
+      rgba(255, 255, 255, 0.012) 4px
+    );
+}
+
+.messageLine {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #EDEDED;
+  margin: 0;
+  letter-spacing: -0.005em;
+  word-break: break-word;
+}
+
+.messageLine.highlight {
+  color: #FFFFFF;
+  font-weight: 500;
+}
+
+.cursor {
+  display: inline-block;
+  width: 7px;
+  height: 14px;
+  vertical-align: -1px;
+  background-color: #F4C400;
+  margin-left: 3px;
+  animation: cursorBlink 750ms infinite;
+}
+
+@keyframes cursorBlink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+/* Typing indicator dots */
+.dotsIndicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 0;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: rgba(244, 196, 0, 0.7);
+  animation: typingDot 1.2s infinite ease-in-out both;
+}
+
+.dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes typingDot {
+  0%, 80%, 100% {
+    opacity: 0.3;
+    transform: scale(0.85);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+/* Footer / CTA inside Teaser */
+.teaserFooter {
+  padding: 10px 18px 12px;
+  background-color: #1E1E1E;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.teaserCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #F4C400;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.teaserCtaLine {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 24px;
+  height: 1.5px;
+  background-color: #F4C400;
+  transition: width 200ms ease;
+}
+
+.teaserCard:hover .teaserCtaLine {
+  width: 100%;
+}
+
+.teaserCtaArrow {
+  font-size: 0.82rem;
+  transition: transform 200ms ease;
+}
+
+.teaserCard:hover .teaserCtaArrow {
+  transform: translateX(4px);
+}
+
+/* --------------------------------------------------------------------------
+   CONNECTOR LINE
+   -------------------------------------------------------------------------- */
+.connectorLine {
+  width: 1.5px;
+  height: 12px;
+  background: linear-gradient(to top, #F4C400, rgba(244, 196, 0, 0.25));
+  margin-right: 29px;
+  box-shadow: 0 0 6px rgba(244, 196, 0, 0.5);
+  animation: lineGrow 240ms ease-out forwards;
+}
+
+@keyframes lineGrow {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   LAUNCHER ORB (CLOSED STATE)
+   -------------------------------------------------------------------------- */
+.launcherOrb {
+  pointer-events: auto;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #292929 0%, #161616 85%);
+  border: 1px solid rgba(244, 196, 0, 0.45);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    0 0 16px rgba(244, 196, 0, 0.16);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  cursor: pointer;
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+  position: relative;
+}
+
+.launcherOrb:hover {
+  transform: scale(1.05);
+  border-color: #F4C400;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.5),
+    0 0 24px rgba(244, 196, 0, 0.32);
+}
+
+.launcherOrb:focus-visible {
+  outline: 2px solid #F4C400;
+  outline-offset: 3px;
+}
+
+.orbCore {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #F4C400;
+  box-shadow: 0 0 8px rgba(244, 196, 0, 0.85);
+  animation: pulseCore 2.4s infinite ease-in-out;
+}
+
+@keyframes pulseCore {
+  0%, 100% {
+    transform: scale(0.9);
+    box-shadow: 0 0 6px rgba(244, 196, 0, 0.6);
+  }
+  50% {
+    transform: scale(1.15);
+    box-shadow: 0 0 12px rgba(244, 196, 0, 0.95);
+  }
+}
+
+.orbLabel {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.56rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #FAF9F6;
+  line-height: 1;
+  margin-top: 1px;
+}
+
+@keyframes pulseDot {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE (MOBILE)
+   -------------------------------------------------------------------------- */
+@media (max-width: 600px) {
+  .floatingContainer {
+    right: 18px;
+    bottom: 20px;
+  }
+
+  .launcherOrb {
+    width: 54px;
+    height: 54px;
+  }
+
+  .connectorLine {
+    margin-right: 26px;
+  }
+
+  .teaserCard {
+    width: calc(100vw - 36px);
+    max-width: 340px;
+  }
+
+  .teaserBody {
+    padding: 14px 16px;
+    min-height: 94px;
+  }
+
+  .messageLine {
+    font-size: 0.84rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ACCESSIBILITY: PREFERS-REDUCED-MOTION
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .teaserCard,
+  .connectorLine,
+  .launcherOrb,
+  .teaserCtaLine,
+  .teaserCtaArrow {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .orbCore,
+  .statusDot,
+  .cursor,
+  .dot {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}

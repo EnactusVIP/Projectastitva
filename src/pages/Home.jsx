@@ -3,9 +3,9 @@ import Hero from '../components/Hero'
 import AstitvaIntro from '../components/AstitvaIntro'
 import ProjectOverview from '../components/ProjectOverview'
 import ImpactSection from '../components/ImpactSection'
-import SaathiSection from '../components/SaathiSection'
 import HomeCTA from '../components/HomeCTA'
 import Footer from '../components/Footer'
+import SaathiFloatingLauncher from '../components/SaathiFloatingLauncher'
 
 export default function Home({ onNavigate, showNavbar = false, showFooter = false }) {
   return (
@@ -16,9 +16,9 @@ export default function Home({ onNavigate, showNavbar = false, showFooter = fals
         <AstitvaIntro />
         <ProjectOverview onNavigate={onNavigate} />
         <ImpactSection onNavigate={onNavigate} />
-        <SaathiSection />
         <HomeCTA onNavigate={onNavigate} />
       </main>
+      <SaathiFloatingLauncher />
       {showFooter && <Footer onNavigate={onNavigate} />}
     </>
   )
