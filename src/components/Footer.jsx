@@ -1,5 +1,5 @@
 import { Instagram, Linkedin, Mail, Phone, ArrowRight } from 'lucide-react';
-import enactusLogo from '../assets/enactus-logo.png';
+import enactusLogo from '../assets/enactus-vips-tc-lockup.png';
 import styles from './Footer.module.css';
 
 const NAV_LINKS = [
@@ -52,15 +52,9 @@ export default function Footer({ onNavigate }) {
               <div className={styles.enactusBrandRow}>
                 <img
                   src={enactusLogo}
-                  alt="Enactus Logo"
+                  alt="Enactus Vivekananda Institute of Professional Studies - TC"
                   className={styles.enactusLogo}
                 />
-                <div className={styles.enactusTextCol}>
-                  <span className={styles.enactusOrg}>ENACTUS</span>
-                  <span className={styles.enactusInstitution}>
-                    Vivekananda Institute of Professional Studies &ndash; TC
-                  </span>
-                </div>
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import enactusLogo from '../assets/enactus-logo.png';
+import enactusLogo from '../assets/enactus-vips-tc-lockup.png';
 import styles from './Navbar.module.css';
 
 const NAV_LINKS = [

@@ -88,44 +88,29 @@
 }
 
 .enactusBrandRow {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  height: 58px;
+  width: 98px;
+  overflow: hidden;
+  position: relative;
+  margin-top: 6px;
 }
 
 .enactusLogo {
-  height: 28px;
+  height: 126px;
   width: auto;
+  max-width: none;
   object-fit: contain;
-  opacity: 0.9;
-  filter: contrast(1.05);
+  opacity: 0.95;
   transition: opacity 200ms ease;
-  flex-shrink: 0;
+  pointer-events: none;
+  transform: translateY(-2.5px);
 }
 
 .enactusBrandRow:hover .enactusLogo {
   opacity: 1;
-}
-
-.enactusTextCol {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.25;
-}
-
-.enactusOrg {
-  font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: 0.76rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: var(--text-primary, #242424);
-}
-
-.enactusInstitution {
-  font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: 0.7rem;
-  color: var(--text-secondary, #4A4A4A);
-  font-weight: 400;
 }
 
 /* --------------------------------------------------------------------------
