@@ -904,3 +904,104 @@
     padding: 20px;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Dark Theme Overrides (Restored from Original Project Astitva Dark Design)
+   -------------------------------------------------------------------------- */
+:global([data-theme="dark"]) .pageContainer {
+  --accent: #facc15;
+  --accent-gold: #facc15;
+  --accent-glow: rgba(250, 204, 21, 0.35);
+  --text-hi: #ffffff;
+  --text-mid: rgba(255, 255, 255, 0.82);
+  --text-lo: rgba(255, 255, 255, 0.55);
+  --border-sub: rgba(255, 255, 255, 0.08);
+
+  background-color: #141414;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -15%, rgba(250, 204, 21, 0.035), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 88% 45%, rgba(255, 140, 0, 0.02), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 12% 80%, rgba(117, 7, 135, 0.025), transparent 70%);
+  color: var(--text-primary, #ffffff);
+}
+
+:global([data-theme="dark"]) .heroEyebrow {
+  color: var(--accent);
+}
+
+:global([data-theme="dark"]) .titleLineItalic {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+:global([data-theme="dark"]) .signupCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+}
+
+:global([data-theme="dark"]) .inputWrapper {
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+:global([data-theme="dark"]) .emailInput {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .emailInput::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+:global([data-theme="dark"]) .subscribeButton {
+  background-color: #facc15;
+  color: #141414;
+}
+
+:global([data-theme="dark"]) .subscribeButton:hover {
+  background-color: #fde047;
+  color: #141414;
+}
+
+:global([data-theme="dark"]) .filterBtn {
+  color: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: transparent;
+}
+
+:global([data-theme="dark"]) .filterBtnActive {
+  background-color: rgba(250, 204, 21, 0.12);
+  border-color: rgba(250, 204, 21, 0.4);
+  color: #facc15;
+}
+
+:global([data-theme="dark"]) .editorialRow {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+:global([data-theme="dark"]) .rowTitle {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .rowExcerpt {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+:global([data-theme="dark"]) .rowMeta {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+:global([data-theme="dark"]) .modalCard {
+  background-color: #161616;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .modalBody {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+:global([data-theme="dark"]) .modalCloseBtn {
+  color: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+}

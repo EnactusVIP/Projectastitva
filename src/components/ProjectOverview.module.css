@@ -594,3 +594,120 @@
     opacity: 1 !important;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Dark Theme Overrides (Restored from Original Project Astitva Dark Design)
+   -------------------------------------------------------------------------- */
+:global([data-theme="dark"]) .section {
+  background-color: #141414;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+:global([data-theme="dark"]) .eyebrowDot {
+  background-color: #facc15;
+  box-shadow: 0 0 10px rgba(250, 204, 21, 0.85);
+}
+
+:global([data-theme="dark"]) .eyebrow {
+  color: #facc15;
+  font-weight: 600;
+}
+
+:global([data-theme="dark"]) .eyebrowLine {
+  background: linear-gradient(to right, rgba(250, 204, 21, 0.6), transparent);
+}
+
+:global([data-theme="dark"]) .headline {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .headlineItalic {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+:global([data-theme="dark"]) .subline {
+  color: rgba(255, 255, 255, 0.58);
+}
+
+:global([data-theme="dark"]) .chapterRow {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+:global([data-theme="dark"]) .railSegment {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+:global([data-theme="dark"]) .railSegmentActive {
+  background-color: rgba(250, 204, 21, 0.7);
+}
+
+:global([data-theme="dark"]) .railNode {
+  background-color: #242424;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+:global([data-theme="dark"]) .chapterActive .railNode {
+  background-color: #facc15;
+  border-color: #facc15;
+  box-shadow: 0 0 12px rgba(250, 204, 21, 0.9);
+}
+
+:global([data-theme="dark"]) .number {
+  color: rgba(255, 255, 255, 0.22);
+}
+
+:global([data-theme="dark"]) .chapterActive .number {
+  color: #facc15;
+  text-shadow: 0 0 20px rgba(250, 204, 21, 0.4);
+}
+
+:global([data-theme="dark"]) .conceptTag {
+  color: rgba(250, 204, 21, 0.65);
+  font-weight: 600;
+}
+
+:global([data-theme="dark"]) .categoryLabel {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+:global([data-theme="dark"]) .categoryLabelActive {
+  color: #facc15;
+}
+
+:global([data-theme="dark"]) .statement {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+:global([data-theme="dark"]) .statementActive {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .description {
+  color: rgba(255, 255, 255, 0.58);
+}
+
+:global([data-theme="dark"]) .descriptionActive {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+:global([data-theme="dark"]) .actionText {
+  color: rgba(255, 255, 255, 0.38);
+}
+
+:global([data-theme="dark"]) .actionBtn:hover .actionText,
+:global([data-theme="dark"]) .chapterActive .actionText {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .arrowWrap {
+  color: rgba(255, 255, 255, 0.38);
+}
+
+:global([data-theme="dark"]) .actionBtn:hover .arrowWrap,
+:global([data-theme="dark"]) .chapterActive .arrowWrap {
+  color: #facc15;
+}
+
+:global([data-theme="dark"]) .actionBtn:focus-visible {
+  outline: 1px solid #facc15;
+}

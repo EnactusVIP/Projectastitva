@@ -921,3 +921,140 @@
     padding: 20px;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Dark Theme Overrides (Restored from Original Project Astitva Dark Design)
+   -------------------------------------------------------------------------- */
+:global([data-theme="dark"]) .pageContainer {
+  --accent: #facc15;
+  --accent-gold: #facc15;
+  --accent-glow: rgba(250, 204, 21, 0.35);
+  --text-hi: #ffffff;
+  --text-mid: rgba(255, 255, 255, 0.82);
+  --text-lo: rgba(255, 255, 255, 0.55);
+  --border-sub: rgba(255, 255, 255, 0.07);
+
+  background-color: #141414;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(250, 204, 21, 0.035), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 90% 40%, rgba(255, 140, 0, 0.02), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 10% 80%, rgba(117, 7, 135, 0.025), transparent 70%);
+  color: var(--text-primary, #ffffff);
+}
+
+:global([data-theme="dark"]) .heroEyebrow {
+  color: var(--accent);
+}
+
+:global([data-theme="dark"]) .titleLineItalic {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+:global([data-theme="dark"]) .heroSubtitle {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+:global([data-theme="dark"]) .statementEyebrow {
+  color: var(--accent);
+}
+
+:global([data-theme="dark"]) .accentItalic {
+  color: var(--accent);
+}
+
+:global([data-theme="dark"]) .statementLine {
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(250, 204, 21, 0.4) 25%,
+    rgba(255, 255, 255, 0.15) 75%,
+    transparent
+  );
+}
+
+:global([data-theme="dark"]) .statementHeading {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .statementSubtext {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+:global([data-theme="dark"]) .contactItem {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+:global([data-theme="dark"]) .contactIconWrapper {
+  background: rgba(250, 204, 21, 0.08);
+  border: 1px solid rgba(250, 204, 21, 0.22);
+  color: #facc15;
+}
+
+:global([data-theme="dark"]) .contactLink {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .contactLabel {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+:global([data-theme="dark"]) .formCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+}
+
+:global([data-theme="dark"]) .formTitle {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .formSubtitle {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+:global([data-theme="dark"]) .fieldLabel {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+:global([data-theme="dark"]) .input,
+:global([data-theme="dark"]) .textarea {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .input::placeholder,
+:global([data-theme="dark"]) .textarea::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+:global([data-theme="dark"]) .input:focus,
+:global([data-theme="dark"]) .textarea:focus {
+  border-color: #facc15;
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 0 2px rgba(250, 204, 21, 0.15);
+}
+
+:global([data-theme="dark"]) .submitButton {
+  background-color: #facc15;
+  color: #141414;
+}
+
+:global([data-theme="dark"]) .submitButton:hover {
+  background-color: #fde047;
+  color: #141414;
+}
+
+:global([data-theme="dark"]) .saathiCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(244, 196, 0, 0.35);
+}
+
+:global([data-theme="dark"]) .saathiHeading {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .saathiDescription {
+  color: rgba(255, 255, 255, 0.75);
+}

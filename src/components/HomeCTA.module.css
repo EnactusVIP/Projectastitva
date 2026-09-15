@@ -275,3 +275,50 @@
     opacity: 1 !important;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Dark Theme Overrides (Restored from Original Project Astitva Dark Design)
+   -------------------------------------------------------------------------- */
+:global([data-theme="dark"]) .section {
+  background-color: #141414;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+:global([data-theme="dark"]) .container {
+  background-color: #171717;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+}
+
+:global([data-theme="dark"]) .headline {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .subtext {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+:global([data-theme="dark"]) .primaryAction {
+  background-color: #facc15;
+  color: #141414;
+  border-color: #facc15;
+  box-shadow: 0 4px 18px rgba(250, 204, 21, 0.25);
+}
+
+:global([data-theme="dark"]) .primaryAction:hover {
+  background-color: #fde047;
+  color: #141414;
+  box-shadow: 0 8px 24px rgba(250, 204, 21, 0.35);
+}
+
+:global([data-theme="dark"]) .secondaryAction {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.85);
+  background: transparent;
+}
+
+:global([data-theme="dark"]) .secondaryAction:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: #ffffff;
+  color: #ffffff;
+}

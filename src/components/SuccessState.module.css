@@ -119,3 +119,42 @@
     transition: none;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Dark Theme Overrides (Restored from Original Project Astitva Dark Design)
+   -------------------------------------------------------------------------- */
+:global([data-theme="dark"]) .checkCircle {
+  background: rgba(250, 204, 21, 0.1);
+  border: 1.5px solid rgba(250, 204, 21, 0.45);
+  color: #facc15;
+  box-shadow: 0 0 24px rgba(250, 204, 21, 0.2);
+}
+
+:global([data-theme="dark"]) .eyebrow {
+  color: #facc15;
+}
+
+:global([data-theme="dark"]) .title {
+  color: #ffffff;
+  font-weight: 350;
+}
+
+:global([data-theme="dark"]) .message {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+:global([data-theme="dark"]) .closeButton {
+  background-color: #facc15;
+  color: #121212;
+  box-shadow: 0 4px 18px rgba(250, 204, 21, 0.25);
+}
+
+:global([data-theme="dark"]) .closeButton:hover {
+  background-color: #fde047;
+  color: #121212;
+  box-shadow: 0 6px 24px rgba(250, 204, 21, 0.38);
+}
+
+:global([data-theme="dark"]) .closeButton:focus-visible {
+  outline: 2px solid #facc15;
+}

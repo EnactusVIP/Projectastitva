@@ -513,3 +513,123 @@
     font-size: 0.7rem;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Dark Theme Overrides (Seamless Integration with Astitva Dark Design)
+   -------------------------------------------------------------------------- */
+:global([data-theme="dark"]) .modalBackdrop {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+:global([data-theme="dark"]) .modalCard {
+  background-color: #181818;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+}
+
+:global([data-theme="dark"]) .modalHeader {
+  background-color: #202020;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+:global([data-theme="dark"]) .modalTitle {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .modalCloseBtn {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+:global([data-theme="dark"]) .modalCloseBtn:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+:global([data-theme="dark"]) .resetBtn {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+:global([data-theme="dark"]) .resetBtn:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+:global([data-theme="dark"]) .modalWelcome {
+  color: #D6D6D6;
+}
+
+:global([data-theme="dark"]) .promptItem {
+  background: #222222;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #EDEDED;
+}
+
+:global([data-theme="dark"]) .promptItem:hover {
+  background: #282828;
+  border-color: #F4C400;
+  color: #F4C400;
+}
+
+:global([data-theme="dark"]) .saathiBubble {
+  background-color: #242424;
+  color: #F0F0F0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+:global([data-theme="dark"]) .userBubble {
+  background-color: #F4C400;
+  color: #141414;
+  font-weight: 500;
+}
+
+:global([data-theme="dark"]) .loadingBubble {
+  background-color: #242424;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+:global([data-theme="dark"]) .loadingText {
+  color: #A0A0A0;
+}
+
+:global([data-theme="dark"]) .inputForm {
+  background-color: #1a1a1a;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+:global([data-theme="dark"]) .inputField {
+  background-color: #222222;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #FFFFFF;
+}
+
+:global([data-theme="dark"]) .inputField::placeholder {
+  color: #888888;
+}
+
+:global([data-theme="dark"]) .inputField:focus {
+  border-color: #F4C400;
+  background-color: #262626;
+}
+
+:global([data-theme="dark"]) .sendButton {
+  background-color: #F4C400;
+  color: #141414;
+  border-color: #F4C400;
+}
+
+:global([data-theme="dark"]) .sendButton:hover:not(:disabled) {
+  background-color: #FDE047;
+  color: #141414;
+  border-color: #FDE047;
+}
+
+:global([data-theme="dark"]) .modalFooter {
+  background-color: #1e1e1e;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+:global([data-theme="dark"]) .modalDisclaimer {
+  color: #888888;
+}

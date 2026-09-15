@@ -1,5 +1,6 @@
 /* ===== CSS Variables ===== */
-:root {
+:root,
+[data-theme="light"] {
   /* Foundational Light Palette */
   --bg-primary: #FAF9F6;
   --bg-secondary: #F4F1EA;
@@ -33,6 +34,12 @@
   --bg-purple: #E9DFF0;
   --accent-soft: #FFF4C2;
 
+  /* Scrollbar & Selection */
+  --scrollbar-thumb: #DDD8CE;
+  --scrollbar-thumb-hover: #B8B2A6;
+  --selection-bg: rgba(244, 196, 0, 0.25);
+  --selection-color: #242424;
+
   --accent-rainbow: linear-gradient(
     to right,
     #e40303,
@@ -61,6 +68,47 @@
   --spacing-2xl: 120px;
   --navbar-height: 80px;
   --max-width: 1200px;
+}
+
+[data-theme="dark"] {
+  /* Restored Original Astitva Dark Palette (from source of truth f4605e9) */
+  --bg-primary: #141414;
+  --bg-secondary: #171717;
+  --bg-section-soft: #141414;
+  --bg-card: #1f1f1f;
+  --bg-footer: #121212;
+  --bg-contrast: #FAF9F6;
+
+  /* Typography */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.82);
+  --text-muted: rgba(255, 255, 255, 0.58);
+  --text-dim: rgba(255, 255, 255, 0.38);
+
+  /* Borders & Hairlines */
+  --border: rgba(255, 255, 255, 0.08);
+  --border-subtle: rgba(255, 255, 255, 0.04);
+  --border-strong: rgba(255, 255, 255, 0.14);
+
+  /* Elevation Shadows */
+  --shadow-card: 0 12px 36px rgba(0, 0, 0, 0.5);
+  --shadow-hover: 0 16px 40px rgba(0, 0, 0, 0.6);
+  --shadow-modal: 0 24px 64px rgba(0, 0, 0, 0.8);
+
+  /* Signature Accents & Contrast */
+  --accent-primary: #F4C400;
+  --accent-warm: #facc15;
+  --accent-gold: #facc15;
+  --dark-contrast: #FAF9F6;
+  --accent-purple: rgba(117, 7, 135, 0.25);
+  --bg-purple: rgba(117, 7, 135, 0.15);
+  --accent-soft: rgba(250, 204, 21, 0.15);
+
+  /* Scrollbar & Selection */
+  --scrollbar-thumb: #444444;
+  --scrollbar-thumb-hover: #555555;
+  --selection-bg: rgba(250, 204, 21, 0.3);
+  --selection-color: #ffffff;
 }
 
 /* ===== Reset ===== */
@@ -131,8 +179,8 @@ button {
 
 /* ===== Selection ===== */
 ::selection {
-  background: rgba(244, 196, 0, 0.25);
-  color: var(--text-primary);
+  background: var(--selection-bg, rgba(244, 196, 0, 0.25));
+  color: var(--selection-color, var(--text-primary));
 }
 
 /* ===== Scrollbar ===== */
@@ -145,12 +193,35 @@ button {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #DDD8CE;
+  background: var(--scrollbar-thumb, #DDD8CE);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #B8B2A6;
+  background: var(--scrollbar-thumb-hover, #B8B2A6);
+}
+
+/* ===== Controlled Theme Transitions (active only during manual toggle) ===== */
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition: background-color 260ms ease,
+              color 260ms ease,
+              border-color 260ms ease,
+              box-shadow 260ms ease,
+              fill 260ms ease,
+              stroke 260ms ease !important;
+  transition-delay: 0s !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.theme-transitioning,
+  html.theme-transitioning *,
+  html.theme-transitioning *::before,
+  html.theme-transitioning *::after {
+    transition: none !important;
+  }
 }
 
 /* ===== Focus States ===== */

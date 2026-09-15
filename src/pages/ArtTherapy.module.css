@@ -413,3 +413,82 @@
     transition: none !important;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Dark Theme Overrides (Restored from Original Project Astitva Dark Design)
+   -------------------------------------------------------------------------- */
+:global([data-theme="dark"]) .pageContainer {
+  --accent: #FACC15;
+  --accent-gold: #FACC15;
+  --text-hi: #ffffff;
+  --text-mid: #e0e0e0;
+  --text-muted: rgba(255, 255, 255, 0.44);
+
+  background-color: #141414;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(250, 204, 21, 0.035), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 85% 50%, rgba(255, 140, 0, 0.02), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 15% 75%, rgba(117, 7, 135, 0.025), transparent 70%);
+  color: var(--text-primary, #ffffff);
+}
+
+:global([data-theme="dark"]) .ambientGlow {
+  background: radial-gradient(
+    circle at center,
+    rgba(250, 204, 21, 0.045) 0%,
+    rgba(255, 255, 255, 0.015) 45%,
+    transparent 75%
+  );
+}
+
+:global([data-theme="dark"]) .eyebrow {
+  color: var(--accent);
+}
+
+:global([data-theme="dark"]) .echoStroke {
+  stroke: rgba(255, 255, 255, 0.08);
+}
+
+:global([data-theme="dark"]) .title {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .statement {
+  color: #e0e0e0;
+}
+
+:global([data-theme="dark"]) .detailText {
+  color: rgba(255, 255, 255, 0.44);
+}
+
+:global([data-theme="dark"]) .inProgressAction {
+  color: rgba(250, 204, 21, 0.85);
+}
+
+:global([data-theme="dark"]) .inProgressAction:hover {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .inProgressAction:hover .inProgressLine {
+  background-color: var(--accent);
+}
+
+:global([data-theme="dark"]) .inProgressLine {
+  background-color: rgba(250, 204, 21, 0.4);
+}
+
+:global([data-theme="dark"]) .arrow {
+  color: var(--accent);
+}
+
+:global([data-theme="dark"]) .primaryActionBtn {
+  background-color: #facc15;
+  color: #121212;
+  border-color: #facc15;
+}
+
+:global([data-theme="dark"]) .primaryActionBtn:hover {
+  background-color: #fde047;
+  color: #121212;
+  border-color: #fde047;
+}

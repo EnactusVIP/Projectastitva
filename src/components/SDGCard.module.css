@@ -325,3 +325,72 @@
     pointer-events: auto;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Dark Theme Overrides (Restored from Original Project Astitva Dark Design)
+   -------------------------------------------------------------------------- */
+:global([data-theme="dark"]) .cardFaceFront,
+:global([data-theme="dark"]) .cardFaceBack {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  :global([data-theme="dark"]) .cardInner:hover {
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+  }
+
+  :global([data-theme="dark"]) .cardInner.flipped:hover {
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+  }
+
+  :global([data-theme="dark"]) .cardInner:hover .exploreHint {
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+}
+
+:global([data-theme="dark"]) .frontOverlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+}
+
+:global([data-theme="dark"]) .exploreHint {
+  background: rgba(18, 18, 18, 0.84);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+:global([data-theme="dark"]) .exploreIcon {
+  color: #facc15;
+}
+
+:global([data-theme="dark"]) .cardFaceBack {
+  background-color: #171717;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+:global([data-theme="dark"]) .backNumber {
+  color: rgba(255, 255, 255, 0.22);
+}
+
+:global([data-theme="dark"]) .backBadge {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+:global([data-theme="dark"]) .backTitle {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .backDescription {
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 350;
+}
+
+:global([data-theme="dark"]) .backFooter {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+:global([data-theme="dark"]) .flipBackHint {
+  color: rgba(255, 255, 255, 0.45);
+}

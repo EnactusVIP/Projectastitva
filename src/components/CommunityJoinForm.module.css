@@ -259,3 +259,98 @@
     transition: none;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Dark Theme Overrides (Restored from Original Project Astitva Dark Design)
+   -------------------------------------------------------------------------- */
+:global([data-theme="dark"]) .eyebrowDot {
+  background-color: #facc15;
+  box-shadow: 0 0 8px rgba(250, 204, 21, 0.7);
+}
+
+:global([data-theme="dark"]) .eyebrow {
+  color: #facc15;
+}
+
+:global([data-theme="dark"]) .title {
+  color: #ffffff;
+  font-weight: 350;
+}
+
+:global([data-theme="dark"]) .subtitle {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+:global([data-theme="dark"]) .label {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+:global([data-theme="dark"]) .requiredMark {
+  color: #facc15;
+}
+
+:global([data-theme="dark"]) .input {
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .input::placeholder {
+  color: rgba(255, 255, 255, 0.32);
+}
+
+:global([data-theme="dark"]) .input:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+:global([data-theme="dark"]) .input:focus {
+  border-color: #facc15;
+  background-color: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 0 0 2px rgba(250, 204, 21, 0.18);
+}
+
+:global([data-theme="dark"]) .inputError {
+  border-color: #f87171 !important;
+  box-shadow: 0 0 0 1px rgba(248, 113, 113, 0.4) !important;
+}
+
+:global([data-theme="dark"]) .errorText {
+  color: #f87171;
+}
+
+:global([data-theme="dark"]) .checkbox {
+  accent-color: #facc15;
+}
+
+:global([data-theme="dark"]) .checkboxLabel {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+:global([data-theme="dark"]) .serverError {
+  background-color: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #fca5a5;
+}
+
+:global([data-theme="dark"]) .submitButton {
+  background-color: #facc15;
+  color: #121212;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(250, 204, 21, 0.25);
+}
+
+:global([data-theme="dark"]) .submitButton:hover:not(:disabled) {
+  background-color: #fde047;
+  color: #121212;
+  box-shadow: 0 6px 26px rgba(250, 204, 21, 0.38);
+}
+
+:global([data-theme="dark"]) .submitButton:focus-visible {
+  outline: 2px solid #facc15;
+}
+
+:global([data-theme="dark"]) .spinner {
+  border: 2px solid rgba(18, 18, 18, 0.25);
+  border-top-color: #121212;
+}

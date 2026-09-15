@@ -256,3 +256,68 @@
     opacity: 1 !important;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Dark Theme Overrides (Restored from Original Project Astitva Dark Design)
+   -------------------------------------------------------------------------- */
+:global([data-theme="dark"]) .section {
+  background-color: #171717;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+:global([data-theme="dark"]) .ambientGlow {
+  background: radial-gradient(
+    circle,
+    rgba(250, 204, 21, 0.028) 0%,
+    rgba(255, 255, 255, 0.01) 45%,
+    transparent 75%
+  );
+}
+
+:global([data-theme="dark"]) .eyebrowDot {
+  background-color: #facc15;
+  box-shadow: 0 0 8px rgba(250, 204, 21, 0.7);
+}
+
+:global([data-theme="dark"]) .eyebrow {
+  color: #facc15;
+  font-weight: 600;
+}
+
+:global([data-theme="dark"]) .eyebrowLine {
+  background: linear-gradient(to right, rgba(250, 204, 21, 0.6), transparent);
+}
+
+:global([data-theme="dark"]) .headline {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .headlineItalic {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+:global([data-theme="dark"]) .subline {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+:global([data-theme="dark"]) .missionBlock {
+  background-color: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+:global([data-theme="dark"]) .missionQuote {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .metricNumber {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .metricLabel {
+  color: rgba(255, 255, 255, 0.58);
+}
+
+:global([data-theme="dark"]) .metricDivider {
+  background: rgba(255, 255, 255, 0.1);
+}

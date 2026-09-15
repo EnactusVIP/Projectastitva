@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import enactusLogo from '../assets/enactus-vips-tc-lockup.png';
+import ThemeToggle from './ThemeToggle';
 import styles from './Navbar.module.css';
 
 const NAV_LINKS = [
@@ -146,39 +147,42 @@ export default function Navbar({ activePage = 'home', onNavigate }) {
           />
         </a>
 
-        {/* Right: Desktop Navigation Links */}
-        <ul className={styles.desktopNav}>
-           {NAV_LINKS.map((link) => {
-            const isSupportActive = activePage === 'support' && link.href === '#support';
-            const isAboutActive = activePage === 'about' && link.href === '#about';
-            const isArtTherapyActive = activePage === 'arttherapy' && (link.href === '#art-therapy' || link.href === '#arttherapy');
-            const isContactActive = activePage === 'contact' && link.href === '#contact';
-            const isNewsletterActive = activePage === 'newsletter' && link.href === '#newsletter';
-            const isCurrentPage = isAboutActive || isSupportActive || isArtTherapyActive || isContactActive || isNewsletterActive;
-            const isActive = isCurrentPage || (activePage === 'home' && activeLink === link.href);
+        {/* Right: Desktop Navigation Links & Theme Toggle */}
+        <div className={styles.desktopNavWrapper}>
+          <ul className={styles.desktopNav}>
+             {NAV_LINKS.map((link) => {
+              const isSupportActive = activePage === 'support' && link.href === '#support';
+              const isAboutActive = activePage === 'about' && link.href === '#about';
+              const isArtTherapyActive = activePage === 'arttherapy' && (link.href === '#art-therapy' || link.href === '#arttherapy');
+              const isContactActive = activePage === 'contact' && link.href === '#contact';
+              const isNewsletterActive = activePage === 'newsletter' && link.href === '#newsletter';
+              const isCurrentPage = isAboutActive || isSupportActive || isArtTherapyActive || isContactActive || isNewsletterActive;
+              const isActive = isCurrentPage || (activePage === 'home' && activeLink === link.href);
 
-            const linkClass = `${styles.navLink} ${
-              isCurrentPage
-                ? styles.aboutActiveLink
-                : isActive
-                ? styles.activeLink
-                : ''
-            }`;
+              const linkClass = `${styles.navLink} ${
+                isCurrentPage
+                  ? styles.aboutActiveLink
+                  : isActive
+                  ? styles.activeLink
+                  : ''
+              }`;
 
-            return (
-              <li key={link.href} className={styles.navItem}>
-                <a
-                  href={link.href}
-                  className={linkClass}
-                  aria-current={isActive ? 'page' : undefined}
-                  onClick={(e) => handleLinkClick(e, link.href)}
-                >
-                  {link.name}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
+              return (
+                <li key={link.href} className={styles.navItem}>
+                  <a
+                    href={link.href}
+                    className={linkClass}
+                    aria-current={isActive ? 'page' : undefined}
+                    onClick={(e) => handleLinkClick(e, link.href)}
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+          <ThemeToggle variant="desktop" />
+        </div>
 
         {/* Mobile: Hamburger Button */}
         <button
@@ -231,6 +235,7 @@ export default function Navbar({ activePage = 'home', onNavigate }) {
             );
           })}
         </ul>
+        <ThemeToggle variant="mobile" />
       </div>
     </nav>
   );

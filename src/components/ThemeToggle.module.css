@@ -1,0 +1,202 @@
+/* ==========================================================================
+   Project Astitva — Premium Editorial Theme Toggle Capsule
+   Sophisticated, minimal pill design with sliding active indicator
+   ========================================================================== */
+
+.toggleBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  outline: none;
+  border-radius: 999px;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 200ms ease;
+}
+
+.toggleBtn:hover {
+  transform: translateY(-1px);
+}
+
+.toggleBtn:active {
+  transform: translateY(0);
+}
+
+.toggleBtn:focus-visible {
+  outline: 2px solid var(--accent-primary, #F4C400);
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------------------------------
+   CAPSULE TRACK
+   -------------------------------------------------------------------------- */
+.capsuleTrack {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--border-subtle, #EDE8DF);
+  border: 1px solid var(--border, #E3DED4);
+  border-radius: 999px;
+  padding: 2px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition:
+    background-color 260ms ease,
+    border-color 260ms ease;
+}
+
+:global([data-theme="dark"]) .capsuleTrack {
+  background-color: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+/* --------------------------------------------------------------------------
+   SLIDING ACTIVE INDICATOR
+   -------------------------------------------------------------------------- */
+.activeIndicator {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  width: calc(50% - 2px);
+  border-radius: 999px;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(244, 196, 0, 0.45);
+  box-shadow:
+    0 1px 4px rgba(40, 30, 20, 0.08),
+    0 0 6px rgba(244, 196, 0, 0.15);
+  transition:
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 260ms ease,
+    border-color 260ms ease,
+    box-shadow 260ms ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.indicatorLight {
+  transform: translateX(0);
+  left: 2px;
+}
+
+.indicatorDark {
+  transform: translateX(100%);
+  left: 2px;
+}
+
+:global([data-theme="dark"]) .activeIndicator {
+  background-color: #242424;
+  border-color: rgba(244, 196, 0, 0.55);
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.45),
+    0 0 8px rgba(244, 196, 0, 0.2);
+}
+
+/* --------------------------------------------------------------------------
+   OPTIONS (LIGHT & DARK)
+   -------------------------------------------------------------------------- */
+.option {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  color: var(--text-dim, #8A8781);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  transition:
+    color 200ms ease,
+    opacity 200ms ease;
+  min-width: 58px;
+}
+
+.optionActive {
+  color: var(--text-primary, #242424);
+  font-weight: 700;
+}
+
+:global([data-theme="dark"]) .optionActive {
+  color: #FFFFFF;
+}
+
+.icon {
+  flex-shrink: 0;
+  stroke: currentColor;
+  transition: stroke 200ms ease;
+}
+
+.optionActive .icon {
+  stroke: var(--accent-primary, #F4C400);
+}
+
+.optionLabel {
+  line-height: 1;
+}
+
+/* --------------------------------------------------------------------------
+   DESKTOP VARIANT (NAVBAR)
+   -------------------------------------------------------------------------- */
+.desktopVariant {
+  margin-left: 12px;
+  align-self: center;
+}
+
+/* --------------------------------------------------------------------------
+   MOBILE VARIANT (MENU DRAWER)
+   -------------------------------------------------------------------------- */
+.mobileVariant {
+  margin-top: 24px;
+  align-self: center;
+}
+
+.mobileVariant .capsuleTrack {
+  padding: 3px;
+  min-height: 44px;
+}
+
+.mobileVariant .activeIndicator {
+  top: 3px;
+  bottom: 3px;
+  width: calc(50% - 3px);
+  left: 3px;
+}
+
+.mobileVariant .indicatorLight {
+  transform: translateX(0);
+}
+
+.mobileVariant .indicatorDark {
+  transform: translateX(100%);
+}
+
+.mobileVariant .option {
+  padding: 8px 16px;
+  font-size: 0.76rem;
+  gap: 7px;
+  min-width: 78px;
+}
+
+.mobileVariant .icon {
+  width: 15px;
+  height: 15px;
+}
+
+/* --------------------------------------------------------------------------
+   ACCESSIBILITY: PREFERS-REDUCED-MOTION
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .toggleBtn,
+  .capsuleTrack,
+  .activeIndicator,
+  .option,
+  .icon {
+    transition: none !important;
+  }
+}

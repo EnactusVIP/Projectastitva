@@ -416,3 +416,100 @@
     transform: none !important;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Dark Theme Overrides (Restored from Original Project Astitva Dark Design)
+   -------------------------------------------------------------------------- */
+:global([data-theme="dark"]) .railInner {
+  background: rgba(18, 18, 18, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+:global([data-theme="dark"]) .topLabel {
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+}
+
+:global([data-theme="dark"]) .trackBackground {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+:global([data-theme="dark"]) .labelWrapper {
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+}
+
+:global([data-theme="dark"]) .railItem:hover .labelWrapper {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .railItemActive .labelWrapper {
+  color: #facc15 !important;
+}
+
+:global([data-theme="dark"]) .dot {
+  background-color: rgba(255, 255, 255, 0.24);
+}
+
+:global([data-theme="dark"]) .railItem:hover .dot {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+:global([data-theme="dark"]) .railItemPassed .dot {
+  background-color: rgba(250, 204, 21, 0.45);
+}
+
+:global([data-theme="dark"]) .railItemActive .dot {
+  background-color: #facc15;
+  box-shadow: 0 0 10px rgba(250, 204, 21, 0.65);
+}
+
+:global([data-theme="dark"]) .mobilePill {
+  background: rgba(18, 18, 18, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.65);
+}
+
+:global([data-theme="dark"]) .mobileBadge {
+  color: #facc15;
+}
+
+:global([data-theme="dark"]) .mobileDivider {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+:global([data-theme="dark"]) .mobileConnector {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+:global([data-theme="dark"]) .mobileConnectorActive {
+  background: rgba(250, 204, 21, 0.5);
+}
+
+:global([data-theme="dark"]) .mobileStepButton {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+:global([data-theme="dark"]) .mobileStepButtonActive {
+  color: #facc15 !important;
+}
+
+:global([data-theme="dark"]) .mobileStepButtonPassed {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+:global([data-theme="dark"]) .mobileStepButton:focus-visible {
+  outline: 1px solid #facc15;
+}
+
+:global([data-theme="dark"]) .mobileProgressBar {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+:global([data-theme="dark"]) .mobileProgressFill {
+  background: #facc15;
+  box-shadow: 0 0 6px rgba(250, 204, 21, 0.5);
+}

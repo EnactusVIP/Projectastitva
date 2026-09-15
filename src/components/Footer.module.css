@@ -421,3 +421,114 @@
     transform: none !important;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Dark Theme Overrides (Restored from Original Project Astitva Dark Design)
+   -------------------------------------------------------------------------- */
+:global([data-theme="dark"]) .footer {
+  background-color: #121212;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  color: var(--text-primary, #ffffff);
+}
+
+:global([data-theme="dark"]) .brandTitle {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .brandTagline {
+  color: rgba(250, 204, 21, 0.92);
+}
+
+:global([data-theme="dark"]) .brandDescription {
+  color: rgba(255, 255, 255, 0.52);
+}
+
+:global([data-theme="dark"]) .enactusSubtle {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+:global([data-theme="dark"]) .enactusLabel {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+:global([data-theme="dark"]) .enactusLogo {
+  filter: brightness(2.1) contrast(1.05);
+}
+
+:global([data-theme="dark"]) .columnHeading {
+  color: #facc15;
+}
+
+:global([data-theme="dark"]) .headingLine {
+  background-color: #facc15;
+}
+
+:global([data-theme="dark"]) .navLink {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+:global([data-theme="dark"]) .navLink:hover {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .navLink:hover .navLinkArrow {
+  color: #facc15;
+}
+
+:global([data-theme="dark"]) .navLink:focus-visible {
+  outline: 1px solid #facc15;
+}
+
+:global([data-theme="dark"]) .connectLink {
+  background-color: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+:global([data-theme="dark"]) .connectIconWrapper {
+  background-color: rgba(250, 204, 21, 0.08);
+  border: 1px solid rgba(250, 204, 21, 0.24);
+  color: #facc15;
+}
+
+:global([data-theme="dark"]) .connectLink:hover {
+  border-color: rgba(250, 204, 21, 0.38);
+  background-color: rgba(250, 204, 21, 0.08);
+}
+
+:global([data-theme="dark"]) .connectLink:hover .connectTextPrimary {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .connectLink:hover .connectIconWrapper {
+  color: #facc15;
+}
+
+:global([data-theme="dark"]) .connectLink:focus-visible {
+  outline: 1px solid #facc15;
+}
+
+:global([data-theme="dark"]) .connectTextPrimary {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+:global([data-theme="dark"]) .connectTextSecondary {
+  color: rgba(255, 255, 255, 0.44);
+}
+
+:global([data-theme="dark"]) .footerDivider {
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.08) 12%,
+    rgba(255, 255, 255, 0.08) 88%,
+    transparent
+  );
+}
+
+:global([data-theme="dark"]) .copyright {
+  color: rgba(255, 255, 255, 0.42);
+}
+
+:global([data-theme="dark"]) .madeWithPurpose {
+  color: rgba(255, 255, 255, 0.48);
+}

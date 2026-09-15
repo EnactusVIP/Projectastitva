@@ -280,3 +280,58 @@
     opacity: 1 !important;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Dark Theme Overrides (Restored from Original Project Astitva Dark Design)
+   -------------------------------------------------------------------------- */
+:global([data-theme="dark"]) .section {
+  background-color: #171717;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+:global([data-theme="dark"]) .ambientGlow {
+  background: radial-gradient(
+    circle,
+    rgba(250, 204, 21, 0.03) 0%,
+    rgba(255, 255, 255, 0.01) 40%,
+    transparent 70%
+  );
+}
+
+:global([data-theme="dark"]) .eyebrowDot {
+  background-color: rgba(250, 204, 21, 0.7);
+  box-shadow: 0 0 8px rgba(250, 204, 21, 0.6);
+}
+
+:global([data-theme="dark"]) .heading {
+  color: #facc15;
+  font-weight: 600;
+}
+
+:global([data-theme="dark"]) .separator {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+:global([data-theme="dark"]) .quoteCard {
+  background-color: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+}
+
+:global([data-theme="dark"]) .englishQuote {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .hindiQuote {
+  color: rgba(255, 255, 255, 0.58);
+}
+
+:global([data-theme="dark"]) .drawingLine {
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(250, 204, 21, 0.75) 30%,
+    rgba(250, 204, 21, 0.75) 70%,
+    transparent 100%
+  );
+}

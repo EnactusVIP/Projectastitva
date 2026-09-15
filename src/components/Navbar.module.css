@@ -81,6 +81,12 @@
 /* --------------------------------------------------------------------------
    Desktop Navigation
    -------------------------------------------------------------------------- */
+.desktopNavWrapper {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 1.8vw, 24px);
+}
+
 .desktopNav {
   display: flex;
   align-items: center;
@@ -329,6 +335,7 @@
 }
 
 @media (max-width: 768px) {
+  .desktopNavWrapper,
   .desktopNav {
     display: none;
   }
@@ -358,4 +365,76 @@
     height: 88px;
     transform: translateY(-1.6px);
   }
+}
+
+/* --------------------------------------------------------------------------
+   Dark Theme Overrides (Restored from Original Project Astitva Dark Design)
+   -------------------------------------------------------------------------- */
+:global([data-theme="dark"]) .scrolled {
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+:global([data-theme="dark"]) .navLink {
+  color: var(--text-primary, #ffffff);
+  opacity: 0.92;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+:global([data-theme="dark"]) .navLink:hover {
+  opacity: 1;
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .activeLink {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .activeLink::after {
+  background-color: var(--accent-primary, #F4C400);
+}
+
+:global([data-theme="dark"]) .aboutActiveLink {
+  color: #facc15;
+  text-shadow: 0 0 16px rgba(250, 204, 21, 0.4);
+}
+
+:global([data-theme="dark"]) .aboutActiveLink::after {
+  background-color: #facc15;
+}
+
+:global([data-theme="dark"]) .hamburger {
+  color: var(--text-primary, #ffffff);
+}
+
+:global([data-theme="dark"]) .hamburger:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+:global([data-theme="dark"]) .mobileMenu {
+  background-color: rgba(18, 18, 18, 0.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+:global([data-theme="dark"]) .mobileNavLink {
+  color: var(--text-primary, #ffffff);
+}
+
+:global([data-theme="dark"]) .mobileActiveLink,
+:global([data-theme="dark"]) .mobileAboutActiveLink {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .mobileActiveLink::after,
+:global([data-theme="dark"]) .mobileAboutActiveLink::after {
+  background-color: var(--accent-primary, #F4C400);
+}
+
+:global([data-theme="dark"]) .logo {
+  filter: brightness(2.1) contrast(1.05);
 }

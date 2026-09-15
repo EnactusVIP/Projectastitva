@@ -600,3 +600,129 @@
     animation: none !important;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Dark Theme Overrides (Restored from Original Project Astitva Dark Design)
+   -------------------------------------------------------------------------- */
+:global([data-theme="dark"]) .hero {
+  background-color: #141414;
+}
+
+:global([data-theme="dark"]) .bgImage {
+  filter: brightness(0.85) contrast(1.06);
+}
+
+:global([data-theme="dark"]) .overlayBase {
+  background: rgba(14, 14, 14, 0.52);
+}
+
+:global([data-theme="dark"]) .overlayRadial {
+  background: radial-gradient(
+    ellipse 85% 65% at 50% 48%,
+    rgba(14, 14, 14, 0.82) 0%,
+    rgba(14, 14, 14, 0.6) 55%,
+    rgba(14, 14, 14, 0.25) 85%,
+    transparent 100%
+  );
+}
+
+:global([data-theme="dark"]) .bottomFade {
+  background: linear-gradient(to top, #171717 0%, rgba(23, 23, 23, 0.8) 50%, transparent 100%);
+}
+
+:global([data-theme="dark"]) .title {
+  color: #ffffff;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.7);
+}
+
+:global([data-theme="dark"]) .tagline {
+  color: rgba(255, 255, 255, 0.88);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+}
+
+:global([data-theme="dark"]) .eyebrow {
+  color: #facc15;
+}
+
+:global([data-theme="dark"]) .eyebrowDot {
+  background-color: #facc15;
+  box-shadow: 0 0 8px rgba(250, 204, 21, 0.7);
+}
+
+:global([data-theme="dark"]) .eyebrowLine {
+  background: linear-gradient(to right, rgba(250, 204, 21, 0.6), transparent);
+}
+
+:global([data-theme="dark"]) .badgeGlow {
+  background: radial-gradient(circle, rgba(250, 204, 21, 0.2) 0%, transparent 70%);
+}
+
+:global([data-theme="dark"]) .badgeCircle {
+  background: #ffffff;
+  border: 1.5px solid rgba(250, 204, 21, 0.35);
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.52),
+    0 2px 8px rgba(0, 0, 0, 0.32);
+}
+
+:global([data-theme="dark"]) .badgeTooltip {
+  color: #facc15;
+  background-color: rgba(18, 18, 18, 0.92);
+  border: 1px solid rgba(250, 204, 21, 0.24);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: none;
+}
+
+:global([data-theme="dark"]) .badgeLink:hover .badgeCircle,
+:global([data-theme="dark"]) .badgeButton:hover .badgeCircle {
+  border-color: #facc15;
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.6),
+    0 0 24px rgba(250, 204, 21, 0.28);
+}
+
+:global([data-theme="dark"]) .badgeButton:focus-visible .badgeCircle {
+  outline: 2px solid #facc15;
+}
+
+:global([data-theme="dark"]) .scrollCueButton {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+:global([data-theme="dark"]) .scrollCueButton:hover {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .scrollCueButton:hover .scrollCueText {
+  color: #facc15;
+}
+
+:global([data-theme="dark"]) .scrollCueIndicator {
+  background-color: rgba(255, 255, 255, 0.18);
+}
+
+:global([data-theme="dark"]) .scrollCueLine {
+  background: linear-gradient(to bottom, #facc15 0%, transparent 100%);
+}
+
+@media (max-width: 768px) {
+  :global([data-theme="dark"]) .bgImage {
+    object-position: center 26%;
+    filter: brightness(0.82) contrast(1.05);
+  }
+
+  :global([data-theme="dark"]) .overlayBase {
+    background: rgba(14, 14, 14, 0.44);
+  }
+
+  :global([data-theme="dark"]) .overlayRadial {
+    background: radial-gradient(
+      ellipse 95% 75% at 50% 46%,
+      rgba(14, 14, 14, 0.88) 0%,
+      rgba(14, 14, 14, 0.65) 55%,
+      rgba(14, 14, 14, 0.28) 85%,
+      transparent 100%
+    );
+  }
+}

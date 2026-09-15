@@ -278,3 +278,18 @@
     transition: none !important;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Dark Theme Overrides (Restored from Original Project Astitva Dark Design)
+   -------------------------------------------------------------------------- */
+:global([data-theme="dark"]) .container {
+  background-color: #1a1a1a;
+}
+
+:global([data-theme="dark"]) .word {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .languageLabel {
+  color: #facc15;
+}
