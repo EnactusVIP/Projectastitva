@@ -16,7 +16,7 @@ export async function callGemini(messages) {
     throw err;
   }
 
-  const modelName = (process.env.GEMINI_MODEL || 'gemini-2.0-flash').trim();
+  const modelName = (process.env.GEMINI_MODEL || 'gemini-3.5-flash-lite').trim();
 
   const ai = new GoogleGenAI({ apiKey });
 
