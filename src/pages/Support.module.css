@@ -1414,3 +1414,103 @@
   border-color: rgba(255, 255, 255, 0.35);
   color: #ffffff;
 }
+
+:global([data-theme="dark"]) .heroTopFade {
+  background: linear-gradient(
+    to bottom,
+    rgba(20, 20, 20, 0.9) 0%,
+    rgba(20, 20, 20, 0.4) 60%,
+    transparent 100%
+  );
+}
+
+:global([data-theme="dark"]) .heroBottomFade {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(20, 20, 20, 0.25) 20%,
+    rgba(20, 20, 20, 0.7) 45%,
+    rgba(20, 20, 20, 0.95) 70%,
+    #141414 85%,
+    #141414 100%
+  );
+}
+
+:global([data-theme="dark"]) .pillarsSection,
+:global([data-theme="dark"]) .howSection,
+:global([data-theme="dark"]) .commitmentSection,
+:global([data-theme="dark"]) .reachSection,
+:global([data-theme="dark"]) .closingSection {
+  background-color: transparent;
+}
+
+:global([data-theme="dark"]) .threadNode {
+  background-color: #141414;
+  border-color: var(--accent);
+}
+
+:global([data-theme="dark"]) .chapterTab {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+:global([data-theme="dark"]) .chapterTabActive {
+  background-color: rgba(255, 255, 255, 0.06);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .displayCard {
+  background-color: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 3px solid var(--accent);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+}
+
+:global([data-theme="dark"]) .displayStatement {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .displayBody {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+:global([data-theme="dark"]) .artTherapyTeaser {
+  background-color: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .statementLine {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+:global([data-theme="dark"]) .chapterTitle {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .displayActionText {
+  color: #facc15;
+}
+
+:global([data-theme="dark"]) .howCopy {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+:global([data-theme="dark"]) .teaserButton {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .closingHeadline {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .howRows,
+:global([data-theme="dark"]) .howRow {
+  border-top-color: rgba(255, 255, 255, 0.08);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+
+

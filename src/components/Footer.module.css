@@ -507,15 +507,23 @@
   outline: 1px solid #facc15;
 }
 
-:global([data-theme="dark"]) .connectTextPrimary {
-  color: rgba(255, 255, 255, 0.78);
+:global([data-theme="dark"]) .connectTextPrimary,
+:global([data-theme="dark"]) .connectTitle {
+  color: rgba(255, 255, 255, 0.82);
 }
 
-:global([data-theme="dark"]) .connectTextSecondary {
+:global([data-theme="dark"]) .connectTextSecondary,
+:global([data-theme="dark"]) .connectValue,
+:global([data-theme="dark"]) .connectMeta {
   color: rgba(255, 255, 255, 0.44);
 }
 
+:global([data-theme="dark"]) .connectLink:hover .connectTitle {
+  color: #ffffff;
+}
+
 :global([data-theme="dark"]) .footerDivider {
+
   background: linear-gradient(
     to right,
     transparent,

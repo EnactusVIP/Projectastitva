@@ -1013,37 +1013,75 @@
   color: rgba(255, 255, 255, 0.65);
 }
 
-:global([data-theme="dark"]) .fieldLabel {
-  color: rgba(255, 255, 255, 0.82);
+:global([data-theme="dark"]) .fieldLabel,
+:global([data-theme="dark"]) .formLabel {
+  color: rgba(255, 255, 255, 0.75);
 }
 
 :global([data-theme="dark"]) .input,
-:global([data-theme="dark"]) .textarea {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+:global([data-theme="dark"]) .textarea,
+:global([data-theme="dark"]) .formInput,
+:global([data-theme="dark"]) .formTextarea {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   color: #ffffff;
 }
 
 :global([data-theme="dark"]) .input::placeholder,
-:global([data-theme="dark"]) .textarea::placeholder {
-  color: rgba(255, 255, 255, 0.35);
+:global([data-theme="dark"]) .textarea::placeholder,
+:global([data-theme="dark"]) .formInput::placeholder,
+:global([data-theme="dark"]) .formTextarea::placeholder {
+  color: rgba(255, 255, 255, 0.3);
 }
 
 :global([data-theme="dark"]) .input:focus,
-:global([data-theme="dark"]) .textarea:focus {
+:global([data-theme="dark"]) .textarea:focus,
+:global([data-theme="dark"]) .formInput:focus,
+:global([data-theme="dark"]) .formTextarea:focus {
   border-color: #facc15;
-  background: rgba(255, 255, 255, 0.06);
-  box-shadow: 0 0 0 2px rgba(250, 204, 21, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 14px rgba(250, 204, 21, 0.2);
 }
 
 :global([data-theme="dark"]) .submitButton {
   background-color: #facc15;
-  color: #141414;
+  color: #121212;
+  border: none;
 }
 
 :global([data-theme="dark"]) .submitButton:hover {
   background-color: #fde047;
-  color: #141414;
+  color: #121212;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(250, 204, 21, 0.35);
+}
+
+:global([data-theme="dark"]) .contactItem {
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+:global([data-theme="dark"]) .contactItem:hover {
+  background-color: rgba(255, 255, 255, 0.04);
+  border-color: rgba(250, 204, 21, 0.3);
+}
+
+:global([data-theme="dark"]) .iconCircle {
+  background-color: rgba(250, 204, 21, 0.08);
+  border: 1px solid rgba(250, 204, 21, 0.2);
+  color: #facc15;
+}
+
+:global([data-theme="dark"]) .contactStatic {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .visualTopFade {
+  background: linear-gradient(to bottom, #141414 0%, transparent 100%);
+}
+
+:global([data-theme="dark"]) .visualBottomFade {
+  background: linear-gradient(to top, #141414 0%, transparent 100%);
 }
 
 :global([data-theme="dark"]) .saathiCard {
@@ -1058,3 +1096,52 @@
 :global([data-theme="dark"]) .saathiDescription {
   color: rgba(255, 255, 255, 0.75);
 }
+
+:global([data-theme="dark"]) .saathiButton {
+  color: #facc15;
+}
+
+:global([data-theme="dark"]) .saathiArrow {
+  color: #facc15;
+}
+
+:global([data-theme="dark"]) .buttonUnderline {
+  background-color: #facc15;
+}
+
+:global([data-theme="dark"]) .modalCard {
+  background-color: #181818;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+}
+
+:global([data-theme="dark"]) .modalHeader {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+:global([data-theme="dark"]) .modalTitle {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .promptItem {
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+:global([data-theme="dark"]) .promptItem:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: #facc15;
+  color: #facc15;
+}
+
+:global([data-theme="dark"]) .modalFooter {
+  background-color: #141414;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+:global([data-theme="dark"]) .modalWelcome {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+

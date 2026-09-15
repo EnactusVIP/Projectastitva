@@ -1250,3 +1250,43 @@
   border-color: rgba(255, 255, 255, 0.35);
   color: #ffffff;
 }
+
+:global([data-theme="dark"]) .heroBottomFade {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(20, 20, 20, 0.5) 40%,
+    rgba(20, 20, 20, 0.9) 80%,
+    #141414 100%
+  );
+}
+
+:global([data-theme="dark"]) .challengePill {
+  background-color: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .soulScene,
+:global([data-theme="dark"]) .impactSection,
+:global([data-theme="dark"]) .closingScene {
+  background-color: transparent;
+}
+
+:global([data-theme="dark"]) .statementLine {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+:global([data-theme="dark"]) .soulBrandTitle {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .soulEnglish {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+:global([data-theme="dark"]) .closingHeadline {
+  color: #ffffff;
+}
+
+

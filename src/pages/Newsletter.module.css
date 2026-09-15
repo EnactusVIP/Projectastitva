@@ -1005,3 +1005,58 @@
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: rgba(255, 255, 255, 0.05);
 }
+
+:global([data-theme="dark"]) .topicPill {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+:global([data-theme="dark"]) .topicPillActive {
+  background-color: rgba(250, 204, 21, 0.12);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+:global([data-theme="dark"]) .emptyState {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+:global([data-theme="dark"]) .modalHeader {
+  background-color: #181818;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+:global([data-theme="dark"]) .modalArticleTitle {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .modalParagraph {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+:global([data-theme="dark"]) .modalFooter {
+  background-color: #141414;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+:global([data-theme="dark"]) .modalSignature {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+:global([data-theme="dark"]) .modalReturnBtn {
+  color: var(--accent);
+}
+
+:global([data-theme="dark"]) .clearFilterButton {
+  color: #facc15;
+}
+
+:global([data-theme="dark"]) .categoryList {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+
+

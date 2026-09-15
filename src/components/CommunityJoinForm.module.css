@@ -323,7 +323,8 @@
   accent-color: #facc15;
 }
 
-:global([data-theme="dark"]) .checkboxLabel {
+:global([data-theme="dark"]) .checkboxLabel,
+:global([data-theme="dark"]) .consentLabel {
   color: rgba(255, 255, 255, 0.7);
 }
 
