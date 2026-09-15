@@ -3,6 +3,7 @@ import Hero from '../components/Hero'
 import AstitvaIntro from '../components/AstitvaIntro'
 import ProjectOverview from '../components/ProjectOverview'
 import ImpactSection from '../components/ImpactSection'
+import SaathiSection from '../components/SaathiSection'
 import HomeCTA from '../components/HomeCTA'
 import Footer from '../components/Footer'
 
@@ -15,6 +16,7 @@ export default function Home({ onNavigate, showNavbar = false, showFooter = fals
         <AstitvaIntro />
         <ProjectOverview onNavigate={onNavigate} />
         <ImpactSection onNavigate={onNavigate} />
+        <SaathiSection />
         <HomeCTA onNavigate={onNavigate} />
       </main>
       {showFooter && <Footer onNavigate={onNavigate} />}
