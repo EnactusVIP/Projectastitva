@@ -42,7 +42,9 @@ const SDG_DATA = [
   {
     number: '5',
     title: 'GENDER EQUALITY',
-    description: 'Equality begins with the freedom to exist as yourself. We create safe spaces to explore identity, seek support, and advance inclusion for everyone.',
+    headline: 'Equality begins with the freedom to exist as yourself.',
+    description:
+      'Project Astitva creates spaces where people can explore identity, seek support, and participate without fear of judgment or exclusion.',
     image: sdg5Image,
     accentColor: '#FF3A21',
   },
@@ -393,6 +395,7 @@ export default function AboutUs({ onNavigate, showFooter = false }) {
                   key={sdg.number}
                   number={sdg.number}
                   title={sdg.title}
+                  headline={sdg.headline}
                   description={sdg.description}
                   image={sdg.image}
                   accentColor={sdg.accentColor}
