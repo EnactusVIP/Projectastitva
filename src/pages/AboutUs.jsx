@@ -42,7 +42,7 @@ const SDG_DATA = [
   {
     number: '5',
     title: 'GENDER EQUALITY',
-    headline: 'Equality begins with the freedom to exist as yourself.',
+    description: 'Equality begins with the freedom to exist as yourself.',
     image: sdg5Image,
     accentColor: '#FF3A21',
   },
@@ -56,7 +56,7 @@ const SDG_DATA = [
   {
     number: '16',
     title: 'PEACE, JUSTICE AND STRONG INSTITUTIONS',
-    description: 'Promoting peaceful and inclusive societies, providing access to justice for all and building effective, accountable institutions at all levels.',
+    description: 'Promoting peaceful, inclusive societies, access to justice for all, and accountable institutions.',
     image: sdg16Image,
     accentColor: '#00689D',
   },
@@ -393,7 +393,6 @@ export default function AboutUs({ onNavigate, showFooter = false }) {
                   key={sdg.number}
                   number={sdg.number}
                   title={sdg.title}
-                  headline={sdg.headline}
                   description={sdg.description}
                   image={sdg.image}
                   accentColor={sdg.accentColor}

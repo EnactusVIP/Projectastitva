@@ -4,7 +4,6 @@ import styles from './SDGCard.module.css';
 export default function SDGCard({
   number,
   title,
-  headline,
   description,
   image,
   accentColor,
@@ -60,11 +59,9 @@ export default function SDGCard({
           <div className={styles.backAccentBar} aria-hidden="true" />
 
           <div className={styles.backTopRow}>
-            {String(number) !== '5' && (
-              <span className={styles.backNumber} aria-hidden="true">
-                {formattedNumber}
-              </span>
-            )}
+            <span className={styles.backNumber} aria-hidden="true">
+              {formattedNumber}
+            </span>
             <span className={styles.backBadge} style={{ color: accentColor }}>
               SDG {formattedNumber}
             </span>
@@ -72,7 +69,6 @@ export default function SDGCard({
 
           <div className={styles.backContent}>
             <h3 className={styles.backTitle}>{title}</h3>
-            {headline && <p className={styles.backHeadline}>{headline}</p>}
             {description && <p className={styles.backDescription}>{description}</p>}
           </div>
 

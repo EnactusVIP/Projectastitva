@@ -223,6 +223,7 @@
   flex: 1;
   margin: 3px 0 4px;
   min-height: 0;
+  overflow: hidden;
 }
 
 .backTitle {
@@ -234,17 +235,6 @@
   letter-spacing: 0.02em;
   text-transform: uppercase;
   margin: 0 0 3px;
-  flex-shrink: 0;
-}
-
-.backHeadline {
-  font-family: var(--font-heading, 'Playfair Display', serif);
-  font-size: clamp(0.78rem, 0.90vw, 0.88rem);
-  font-style: italic;
-  font-weight: 400;
-  line-height: 1.38;
-  color: var(--accent-gold, #B45309);
-  margin: 6px 0 0;
   flex-shrink: 0;
 }
 
@@ -431,10 +421,6 @@
 
 :global([data-theme="dark"]) .cardFaceFront {
   background-color: #171717;
-}
-
-:global([data-theme="dark"]) .backHeadline {
-  color: #facc15;
 }
 
 :global([data-theme="dark"]) .flipBackHint {
