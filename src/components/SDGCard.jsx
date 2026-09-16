@@ -60,9 +60,11 @@ export default function SDGCard({
           <div className={styles.backAccentBar} aria-hidden="true" />
 
           <div className={styles.backTopRow}>
-            <span className={styles.backNumber} aria-hidden="true">
-              {formattedNumber}
-            </span>
+            {String(number) !== '5' && (
+              <span className={styles.backNumber} aria-hidden="true">
+                {formattedNumber}
+              </span>
+            )}
             <span className={styles.backBadge} style={{ color: accentColor }}>
               SDG {formattedNumber}
             </span>
