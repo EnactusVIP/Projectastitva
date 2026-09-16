@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Users, Sparkles } from 'lucide-react';
 import Footer from '../components/Footer';
 import SDGCard from '../components/SDGCard';
+import SDG5Feature from '../components/SDG5Feature';
 import ChapterRail from '../components/ChapterRail';
 import styles from './AboutUs.module.css';
 
@@ -378,6 +379,9 @@ export default function AboutUs({ onNavigate, showFooter = false }) {
                 </p>
               </div>
             </div>
+
+            {/* Featured SDG 5: Gender Equality Spotlight */}
+            <SDG5Feature isVisible={reveals.impact} />
 
             <div className={styles.sdgGrid}>
               {SDG_DATA.map((sdg, index) => (
