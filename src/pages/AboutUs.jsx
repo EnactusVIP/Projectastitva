@@ -43,8 +43,6 @@ const SDG_DATA = [
     number: '5',
     title: 'GENDER EQUALITY',
     headline: 'Equality begins with the freedom to exist as yourself.',
-    description:
-      'Project Astitva creates spaces where people can explore identity, seek support, and participate without fear of judgment or exclusion.',
     image: sdg5Image,
     accentColor: '#FF3A21',
   },

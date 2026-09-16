@@ -73,7 +73,7 @@ export default function SDGCard({
           <div className={styles.backContent}>
             <h3 className={styles.backTitle}>{title}</h3>
             {headline && <p className={styles.backHeadline}>{headline}</p>}
-            <p className={styles.backDescription}>{description}</p>
+            {description && <p className={styles.backDescription}>{description}</p>}
           </div>
 
           <div className={styles.backFooter}>
