@@ -761,8 +761,8 @@
 
 .sdgGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(14px, 1.8vw, 24px);
+  grid-template-columns: repeat(5, 1fr);
+  gap: clamp(10px, 1.3vw, 18px);
   width: 100%;
   margin-top: clamp(28px, 3.5vh, 40px);
 }
@@ -873,16 +873,6 @@
 /* --------------------------------------------------------------------------
    RESPONSIVE
    -------------------------------------------------------------------------- */
-@media (max-width: 1180px) {
-  .sdgGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
 @media (max-width: 1024px) {
   .heroBgImage {
     object-position: center 38%;
@@ -905,7 +895,18 @@
 
   .sdgGrid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
+    gap: 20px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .sdgGrid > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    max-width: 290px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
   }
 }
 

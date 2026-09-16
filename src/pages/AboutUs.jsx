@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Users, Sparkles } from 'lucide-react';
 import Footer from '../components/Footer';
 import SDGCard from '../components/SDGCard';
-import SDG5Feature from '../components/SDG5Feature';
 import ChapterRail from '../components/ChapterRail';
 import styles from './AboutUs.module.css';
 
@@ -12,6 +11,7 @@ import communityIllustration from '../assets/community-visual.png';
 // Direct asset imports for the official SDG artwork
 import sdg3Image from '../assets/E_WEB_03.png';
 import sdg4Image from '../assets/E_WEB_04.png';
+import sdg5Image from '../assets/E_WEB_05.jpg';
 import sdg10Image from '../assets/E_WEB_10.png';
 import sdg16Image from '../assets/E_PRINT_16.jpg';
 
@@ -38,6 +38,13 @@ const SDG_DATA = [
     description: 'Ensuring inclusive and equitable quality education and promoting lifelong learning opportunities for all.',
     image: sdg4Image,
     accentColor: '#C5192D',
+  },
+  {
+    number: '5',
+    title: 'GENDER EQUALITY',
+    description: 'Equality begins with the freedom to exist as yourself. We create safe spaces to explore identity, seek support, and advance inclusion for everyone.',
+    image: sdg5Image,
+    accentColor: '#FF3A21',
   },
   {
     number: '10',
@@ -379,9 +386,6 @@ export default function AboutUs({ onNavigate, showFooter = false }) {
                 </p>
               </div>
             </div>
-
-            {/* Featured SDG 5: Gender Equality Spotlight */}
-            <SDG5Feature isVisible={reveals.impact} />
 
             <div className={styles.sdgGrid}>
               {SDG_DATA.map((sdg, index) => (
