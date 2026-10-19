@@ -1,30 +1,494 @@
-.mainStage { padding: calc(var(--navbar-height) + 72px) var(--page-pad) 72px; }
-.composition { max-width: var(--page-max); margin: auto; display: grid; grid-template-columns: 1.25fr 1fr; gap: clamp(32px, 4vw, 64px); align-items: center; }
-.content { min-width: 0; }
-.eyebrow { color: var(--accent-text); letter-spacing: .22em; font-size: .72rem; font-weight: 600; margin-bottom: 24px; }
-.title { font-size: clamp(3rem, 6.25vw, 5.6rem); line-height: 1.06; letter-spacing: -.035em; margin-bottom: 28px; }
-.tagline { font-size: clamp(1.2rem, 1.7vw, 1.5rem); line-height: 1.55; color: var(--forest); max-width: 34ch; margin-bottom: 24px; }
-.description { color: var(--body); font-size: 1rem; line-height: 1.85; max-width: 58ch; }
-.actions { display: flex; flex-wrap: wrap; align-items: center; column-gap: 24px; row-gap: 16px; margin-top: 30px; }
-.primaryAction { display: inline-flex; gap: 16px; align-items: center; justify-content: center; min-height: 48px; padding: 12px 20px; color: var(--paper); background: var(--heading); border: 1px solid var(--heading); border-radius: 3px; font-size: .875rem; font-weight: 600; transition: background-color 160ms ease, color 160ms ease; }
-.primaryAction:hover { background: var(--paper); color: var(--heading); }
-.homeLink { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: 5px; color: var(--heading); font-size: .875rem; }
-.homeLink:hover { color: var(--accent-text); }
-.artwork { min-width: 0; background: transparent; padding: 12px 12px 24px; border-bottom: 1px solid var(--sage); }
-.artwork svg { width: 100%; height: auto; }
-.artwork figcaption { font-size: .7rem; color: var(--label); letter-spacing: .1em; text-align: center; }
-@media (max-width: 1000px) and (min-width: 768px) {
- .composition { grid-template-columns: 1.1fr .9fr; gap: 24px; }
- .title { font-size: 3.5rem; }
+/* ==========================================================================
+   Art Therapy / Coming Soon Page Styles (CSS Module)
+   Project Astitva — Minimal Atmospheric Editorial Layout
+   Restored Original Design — Light Theme
+   ========================================================================== */
+
+.pageContainer {
+  --page-max: 960px;
+  --page-pad: clamp(24px, 5vw, 64px);
+
+  /* Light Theme Color Aliases */
+  --accent: #F4C400;
+  --accent-gold: #B45309;
+  --accent-glow: rgba(244, 196, 0, 0.2);
+  --text-hi: #242424;
+  --text-mid: #4A4A4A;
+  --text-muted: #686868;
+
+  background-color: #FAF9F6;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(244, 196, 0, 0.04), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 85% 50%, rgba(226, 154, 38, 0.025), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 15% 75%, rgba(233, 223, 240, 0.06), transparent 70%);
+  color: var(--text-primary, #242424);
+  min-height: calc(100vh - var(--navbar-height, 80px));
+  position: relative;
+  overflow-x: hidden;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 800ms ease;
 }
-@media (max-width: 767px) {
- .mainStage { padding-top: calc(var(--navbar-height) + 36px); padding-bottom: 48px; }
- .composition { grid-template-columns: 1fr; gap: 32px; }
- .title { font-size: clamp(1.65rem, 7vw, 3.3rem); white-space: nowrap; margin-bottom: 22px; }
- .eyebrow { margin-bottom: 20px; }
- .tagline { font-size: 1.2rem; }
- .actions { flex-direction: column; align-items: stretch; gap: 10px; }
- .homeLink { align-self: center; }
- .artwork { max-width: 460px; width: 100%; margin: auto; }
+
+.stageBgReady {
+  /* Soft transition as stage 1 resolves */
+  opacity: 1;
 }
-@media (prefers-reduced-motion: reduce) { .primaryAction { transition: none; } }
+
+/* --------------------------------------------------------------------------
+   MAIN STAGE (~90-100vh viewport centering with natural breathing room)
+   -------------------------------------------------------------------------- */
+.mainStage {
+  position: relative;
+  width: 100%;
+  min-height: calc(88vh - var(--navbar-height, 80px));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--navbar-height, 80px) + 24px) var(--page-pad) clamp(48px, 8vh, 88px);
+}
+
+.ambientGlow {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(560px, 85vw);
+  height: min(340px, 55vw);
+  background: radial-gradient(
+    circle at center,
+    rgba(244, 196, 0, 0.06) 0%,
+    rgba(255, 255, 255, 0.02) 45%,
+    transparent 75%
+  );
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.contentCard {
+  position: relative;
+  z-index: 2;
+  max-width: var(--page-max);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+/* --------------------------------------------------------------------------
+   EYEBROW
+   -------------------------------------------------------------------------- */
+.eyebrowWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: clamp(20px, 3vh, 32px);
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.eyebrow {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.74rem, 0.9vw, 0.82rem);
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--accent-gold, #B45309);
+}
+
+/* --------------------------------------------------------------------------
+   HEADING BLOCK & ORGANIC ART MOTIF
+   -------------------------------------------------------------------------- */
+.headingBlock {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: clamp(20px, 3.5vh, 32px);
+}
+
+.artMotif {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(840px, 94vw);
+  height: auto;
+  pointer-events: none;
+  z-index: 1;
+  overflow: visible;
+}
+
+.drawnStroke {
+  stroke: url(#artStrokeGrad);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 2400ms cubic-bezier(0.25, 1, 0.5, 1);
+  opacity: 0.9;
+}
+
+.echoStroke {
+  stroke: #E3DED4;
+  stroke-width: 0.9;
+  stroke-linecap: round;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 2200ms cubic-bezier(0.25, 1, 0.5, 1) 250ms;
+}
+
+.drawMotif .drawnStroke,
+.drawMotif .echoStroke {
+  stroke-dashoffset: 0;
+}
+
+.title {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: clamp(3.4rem, 8vw, 6.8rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--text-hi);
+  margin: 0;
+  user-select: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 900ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --------------------------------------------------------------------------
+   SUPPORTING STATEMENT
+   -------------------------------------------------------------------------- */
+.statement {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+  font-weight: 400;
+  color: var(--text-mid);
+  line-height: 1.45;
+  margin: 0;
+  max-width: 620px;
+  letter-spacing: -0.01em;
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 900ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --------------------------------------------------------------------------
+   SECONDARY / ACTION DETAIL
+   -------------------------------------------------------------------------- */
+.bottomDetail {
+  margin-top: clamp(48px, 8vh, 72px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.detailText {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.82rem, 1vw, 0.88rem);
+  color: var(--text-muted);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.actionsRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.primaryActionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 30px;
+  background-color: #242424;
+  color: #FFFFFF;
+  border: 1px solid #242424;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease,
+    transform 200ms ease;
+}
+
+.primaryActionBtn:hover {
+  background-color: var(--accent-primary, #F4C400);
+  border-color: var(--accent-primary, #F4C400);
+  color: #242424;
+  transform: translateY(-2px);
+}
+
+.primaryActionBtn .arrow {
+  color: inherit;
+  transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.primaryActionBtn:hover .arrow {
+  transform: translateX(4px);
+}
+
+.primaryActionBtn:focus-visible {
+  outline: 2px solid #F4C400;
+  outline-offset: 4px;
+}
+
+.inProgressAction {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: #242424;
+  cursor: pointer;
+  padding: 6px 10px;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: color 240ms ease;
+}
+
+.inProgressLine {
+  display: inline-block;
+  width: 14px;
+  height: 1.5px;
+  background-color: #F4C400;
+  transition:
+    width 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 240ms ease;
+}
+
+.inProgressText {
+  color: inherit;
+}
+
+.inProgressAction:hover {
+  color: #000000;
+}
+
+.inProgressAction:hover .inProgressLine {
+  width: 26px;
+  background-color: #F4C400;
+}
+
+.inProgressAction:focus-visible {
+  outline: 1px solid #F4C400;
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   STAGES / VISIBILITY
+   -------------------------------------------------------------------------- */
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE DESIGN
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .title {
+    font-size: clamp(2.6rem, 10vw, 4rem);
+    letter-spacing: -0.02em;
+  }
+
+  .statement {
+    font-size: 1.15rem;
+    padding: 0 16px;
+  }
+
+  .artMotif {
+    width: 110vw;
+  }
+
+  .bottomDetail {
+    gap: 12px;
+    margin-top: 42px;
+  }
+
+  .actionsRow {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pageContainer {
+    --page-pad: 20px;
+  }
+
+  .title {
+    font-size: clamp(2.2rem, 9.5vw, 3rem);
+  }
+
+  .statement {
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+
+  .bottomDetail {
+    margin-top: 36px;
+  }
+
+  .detailText {
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .title {
+    font-size: 2rem;
+  }
+  
+  .statement {
+    font-size: 0.98rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ACCESSIBILITY: PREFERS-REDUCED-MOTION
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .pageContainer,
+  .eyebrowWrapper,
+  .title,
+  .statement,
+  .bottomDetail {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .drawnStroke,
+  .echoStroke {
+    transition: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+
+  .inProgressLine,
+  .arrow {
+    transition: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Dark Theme Overrides (Restored from Original Project Astitva Dark Design)
+   -------------------------------------------------------------------------- */
+:global([data-theme="dark"]) .pageContainer {
+  --accent: #FACC15;
+  --accent-gold: #FACC15;
+  --text-hi: #ffffff;
+  --text-mid: #e0e0e0;
+  --text-muted: rgba(255, 255, 255, 0.44);
+
+  background-color: #141414;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(250, 204, 21, 0.035), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 85% 50%, rgba(255, 140, 0, 0.02), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 15% 75%, rgba(117, 7, 135, 0.025), transparent 70%);
+  color: var(--text-primary, #ffffff);
+}
+
+:global([data-theme="dark"]) .ambientGlow {
+  background: radial-gradient(
+    circle at center,
+    rgba(250, 204, 21, 0.045) 0%,
+    rgba(255, 255, 255, 0.015) 45%,
+    transparent 75%
+  );
+}
+
+:global([data-theme="dark"]) .eyebrow {
+  color: var(--accent);
+}
+
+:global([data-theme="dark"]) .echoStroke {
+  stroke: rgba(255, 255, 255, 0.08);
+}
+
+:global([data-theme="dark"]) .title {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .statement {
+  color: #e0e0e0;
+}
+
+:global([data-theme="dark"]) .detailText {
+  color: rgba(255, 255, 255, 0.44);
+}
+
+:global([data-theme="dark"]) .inProgressAction {
+  color: rgba(250, 204, 21, 0.85);
+}
+
+:global([data-theme="dark"]) .inProgressAction:hover {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .inProgressAction:hover .inProgressLine {
+  background-color: var(--accent);
+}
+
+:global([data-theme="dark"]) .inProgressLine {
+  background-color: rgba(250, 204, 21, 0.4);
+}
+
+:global([data-theme="dark"]) .arrow {
+  color: var(--accent);
+}
+
+:global([data-theme="dark"]) .primaryActionBtn {
+  background-color: #facc15;
+  color: #121212;
+  border-color: #facc15;
+}
+
+:global([data-theme="dark"]) .primaryActionBtn:hover {
+  background-color: #fde047;
+  color: #121212;
+  border-color: #fde047;
+}

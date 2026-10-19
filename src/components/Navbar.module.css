@@ -438,25 +438,3 @@
 :global([data-theme="dark"]) .logo {
   filter: brightness(2.1) contrast(1.05);
 }
-
-/* Solid, quiet navigation for the two editorial pages. */
-.editorialNav.navbar { background: var(--paper); border-bottom-color: var(--divider); box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
-.editorialNav :is(.navLink, .aboutActiveLink, .mobileNavLink, .mobileAboutActiveLink, .hamburger) { color: var(--heading); text-shadow: none; }
-.editorialNav :is(.navLink, .mobileNavLink) { font-family: var(--font-body); opacity: 1; }
-.editorialNav :is(.navLink, .mobileNavLink)::after { background: var(--accent); }
-.editorialNav .mobileMenu { background: var(--paper); backdrop-filter: none; -webkit-backdrop-filter: none; }
-.editorialNav :is(a, button):focus-visible { outline-color: var(--accent-text); }
-.editorialNav [role='switch'] { min-height: 44px; }
-.editorialNav [role='switch'] span { box-shadow: none; color: var(--heading); }
-.editorialNav [role='switch'] svg { color: var(--accent-text); }
-.editorialNav [role='switch'] > span { background: var(--panel); border-color: var(--divider); }
-.editorialNav [role='switch'] > span > span:first-child { background: var(--paper); border-color: var(--accent); }
-/* Keep every menu control reachable on shorter phones. */
-@media (max-width: 768px) {
- .mobileNavList { gap: clamp(4px, 1.5vh, 16px); }
- .mobileMenu { overflow-y: auto; }
-}
-
-@media (prefers-reduced-motion: reduce) {
- .mobileMenu, .navLink, .mobileNavLink, .navbar { transition: none; }
-}

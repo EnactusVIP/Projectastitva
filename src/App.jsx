@@ -133,8 +133,6 @@ function App() {
     return () => window.removeEventListener('hashchange', onHashChange);
   }, [activePage, performNavigation]);
 
-  const isEditorialPage = activePage === 'support' || activePage === 'arttherapy';
-
   return (
     <div className="app-layout">
       {/* Multilingual intro transition ONLY on Home page reload / landing */}
@@ -148,7 +146,7 @@ function App() {
       <div
         className={`page-transition-container ${
           isTransitioning ? 'page-entering' : 'page-active'
-        } ${isEditorialPage ? 'editorial-page' : ''}`}
+        }`}
       >
         {activePage === 'about' && (
           <AboutUs onNavigate={handleNavigate} />
@@ -169,8 +167,8 @@ function App() {
           <Home onNavigate={handleNavigate} showNavbar={false} />
         )}
       </div>
-      <Footer onNavigate={handleNavigate} editorial={isEditorialPage} />
-      <CommunityStrip editorial={isEditorialPage} />
+      <Footer onNavigate={handleNavigate} />
+      <CommunityStrip />
     </div>
   );
 }

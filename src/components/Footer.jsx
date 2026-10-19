@@ -1,6 +1,5 @@
 import { Instagram, Linkedin, Mail, Phone, ArrowRight } from 'lucide-react';
 import enactusLogo from '../assets/enactus-vips-tc-lockup.png';
-import foundation from '../pages/EditorialFoundation.module.css';
 import styles from './Footer.module.css';
 
 const NAV_LINKS = [
@@ -12,7 +11,7 @@ const NAV_LINKS = [
   { label: 'Contact Us', href: '#contact' },
 ];
 
-export default function Footer({ onNavigate, editorial = false }) {
+export default function Footer({ onNavigate }) {
   const handleNavClick = (e, href) => {
     if (onNavigate) {
       e.preventDefault();
@@ -35,13 +34,13 @@ export default function Footer({ onNavigate, editorial = false }) {
   };
 
   return (
-    <footer className={`${styles.footer} ${editorial ? `${foundation.surface} ${styles.editorialFooter}` : ''}`} role="contentinfo" aria-label="Site Footer">
+    <footer className={styles.footer} role="contentinfo" aria-label="Site Footer">
       <div className={styles.container}>
         <div className={styles.mainGrid}>
           {/* COLUMN 1: Project Astitva & Enactus Identity */}
           <div className={styles.brandColumn}>
             <div className={styles.identityBlock}>
-              <h2 className={styles.brandTitle}>Project Astitva</h2>
+              <h3 className={styles.brandTitle}>Project Astitva</h3>
               <p className={styles.brandTagline}>exist as you are.</p>
               <p className={styles.brandDescription}>
                 An initiative by Enactus VIPS-TC creating space for conversation, support, and belonging.
@@ -62,7 +61,7 @@ export default function Footer({ onNavigate, editorial = false }) {
 
           {/* COLUMN 2: Explore / Navigation */}
           <div className={styles.navColumn}>
-            <h3 className={styles.columnHeading}>EXPLORE</h3>
+            <h4 className={styles.columnHeading}>EXPLORE</h4>
             <ul className={styles.navList}>
               {NAV_LINKS.map((link) => (
                 <li key={link.label} className={styles.navItem}>
@@ -82,7 +81,7 @@ export default function Footer({ onNavigate, editorial = false }) {
 
           {/* COLUMN 3: Connect with Us */}
           <div className={styles.connectColumn}>
-            <h3 className={styles.columnHeading}>CONNECT</h3>
+            <h4 className={styles.columnHeading}>CONNECT</h4>
             <ul className={styles.connectList}>
               <li className={styles.connectItem}>
                 <a

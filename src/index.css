@@ -250,7 +250,3 @@ html.theme-transitioning *::after {
     transition: none !important;
   }
 }
-
-/* Target pages use natural content height instead of leaving a viewport-sized gap. */
-.page-transition-container.editorial-page { min-height: 0; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

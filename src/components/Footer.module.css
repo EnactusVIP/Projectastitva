@@ -540,37 +540,3 @@
 :global([data-theme="dark"]) .madeWithPurpose {
   color: rgba(255, 255, 255, 0.48);
 }
-
-/* Shared readability improvements preserve the existing footer composition. */
-.brandDescription, .connectValue, .bottomRow, .enactusLabel { color: var(--text-secondary); }
-.navLink { min-height: 36px; }
-.connectLink { min-height: 44px; }
-:global([data-theme='dark']) :is(.brandDescription, .connectValue, .enactusLabel, .copyright, .madeWithPurpose) { color: #B8BAB5; }
-/* Match the refined pages without changing the palette on unrelated pages. */
-.editorialFooter.footer { background: var(--panel); border-color: var(--divider); color: var(--body); --font-heading: 'DM Serif Display', Georgia, serif; --font-body: 'Manrope', sans-serif; }
-.editorialFooter .container { max-width: calc(var(--page-max) + 2 * var(--page-pad)); padding: 48px var(--page-pad) 28px; }
-.editorialFooter .mainGrid { grid-template-columns: 1.3fr .75fr 1fr; gap: clamp(28px, 4vw, 64px); margin-bottom: 32px; }
-.editorialFooter :is(.brandTitle, .navLink, .connectTitle) { color: var(--heading); }
-.editorialFooter :is(.brandTagline, .columnHeading, .navLinkArrow) { color: var(--accent-text); }
-.editorialFooter :is(.brandDescription, .enactusLabel, .connectValue, .copyright, .madeWithPurpose, .bottomRow) { color: var(--label); }
-.editorialFooter .brandDescription { font-size: .9rem; }
-.editorialFooter .connectValue { font-size: .8rem; overflow-wrap: anywhere; }
-.editorialFooter .connectTitle { font-size: .85rem; }
-.editorialFooter .enactusSubtle { border-color: var(--divider); }
-.editorialFooter .divider { background: var(--divider); }
-.editorialFooter .connectLink { background: transparent; border: 1px solid transparent; padding: 6px 8px; }
-.editorialFooter .connectLink:hover { background: var(--paper); }
-.editorialFooter .connectIconWrapper { background: transparent; border-color: var(--divider); }
-.editorialFooter :is(.connectIcon, .connectLink:hover .connectIcon) { color: var(--accent-text); }
-.editorialFooter .navLink:hover { color: var(--accent-text); }
-.editorialFooter :is(a, button):focus-visible { outline: 2px solid var(--accent-text); outline-offset: 4px; }
-@media (max-width: 900px) {
- .editorialFooter .mainGrid { grid-template-columns: 1fr 1fr; }
-}
-@media (max-width: 600px) {
- .editorialFooter .mainGrid { grid-template-columns: 1fr; gap: 28px; }
- .editorialFooter .navList { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 20px; }
- .editorialFooter .navLink { min-height: 44px; }
-}
-
-.editorialFooter .columnHeading { font-family: var(--font-body); font-weight: 700; }
