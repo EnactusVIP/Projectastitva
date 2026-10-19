@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Menu, X } from 'lucide-react';
 import enactusLogo from '../assets/enactus-vips-tc-lockup.png';
+import foundation from '../pages/EditorialFoundation.module.css';
 import ThemeToggle from './ThemeToggle';
 import styles from './Navbar.module.css';
 
@@ -14,6 +15,9 @@ const NAV_LINKS = [
 ];
 
 export default function Navbar({ activePage = 'home', onNavigate }) {
+  const isEditorialPage = activePage === 'support' || activePage === 'arttherapy';
+  const menuRef = useRef(null);
+  const toggleRef = useRef(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState(
@@ -81,6 +85,14 @@ export default function Navbar({ activePage = 'home', onNavigate }) {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape' && isMenuOpen) {
         setIsMenuOpen(false);
+        toggleRef.current?.focus();
+      }
+      if (e.key === 'Tab' && isMenuOpen) {
+        const controls = [toggleRef.current, ...menuRef.current.querySelectorAll('a, button')];
+        const first = controls[0];
+        const last = controls[controls.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
       }
     };
 
@@ -89,12 +101,17 @@ export default function Navbar({ activePage = 'home', onNavigate }) {
   }, [isMenuOpen]);
 
   useEffect(() => {
+    let focusTimer;
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
+      // Focus after the menu becomes visible, including when motion is disabled.
+      focusTimer = setTimeout(() => menuRef.current?.querySelector('a')?.focus(),
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 320);
     } else {
       document.body.style.overflow = '';
     }
     return () => {
+      clearTimeout(focusTimer);
       document.body.style.overflow = '';
     };
   }, [isMenuOpen]);
@@ -128,7 +145,7 @@ export default function Navbar({ activePage = 'home', onNavigate }) {
 
   return (
     <nav
-      className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''}`}
+      className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''} ${isEditorialPage ? `${foundation.surface} ${styles.editorialNav}` : ''}`}
       role="navigation"
       aria-label="Main Navigation"
     >
@@ -188,6 +205,7 @@ export default function Navbar({ activePage = 'home', onNavigate }) {
         <button
           type="button"
           className={styles.hamburger}
+          ref={toggleRef}
           onClick={() => setIsMenuOpen((prev) => !prev)}
           aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
           aria-expanded={isMenuOpen}
@@ -200,6 +218,8 @@ export default function Navbar({ activePage = 'home', onNavigate }) {
       {/* Mobile Menu Overlay */}
       <div
         id="mobile-nav-menu"
+        ref={menuRef}
+        inert={!isMenuOpen}
         className={`${styles.mobileMenu} ${isMenuOpen ? styles.mobileMenuOpen : ''}`}
         aria-hidden={!isMenuOpen}
       >

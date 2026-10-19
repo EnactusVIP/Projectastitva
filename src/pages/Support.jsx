@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { ArrowRight, ArrowDown, MessageCircle, BookOpen, Users } from 'lucide-react';
+import foundation from './EditorialFoundation.module.css';
 import styles from './Support.module.css';
 
 import communityIllustration from '../assets/support-community-hero.png';
@@ -56,94 +57,18 @@ const HOW_WE_HELP = [
 ];
 
 export default function Support({ onNavigate }) {
-  const [reveals, setReveals] = useState({
-    hero: false,
-    pillars: false,
-    how: false,
-    commitment: false,
-    closing: false,
-  });
-
-  const [heroParallaxY, setHeroParallaxY] = useState(0);
   const [activePillar, setActivePillar] = useState(0);
-  const [isChangingPillar, setIsChangingPillar] = useState(false);
-
-  const heroRef = useRef(null);
   const pillarsRef = useRef(null);
-  const howRef = useRef(null);
-  const commitmentRef = useRef(null);
-  const closingRef = useRef(null);
-  const switchTimeoutRef = useRef(null);
+  const tabRefs = useRef([]);
+  useEffect(() => { window.scrollTo(0, 0); }, []);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  useEffect(() => {
-    let ticking = false;
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const scrollY = window.scrollY;
-          if (scrollY < window.innerHeight * 1.2) {
-            setHeroParallaxY(Math.min(scrollY * 0.05, 18));
-          }
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    if (!('IntersectionObserver' in window)) {
-      setReveals({ hero: true, pillars: true, how: true, commitment: true, closing: true });
-      return;
-    }
-
-    const observers = [];
-    const observeSection = (ref, key) => {
-      if (!ref.current) return;
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setReveals((prev) => ({ ...prev, [key]: true }));
-          }
-        },
-        { threshold: 0.12, rootMargin: '-5% 0px -15% 0px' }
-      );
-      obs.observe(ref.current);
-      observers.push({ obs, target: ref.current });
-    };
-
-    observeSection(heroRef, 'hero');
-    observeSection(pillarsRef, 'pillars');
-    observeSection(howRef, 'how');
-    observeSection(commitmentRef, 'commitment');
-    observeSection(closingRef, 'closing');
-
-    return () => {
-      observers.forEach(({ obs, target }) => {
-        if (target) obs.unobserve(target);
-      });
-    };
-  }, []);
-
-  const handlePillarSelect = useCallback(
-    (index) => {
-      if (index === activePillar) return;
-      setIsChangingPillar(true);
-      if (switchTimeoutRef.current) clearTimeout(switchTimeoutRef.current);
-
-      switchTimeoutRef.current = setTimeout(() => {
-        setActivePillar(index);
-        setIsChangingPillar(false);
-      }, 180);
-    },
-    [activePillar]
-  );
+  const exploreSupport = () => {
+    pillarsRef.current?.scrollIntoView({
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
+      block: 'start',
+    });
+    pillarsRef.current?.focus({ preventScroll: true });
+  };
 
   const handleContactClick = (e) => {
     if (e && e.preventDefault) e.preventDefault();
@@ -157,59 +82,40 @@ export default function Support({ onNavigate }) {
     else window.location.hash = '#about';
   };
 
-  const currentPhilosophy = SUPPORT_PHILOSOPHIES[activePillar];
+  const handleTabKey = (event, index) => {
+    let next;
+    if (event.key === 'ArrowDown' || event.key === 'ArrowRight') next = (index + 1) % SUPPORT_PHILOSOPHIES.length;
+    if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') next = (index + SUPPORT_PHILOSOPHIES.length - 1) % SUPPORT_PHILOSOPHIES.length;
+    if (event.key === 'Home') next = 0;
+    if (event.key === 'End') next = SUPPORT_PHILOSOPHIES.length - 1;
+    if (next === undefined) return;
+    event.preventDefault();
+    setActivePillar(next);
+    tabRefs.current[next]?.focus();
+  };
 
   return (
-    <div className={styles.pageContainer}>
+    <div className={`${foundation.surface} ${styles.pageContainer}`}>
       <main>
 
-        {/* ---- HERO ---- */}
-        <section
-          ref={heroRef}
-          className={styles.heroSection}
-          aria-label="Support from Project Astitva"
-        >
-          <div
-            className={styles.heroBgWrapper}
-            style={{ transform: `translateY(${heroParallaxY}px)` }}
-            aria-hidden="true"
-          >
-            <img
-              src={communityIllustration}
-              alt=""
-              className={`${styles.heroBgImage} ${reveals.hero ? styles.heroBgLoaded : ''}`}
-              loading="eager"
-            />
-            <div className={`${styles.heroOverlay} ${reveals.hero ? styles.heroOverlayLoaded : ''}`} />
-          </div>
-          <div className={styles.heroTopFade} aria-hidden="true" />
-          <div className={styles.heroBottomFade} aria-hidden="true" />
-
-          <div className={styles.heroContentContainer}>
-            <div className={styles.heroTextColumn}>
-              <div className={`${styles.revealElement} ${reveals.hero ? styles.revealed : ''} ${styles.heroEyebrowWrapper}`}>
-                <span className={styles.heroEyebrow}>PROJECT ASTITVA</span>
-                <span className={styles.eyebrowLine} aria-hidden="true" />
+        <section className={styles.supportHero} aria-labelledby="support-title">
+          <div className={styles.heroComposition}>
+            <div className={styles.heroCopy}>
+              <p className={styles.heroLabel}>PROJECT ASTITVA</p>
+              <h1 id="support-title" className={styles.supportTitle}>Support <em>& Care</em></h1>
+              <div className={styles.supportStatement}>
+                <p>You are not alone.</p>
+                <p>You never have to be.</p>
+                <p>Help begins here.</p>
               </div>
-
-              <h1 className={`${styles.revealElement} ${reveals.hero ? styles.revealed : ''} ${styles.delay100} ${styles.heroTitle}`}>
-                <span className={styles.titleLine}>Support</span>
-                <span className={styles.titleLineItalic}>& Care</span>
-              </h1>
-
-              <div className={`${styles.revealElement} ${reveals.hero ? styles.revealed : ''} ${styles.delay200} ${styles.heroStatement}`}>
-                <p className={styles.statementLine}>You are not alone.</p>
-                <p className={styles.statementLine}>You never have to be.</p>
-                <p className={styles.statementLine}>Help begins here.</p>
-              </div>
-
-              <div
-                className={`${styles.revealElement} ${reveals.hero ? styles.revealed : ''} ${styles.delay300} ${styles.scrollCue}`}
-                aria-hidden="true"
-              >
-                <span>Scroll to explore</span>
-                <div className={styles.scrollCueLine} />
-              </div>
+              <button type="button" className={styles.exploreButton} onClick={exploreSupport}
+                aria-label="Find your support below">
+                <ArrowDown size={20} aria-hidden="true" /><span>Find your support</span>
+              </button>
+            </div>
+            <div className={styles.communityArtwork}>
+              <img src={communityIllustration} width="1024" height="409"
+                alt="An inclusive community sharing conversation, with rainbow details celebrating LGBTQ+ identities" />
             </div>
           </div>
         </section>
@@ -217,19 +123,21 @@ export default function Support({ onNavigate }) {
         {/* ---- WHAT WE OFFER / SUPPORT PHILOSOPHIES ---- */}
         <section
           ref={pillarsRef}
+          id="support-options"
+          tabIndex={-1}
           className={styles.pillarsSection}
-          aria-label="What We Offer: Three ways Astitva creates a space to be heard"
+          aria-labelledby="support-options-heading"
         >
           <div className={styles.pillarsInner}>
             {/* Section Header */}
-            <div className={`${styles.revealElement} ${reveals.pillars ? styles.revealed : ''} ${styles.sectionHeader}`}>
+            <div className={styles.sectionHeader}>
               <div className={styles.eyebrowRow}>
                 <span className={styles.eyebrowDot} aria-hidden="true" />
                 <span className={styles.sectionEyebrow}>WHAT WE OFFER</span>
                 <span className={styles.eyebrowLine} aria-hidden="true" />
               </div>
 
-              <h2 className={styles.sectionHeadline}>
+              <h2 id="support-options-heading" className={styles.sectionHeadline}>
                 Support that starts with{' '}
                 <em className={styles.accentItalic}>listening</em>
               </h2>
@@ -239,155 +147,77 @@ export default function Support({ onNavigate }) {
               </p>
             </div>
 
-            {/* Editorial Split Composition */}
-            <div className={`${styles.editorialWrapper} ${reveals.pillars ? styles.revealed : ''}`}>
-              {/* Left Column: Interactive Chapter Navigation */}
-              <div className={styles.chapterNavCol} role="tablist" aria-label="Support philosophies">
-                {/* Connecting Thread Motif (Desktop) */}
-                <div className={styles.connectingThread} aria-hidden="true">
-                  <div
-                    className={styles.threadProgress}
-                    style={{
-                      height: `${((activePillar + 0.5) / SUPPORT_PHILOSOPHIES.length) * 100}%`,
-                    }}
-                  />
-                  {SUPPORT_PHILOSOPHIES.map((item, i) => (
-                    <div
-                      key={`thread-${item.number}`}
-                      className={`${styles.threadNode} ${
-                        activePillar === i
-                          ? styles.threadNodeActive
-                          : activePillar > i
-                          ? styles.threadNodePassed
-                          : ''
-                      }`}
-                      style={{
-                        top: `${((i + 0.5) / SUPPORT_PHILOSOPHIES.length) * 100}%`,
-                      }}
-                    />
-                  ))}
-                </div>
-
-                {/* Chapter Selection Tabs */}
-                <div className={styles.chapterItems}>
-                  {SUPPORT_PHILOSOPHIES.map((pillar, i) => {
-                    const isActive = activePillar === i;
-                    return (
-                      <button
-                        key={pillar.number}
-                        type="button"
-                        role="tab"
-                        aria-selected={isActive}
-                        tabIndex={0}
-                        className={`${styles.chapterTab} ${
-                          isActive ? styles.chapterTabActive : styles.chapterTabInactive
-                        }`}
-                        onClick={() => handlePillarSelect(i)}
-                      >
-                        <div className={styles.chapterTabTop}>
-                          <span className={styles.chapterNumber}>{pillar.number}</span>
-                          <span className={styles.chapterSlash}>/</span>
-                          <span className={styles.chapterConcept}>{pillar.concept}</span>
-                        </div>
-                        <h3 className={styles.chapterTitle}>{pillar.title}</h3>
-                        <div className={styles.activeTabIndicator} aria-hidden="true" />
-                      </button>
-                    );
-                  })}
-                </div>
+            <div className={styles.supportOptions}>
+              <div className={styles.categoryList} role="tablist" aria-label="Support philosophies" aria-orientation="vertical">
+                {SUPPORT_PHILOSOPHIES.map((pillar, i) => (
+                  <button key={pillar.number} type="button" role="tab"
+                    id={`support-tab-${i}`} aria-controls={`support-panel-${i}`}
+                    aria-selected={activePillar === i} tabIndex={activePillar === i ? 0 : -1}
+                    ref={el => { tabRefs.current[i] = el; }}
+                    className={styles.categoryTab} onClick={() => setActivePillar(i)}
+                    onKeyDown={event => handleTabKey(event, i)}>
+                    <span className={styles.categoryMeta}>{pillar.number} / {pillar.concept}</span>
+                    <span className={styles.categoryTitle}>{pillar.title}</span>
+                    <ArrowRight className={styles.selectedArrow} size={19} aria-hidden="true" />
+                  </button>
+                ))}
               </div>
-
-              {/* Right Column: Active Support Philosophy Display */}
-              <div
-                className={`${styles.activeDisplayCol} ${
-                  isChangingPillar ? styles.displayChanging : styles.displayActive
-                }`}
-                role="tabpanel"
-                aria-label={currentPhilosophy.title}
-              >
-                <div className={styles.displayCard}>
-                  <div className={styles.displayMetaRow}>
-                    <span className={styles.displayConceptBadge}>
-                      {currentPhilosophy.number} &mdash; {currentPhilosophy.concept}
-                    </span>
-                    <span className={styles.displayTitleBadge}>{currentPhilosophy.title}</span>
+              <div className={styles.panels}>
+                {SUPPORT_PHILOSOPHIES.map((pillar, i) => (
+                  <div key={pillar.number} id={`support-panel-${i}`} role="tabpanel"
+                    aria-labelledby={`support-tab-${i}`} tabIndex={0} hidden={activePillar !== i}
+                    className={styles.supportPanel}>
+                    <p className={styles.panelLabel}>{pillar.number} — {pillar.concept}</p>
+                    <h3 className={styles.panelStatement}>&ldquo;{pillar.statement}&rdquo;</h3>
+                    <p className={styles.panelBody}>{pillar.body}</p>
+                    <a href="#contact" onClick={handleContactClick} className={styles.textLink}>
+                      {pillar.actionLabel} <ArrowRight size={17} aria-hidden="true" />
+                    </a>
                   </div>
-
-                  <h3 className={styles.displayStatement}>
-                    &ldquo;{currentPhilosophy.statement}&rdquo;
-                  </h3>
-
-                  <p className={styles.displayBody}>
-                    {currentPhilosophy.body}
-                  </p>
-
-                  <div className={styles.displayActionRow}>
-                    <button
-                      type="button"
-                      className={styles.displayActionBtn}
-                      onClick={handleContactClick}
-                      aria-label={`${currentPhilosophy.actionLabel} (Go to Contact)`}
-                    >
-                      <span className={styles.displayActionText}>
-                        {currentPhilosophy.actionLabel}
-                      </span>
-                      <span className={styles.arrowWrap} aria-hidden="true">
-                        <ArrowRight size={15} className={styles.displayArrow} />
-                      </span>
-                    </button>
-                  </div>
-
-                  <div className={styles.displayAccentBar} aria-hidden="true" />
-                </div>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
-        {/* ---- HOW WE HELP ---- */}
-        <section ref={howRef} className={styles.howSection} aria-label="Our approach to support">
-          <div className={styles.howInner}>
-            <div className={`${styles.revealElement} ${reveals.how ? styles.revealed : ''} ${styles.howHeader}`}>
-              <div className={styles.eyebrowRow}>
-                <span className={styles.eyebrowDot} aria-hidden="true" />
-                <span className={styles.sectionEyebrow}>HOW WE HELP</span>
-                <span className={styles.eyebrowLine} aria-hidden="true" />
-              </div>
-            </div>
-
+        <section className={styles.howSection} aria-labelledby="how-heading">
+          <div className={styles.sectionInner}>
+            <h2 id="how-heading" className={styles.sectionEyebrow}>HOW WE HELP</h2>
             <div className={styles.howRows}>
-              {HOW_WE_HELP.map((item, i) => (
-                <div
-                  key={item.tag}
-                  className={`${styles.howRow} ${reveals.how ? styles.howRowVisible : ''}`}
-                  style={{ transitionDelay: reveals.how ? `${i * 140}ms` : '0ms' }}
-                >
-                  <div className={styles.howLeft}>
-                    <span className={styles.howTag}>{item.tag}</span>
-                    <h3 className={styles.howHeadline}>{item.headline}</h3>
+              {HOW_WE_HELP.map((item, i) => {
+                const Marker = [MessageCircle, BookOpen, Users][i];
+                return (
+                  <div key={item.tag} className={styles.howRow}>
+                    <div className={styles.howLeft}>
+                      <Marker size={22} strokeWidth={1.4} className={styles.serviceMarker} aria-hidden="true" />
+                      <div>
+                        <p className={styles.howTag}>{item.tag}</p>
+                        <h3 className={styles.howHeadline}>{item.headline}</h3>
+                      </div>
+                    </div>
+                    <div className={styles.howRight}>
+                      <p className={styles.howCopy}>{item.copy}</p>
+                      <a href="#contact" onClick={handleContactClick} className={styles.textLink}>
+                        {['Contact the team', 'Find your support pathway', 'Talk to us about workshops'][i]}
+                        <ArrowRight size={16} aria-hidden="true" />
+                      </a>
+                    </div>
                   </div>
-                  <div className={styles.howDivider} aria-hidden="true" />
-                  <div className={styles.howRight}>
-                    <p className={styles.howCopy}>{item.copy}</p>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
 
-        {/* ---- COMMITMENT ---- */}
-        <section ref={commitmentRef} className={styles.commitmentSection} aria-label="Our commitment">
+        <section className={styles.commitmentSection} aria-labelledby="commitment-heading">
           <div className={styles.commitmentInner}>
-            <div className={styles.rainbowFilament} aria-hidden="true" />
-            <p className={`${styles.revealElement} ${reveals.commitment ? styles.revealed : ''} ${styles.commitmentEyebrow}`}>
-              OUR COMMITMENT
-            </p>
-            <blockquote className={`${styles.revealElement} ${reveals.commitment ? styles.revealed : ''} ${styles.delay100} ${styles.commitmentQuote}`}>
+            <span className={styles.quotationMark} aria-hidden="true">“</span>
+            <h2 id="commitment-heading" className={styles.sectionEyebrow}>OUR COMMITMENT</h2>
+            <blockquote className={styles.commitmentQuote}>
               &ldquo;No one should have to earn the right to be cared for.
               Dignity is not conditional. Neither is our support.&rdquo;
             </blockquote>
-            <p className={`${styles.revealElement} ${reveals.commitment ? styles.revealed : ''} ${styles.delay200} ${styles.commitmentBody}`}>
+            <p className={styles.commitmentBody}>
               Project Astitva was built on the belief that LGBTQ+ individuals deserve access to
               compassionate, culturally sensitive support not clinical detachment. Every
               interaction we facilitate is grounded in respect, confidentiality, and genuine care.
@@ -395,27 +225,20 @@ export default function Support({ onNavigate }) {
           </div>
         </section>
 
-        {/* ---- CLOSING CTA ---- */}
-        <section ref={closingRef} className={styles.closingSection} aria-label="Get in touch">
+        <section className={styles.closingSection} aria-labelledby="closing-heading">
           <div className={styles.closingInner}>
-            <span className={`${styles.revealElement} ${reveals.closing ? styles.revealed : ''} ${styles.closingTagline}`}>
-              EXIST AS YOU ARE
-            </span>
-            <h2 className={`${styles.revealElement} ${reveals.closing ? styles.revealed : ''} ${styles.delay100} ${styles.closingHeadline}`}>
-              Ready to reach out?
-            </h2>
-            <p className={`${styles.revealElement} ${reveals.closing ? styles.revealed : ''} ${styles.delay200} ${styles.closingSubtext}`}>
+            <p className={styles.sectionEyebrow}>EXIST AS YOU ARE</p>
+            <h2 id="closing-heading" className={styles.closingHeadline}>Ready to reach out?</h2>
+            <p className={styles.closingSubtext}>
               The first step is the hardest. We are here for every step that follows.
             </p>
-            <div className={`${styles.revealElement} ${reveals.closing ? styles.revealed : ''} ${styles.delay300} ${styles.closingButtonRow}`}>
-              <button className={styles.primaryPill} onClick={handleContactClick} aria-label="Go to Contact Us page">
-                Contact Us
-                <ArrowRight size={16} aria-hidden="true" />
-              </button>
-              <button className={styles.secondaryPill} onClick={handleAboutClick} aria-label="Learn about Project Astitva">
-                Learn about us
-                <ArrowRight size={14} aria-hidden="true" />
-              </button>
+            <div className={styles.closingButtonRow}>
+              <a href="#contact" className={styles.primaryAction} onClick={handleContactClick}>
+                Contact Us <ArrowRight size={17} aria-hidden="true" />
+              </a>
+              <a href="#about" className={styles.secondaryAction} onClick={handleAboutClick}>
+                Learn about us <ArrowRight size={16} aria-hidden="true" />
+              </a>
             </div>
           </div>
         </section>

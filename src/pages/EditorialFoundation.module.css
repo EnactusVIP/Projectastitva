@@ -1,0 +1,60 @@
+/* Shared only by Support and Art Therapy; unrelated pages retain their theme. */
+.surface {
+  --paper: #F5F1E8;
+  --heading: #26372F;
+  --forest: #293B32;
+  --supporting: #626B64;
+  --body: #414B45;
+  --accent: #B8755D;
+  --accent-text: #93533E;
+  --panel: #EEE9DE;
+  --divider: #D9D2C5;
+  --label: #626B64;
+  --commitment: #EAE5D9;
+  --quote: #293B32;
+  --sage: #A4B198;
+  --sage-ink: #758667;
+  --page-max: 1200px;
+  --page-pad: clamp(24px, 5vw, 72px);
+  --section-space: clamp(52px, 6vw, 88px);
+  --font-heading: 'DM Serif Display', Georgia, serif;
+  --font-body: 'Manrope', sans-serif;
+  --paper-grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.84' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23847c65' opacity='.015' filter='url(%23n)' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
+  background: var(--paper);
+  color: var(--body);
+  font: 400 1rem/1.8 var(--font-body);
+}
+.surface main {
+  background: var(--paper);
+  background-image: var(--paper-grain);
+  background-size: 180px 180px;
+  color: var(--body);
+  font: inherit;
+  min-height: 0;
+}
+.surface h1, .surface h2, .surface h3 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  color: var(--heading);
+  text-wrap: balance;
+}
+.surface :focus-visible {
+  outline: 2px solid var(--accent-text);
+  outline-offset: 5px;
+}
+.surface :is(a, button) { touch-action: manipulation; }
+:global([data-theme='dark']) .surface {
+  --paper: #1C2722;
+  --heading: #F1EBDD;
+  --forest: #F1EBDD;
+  --supporting: #D5D7CC;
+  --body: #D5D7CC;
+  --accent: #D69A7F;
+  --accent-text: #D69A7F;
+  --panel: #2D3B33;
+  --divider: #435046;
+  --label: #B2B9AE;
+  --commitment: #25332C;
+  --quote: #F1EBDD;
+  --sage-ink: #A4B198;
+}
